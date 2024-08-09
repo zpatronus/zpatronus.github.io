@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Zijun(Mark) Yang's Blog - 1. Projects</title><link href="https://blog.zijuny.dev/" rel="alternate"></link><link href="https://blog.zijuny.dev/feeds/1-projects.atom.xml" rel="self"></link><id>https://blog.zijuny.dev/</id><updated>2023-11-29T22:10:16+08:00</updated><entry><title>Things I Did to Start a Public GNU/Linux Server Among My Friends</title><link href="https://blog.zijuny.dev/things-i-did-to-start-a-public-gnulinux-server-among-my-friends.html" rel="alternate"></link><published>2023-11-29T22:10:16+08:00</published><updated>2023-11-29T22:10:16+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2023-11-29:/things-i-did-to-start-a-public-gnulinux-server-among-my-friends.html</id><summary type="html">&lt;h2&gt;0. Create 2 users&lt;/h2&gt;
+&lt;p&gt;An admin user and a public user &lt;code&gt;pub&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Since there's no malicious guys in my friends, I'm not preparing to create an account for each of them. Rather, they will be logged in to a same public account. It also enforces them to store only public …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;0. Create 2 users&lt;/h2&gt;
+&lt;p&gt;An admin user and a public user &lt;code&gt;pub&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Since there's no malicious guys in my friends, I'm not preparing to create an account for each of them. Rather, they will be logged in to a same public account. It also enforces them to store only public content in this server, or they really want their "dark secrets" to be seen. It's just a Raspberry Pi 3B+ with 1GB of RAM and 16GB of storage. Not a lot of computer juice here.&lt;/p&gt;
+&lt;h2&gt;1. Notice board and readme system&lt;/h2&gt;
+&lt;p&gt;I heavily modified the &lt;code&gt;~/.bashrc&lt;/code&gt; to do the following 2 things:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Whenever a bash session is created, &lt;code&gt;~/.news&lt;/code&gt; will be catted to print the news (modifications to the server or newly uploaded files).&lt;/li&gt;
+&lt;li&gt;Whenever &lt;code&gt;cd&lt;/code&gt; is called to a directory with a &lt;code&gt;README.txt&lt;/code&gt; in it, the &lt;code&gt;README.txt&lt;/code&gt; will be catted to print info about that directory.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Trust me. Even they are my friends, I gets annoyed when they keep asking me the same question (like "wtf, &lt;code&gt;rsync pub@xx.xx.xx.xx:/path/to/dir/or/files /path/to/local/dir/&lt;/code&gt;" does not sync &lt;code&gt;~/281p4/*&lt;/code&gt; on the server to my disk). I put these things to the notice board and &lt;code&gt;README.txt&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;2. SSH auth protection&lt;/h2&gt;
+&lt;p&gt;Since all of my friends are able to log in to &lt;code&gt;pub&lt;/code&gt;, they can potentially modify &lt;code&gt;~/.ssh/authorized_keys&lt;/code&gt;, which I don't want to happen.&lt;/p&gt;
+&lt;p&gt;In the admin account, I add a start-up script which will start all custom scripts.&lt;/p&gt;
+&lt;p&gt;One of the customized script copies a valid &lt;code&gt;authorized_keys&lt;/code&gt; to &lt;code&gt;pub&lt;/code&gt; every 1 min to secure that.&lt;/p&gt;
+&lt;h2&gt;3. Source file cleaning&lt;/h2&gt;
+&lt;p&gt;The purpose of this server is never to exchange project answers, aka source codes. A source file cleaning scripts runs every 3 mins to remove all source files by matching extensions. This will be bypassed if one simply change the file extension, but if they really want to exchange source, they can use other platforms and this server is definitely not the best option. The main purpose of this function is to take care of source files that are compiled and executed on the server, but are not removed in time.&lt;/p&gt;
+&lt;h2&gt;4. oh-my-posh&lt;/h2&gt;
+&lt;p&gt;That is a must have. In &lt;code&gt;.bashrc&lt;/code&gt; I set it up so that a random theme is used every time a session starts.&lt;/p&gt;
+&lt;h2&gt;5. System status monetization&lt;/h2&gt;
+&lt;p&gt;A nginx server is created to host several webpages that display the system's status.  &lt;/p&gt;
+&lt;p&gt;Status includes CPU load, CPU temperature, file tree under &lt;code&gt;~&lt;/code&gt;, and login count from different people.&lt;/p&gt;
+&lt;p&gt;The login count is achieved by parsing &lt;code&gt;/var/log/auth.log&lt;/code&gt; and match SHA256 of every ssh keys to one in the &lt;code&gt;~/.ssh/authorized_keys&lt;/code&gt;.&lt;/p&gt;</content><category term="1. Projects"></category><category term="Fun Stuff"></category><category term="Maintenance"></category></entry><entry><title>A Wish Posting and Realizing Platform</title><link href="https://blog.zijuny.dev/a-wish-posting-and-realizing-platform.html" rel="alternate"></link><published>2023-01-28T12:48:04+08:00</published><updated>2023-01-28T12:48:04+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2023-01-28:/a-wish-posting-and-realizing-platform.html</id><content type="html">&lt;h2&gt;Repos&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://github.com/zijunhz/wish-realize-frontend"&gt;Frontend&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/zijunhz/wish-realize-backend"&gt;Backend&lt;/a&gt;&lt;/p&gt;</content><category term="1. Projects"></category><category term="Project"></category><category term="Fun Stuff"></category><category term="Web Dev"></category><category term="Django"></category><category term="Vue"></category></entry><entry><title>Datacenter Workload Visualization</title><link href="https://blog.zijuny.dev/datacenter-workload-visualization.html" rel="alternate"></link><published>2022-08-07T19:59:21+08:00</published><updated>2022-08-07T19:59:21+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2022-08-07:/datacenter-workload-visualization.html</id><content type="html">&lt;p&gt;Codes and results are at its &lt;a href="https://github.com/zijunhz/datacenter-workload-visualization"&gt;Github Repo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The repo is temporarily set to private to avoid potential violation of the Honor Code.&lt;/p&gt;</content><category term="1. Projects"></category><category term="Matlab"></category><category term="Project"></category></entry><entry><title>Trajectory with Air Drag</title><link href="https://blog.zijuny.dev/trajectory-with-air-drag.html" rel="alternate"></link><published>2022-08-07T19:35:41+08:00</published><updated>2022-08-07T19:35:41+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2022-08-07:/trajectory-with-air-drag.html</id><content type="html">&lt;p&gt;Codes and results are at this &lt;a href="https://github.com/zijunhz/trajectory-with-air-drag"&gt;Github Repo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The repo is temporarily set to private to prevent potential violation of the Honor Code.&lt;/p&gt;</content><category term="1. Projects"></category><category term="Matlab"></category><category term="Project"></category></entry><entry><title>Markdown to HTML Convertor</title><link href="https://blog.zijuny.dev/markdown-to-html-convertor.html" rel="alternate"></link><published>2022-08-06T02:00:26+08:00</published><updated>2022-08-06T02:00:26+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2022-08-06:/markdown-to-html-convertor.html</id><summary type="html">&lt;h2&gt;For users&lt;/h2&gt;
+&lt;h3&gt;The convertor currently supports&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;#&lt;/code&gt;, &lt;code&gt;##&lt;/code&gt;, ... -&amp;gt; &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;h2&amp;gt;&lt;/code&gt;, ...&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;---&lt;/code&gt; -&amp;gt; &lt;code&gt;&amp;lt;hr&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Unordered/ordered list&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;![]()&lt;/code&gt;, &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; -&amp;gt; &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[]()&lt;/code&gt; -&amp;gt; &lt;code&gt;&amp;lt;a&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Plain text&lt;/li&gt;
+&lt;li&gt;Code blocks (&lt;code&gt;``` ```&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Inline code blocks (&lt;code&gt;``&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;How to use (in Windows)&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Download and unzip &lt;code&gt;markdown2html-x.x.x.zip&lt;/code&gt; from &lt;a href="https://github.com/zijunhz/markdown2html/releases/latest"&gt;this page&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Open &lt;code&gt;markdown2html.exe&lt;/code&gt; and follow the instruction:&lt;/li&gt;
+&lt;li&gt;Input Markdown file path: you need …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;h2&gt;For users&lt;/h2&gt;
+&lt;h3&gt;The convertor currently supports&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;#&lt;/code&gt;, &lt;code&gt;##&lt;/code&gt;, ... -&amp;gt; &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;h2&amp;gt;&lt;/code&gt;, ...&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;---&lt;/code&gt; -&amp;gt; &lt;code&gt;&amp;lt;hr&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Unordered/ordered list&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;![]()&lt;/code&gt;, &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; -&amp;gt; &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[]()&lt;/code&gt; -&amp;gt; &lt;code&gt;&amp;lt;a&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Plain text&lt;/li&gt;
+&lt;li&gt;Code blocks (&lt;code&gt;``` ```&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Inline code blocks (&lt;code&gt;``&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;How to use (in Windows)&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Download and unzip &lt;code&gt;markdown2html-x.x.x.zip&lt;/code&gt; from &lt;a href="https://github.com/zijunhz/markdown2html/releases/latest"&gt;this page&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Open &lt;code&gt;markdown2html.exe&lt;/code&gt; and follow the instruction:&lt;/li&gt;
+&lt;li&gt;Input Markdown file path: you need to enter the path to your markdown file. This path can be absolute or be relative to the path where the &lt;code&gt;.exe&lt;/code&gt; locates. &lt;strong&gt;&lt;em&gt;It is recommended to copy the markdown file into the folder where the exe is located so that you only need to type in the file name of the markdown file.&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Input output file path: this is the same as 3, but it specifies where you wish the output file is.&lt;/li&gt;
+&lt;li&gt;Choose theme: enter a number.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Fun fact&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://zpatronus.top"&gt;My website&lt;/a&gt; is generated by this program.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="effect" src="https://media.githubusercontent.com/media/zijunhz/markdown2html/main/docs/Screenshot%202022-08-09%20030738.png"&gt;&lt;/p&gt;
+&lt;h3&gt;Themes&lt;/h3&gt;
+&lt;p&gt;Themes are now supported.&lt;/p&gt;
+&lt;p&gt;There are a total of 7 themes.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;default&lt;/li&gt;
+&lt;li&gt;githubDark&lt;/li&gt;
+&lt;li&gt;githubLight&lt;/li&gt;
+&lt;li&gt;dark&lt;/li&gt;
+&lt;li&gt;light&lt;/li&gt;
+&lt;li&gt;darkCompact&lt;/li&gt;
+&lt;li&gt;lightCompact&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;For developers&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://github.com/zijunhz/markdown2html"&gt;Github Repo&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;How to compile&lt;/h3&gt;
+&lt;p&gt;The project uses &lt;code&gt;CMake&lt;/code&gt; as building tool.&lt;/p&gt;
+&lt;h3&gt;Structure of the project&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://imgse.com/i/z1s2TK"&gt;&lt;img alt="z1s2TK.png" src="https://s1.ax1x.com/2022/11/22/z1s2TK.png"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;Core function &lt;code&gt;convertTo(ofstream&amp;amp;)&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;Effect: convert a Markdown source to a HTML/Vue source into a given ofstream passed by reference.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;lNum&lt;/code&gt;, &lt;code&gt;lType&lt;/code&gt; are two stack used to deal with nested ordered/unordered list.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kt"&gt;void&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;MarkdownSource::convertTo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ofstream&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;outFile&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;lType&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;Text&lt;/span&gt;&lt;span class="p"&gt;};&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;lNum&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;lSize&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;lNum&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;-10&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="kt"&gt;bool&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;isInCodeBlocks&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;auto&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;lines&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;len&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;types&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;CodeBlock&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;substr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;```&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;isInCodeBlocks&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="n"&gt;outFile&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;lt;pre&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="n"&gt;outFile&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;lt;/pre&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="n"&gt;isInCodeBlocks&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;isInCodeBlocks&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="n"&gt;outFile&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="k"&gt;continue&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;len&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lSize&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;lines&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;lines&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;startWith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lines&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Text&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;startWith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lines&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Text&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="n"&gt;outFile&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;lt;br&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lSize&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="n"&gt;outFile&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;lt;/li&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;
+&lt;span class="w"&gt;                            &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;lType&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;lSize&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Uli&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="w"&gt;                                    &lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;lt;/ul&amp;gt;&amp;quot;&lt;/span&gt;
+&lt;span class="w"&gt;                                    &lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;lt;/ol&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="w"&gt;                            &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="n"&gt;lSize&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="k"&gt;continue&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;theType&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;startWith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;theType&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Hr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="n"&gt;outFile&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;lt;hr&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="k"&gt;continue&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;theType&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Title&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;spacePos&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;findChar&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="sc"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="n"&gt;outFile&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;lt;h&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;spacePos&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="n"&gt;processLine&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;spacePos&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;outFile&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="n"&gt;outFile&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;lt;/h&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;spacePos&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="k"&gt;continue&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;theType&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Uli&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;theType&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Oli&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;meStart&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;lt;ul&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;meEnd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;lt;/ul&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;youStart&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;lt;ol&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;youEnd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;lt;/ol&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;theType&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Oli&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="n"&gt;swap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;meEnd&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;youEnd&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="n"&gt;swap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;meStart&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;youStart&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;indentCnt&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;theType&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Uli&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;findChar&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="sc"&gt;&amp;#39;-&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;findDigit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lType&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;lSize&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;theType&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;lNum&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;lSize&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;indentCnt&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="n"&gt;outFile&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;lt;/li&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;indentCnt&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;lNum&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;lSize&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="n"&gt;lSize&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="n"&gt;lNum&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;lSize&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;indentCnt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="n"&gt;lType&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;lSize&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;theType&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="n"&gt;outFile&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;meStart&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="c1"&gt;// not the same type of list or higher level&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lSize&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;lType&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;lSize&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;theType&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;lNum&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;lSize&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;indentCnt&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;||&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;lNum&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;lSize&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;indentCnt&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="n"&gt;outFile&lt;/span&gt;
+&lt;span class="w"&gt;                        &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;lt;/li&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;
+&lt;span class="w"&gt;                        &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lType&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;lSize&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;theType&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;meEnd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;youEnd&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="n"&gt;lSize&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lSize&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;lType&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;lSize&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;theType&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="c1"&gt;// same level &amp;amp; same type&lt;/span&gt;
+&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="n"&gt;outFile&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;lt;/li&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="c1"&gt;// different level || different type&lt;/span&gt;
+&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="n"&gt;lSize&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="n"&gt;lNum&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;lSize&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;indentCnt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="n"&gt;lType&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;lSize&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;theType&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="n"&gt;outFile&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;meStart&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="n"&gt;outFile&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;lt;li&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="n"&gt;processLine&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;theType&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Uli&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;indentCnt&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;findChar&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;indentCnt&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="sc"&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;outFile&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="k"&gt;continue&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;processLine&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;outFile&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="1. Projects"></category><category term="Project"></category><category term="C &amp; C++"></category></entry><entry><title>Tank War Game with CLI</title><link href="https://blog.zijuny.dev/tank-war-game-with-cli.html" rel="alternate"></link><published>2022-08-03T15:43:09+08:00</published><updated>2022-08-03T15:43:09+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2022-08-03:/tank-war-game-with-cli.html</id><summary type="html">&lt;p&gt;&lt;a href="https://github.com/zijunhz/tank-war-game"&gt;Github Repo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The repo is temporarily set to private to prevent potential violation of the Honor Code.&lt;/p&gt;
+&lt;p&gt;A simple tank war game with CLI that supports PVP, PVE and DEMO.&lt;/p&gt;
+&lt;h2&gt;Compile the program&lt;/h2&gt;
+&lt;p&gt;To compile it, you need to install:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;g++&lt;/code&gt;, a cpp compiler. Remember to add it to PATH …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://github.com/zijunhz/tank-war-game"&gt;Github Repo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The repo is temporarily set to private to prevent potential violation of the Honor Code.&lt;/p&gt;
+&lt;p&gt;A simple tank war game with CLI that supports PVP, PVE and DEMO.&lt;/p&gt;
+&lt;h2&gt;Compile the program&lt;/h2&gt;
+&lt;p&gt;To compile it, you need to install:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;g++&lt;/code&gt;, a cpp compiler. Remember to add it to PATH if you are using Windows.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CMake&lt;/code&gt;, a build process manager.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GNU Make&lt;/code&gt;, a tool which controls the generation of executables and other non-source files of a program from the program's source files.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;or you can use IDEs such as &lt;code&gt;CLion&lt;/code&gt;.&lt;/p&gt;
+&lt;h3&gt;The recommended way&lt;/h3&gt;
+&lt;p&gt;The recommended way of compiling it (also the way I compile it) is with the help of a plug-in in &lt;code&gt;VSCode&lt;/code&gt; called &lt;code&gt;CMake Tools&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If you open the project folder in &lt;code&gt;VSCode&lt;/code&gt; and you have successfully install &lt;code&gt;g++&lt;/code&gt;, &lt;code&gt;CMake&lt;/code&gt; and &lt;code&gt;CMake Tools&lt;/code&gt;, you can find a &lt;code&gt;build&lt;/code&gt; button in the bottom bar. By clicking it, the executable will be compiled under &lt;code&gt;./build/tankwar.exe&lt;/code&gt;.&lt;/p&gt;
+&lt;h3&gt;Other ways&lt;/h3&gt;
+&lt;p&gt;You may refer to &lt;a href="https://cmake.org/cmake/help/latest/manual/cmake.1.html"&gt;docs for CMake command line&lt;/a&gt; to checkout how to compile it with command line (it should be &lt;code&gt;cmake -b build&lt;/code&gt;, &lt;code&gt;cd build&lt;/code&gt; and &lt;code&gt;make&lt;/code&gt;, I believe).&lt;/p&gt;
+&lt;p&gt;Or, you may refer to &lt;a href="https://www.jetbrains.com/help/clion/quick-cmake-tutorial.html"&gt;docs for CMake in CLion&lt;/a&gt; to checkout how to compile it in &lt;code&gt;CLion&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Run the program&lt;/h2&gt;
+&lt;p&gt;This is a command line game so you can run it in terminal.&lt;/p&gt;
+&lt;p&gt;I'll take how it can be run in &lt;code&gt;Linux Mint&lt;/code&gt; as an example.&lt;/p&gt;
+&lt;p&gt;After generate the executable &lt;code&gt;tankwar&lt;/code&gt;, type &lt;code&gt;./tankwar&lt;/code&gt; in the terminal to enter the default mode which is PVP and has the default life of 5 and default log file &lt;code&gt;tankwar.log&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;You can type &lt;code&gt;./tankwar -h&lt;/code&gt; to check the help page of the game and learn how to have access to other mode and how to change the life and log file.&lt;/p&gt;
+&lt;p&gt;The game-play instruction is built into the game itself and you can see it during the game.&lt;/p&gt;
+&lt;p&gt;The game's interface has colored texts so you need to run it in a supported terminal. In Windows, for example, you need to run it in &lt;code&gt;Windows Terminal&lt;/code&gt; or the terminal in &lt;code&gt;VSCode&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Layer of the program&lt;/h2&gt;
+&lt;p&gt;The program consists of 5 layers listed from low level to high level:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Object&lt;/code&gt; layer. It includes every player, bullet and the whole game. It is responsible for some basic tasks like moving a tank or a bullet or judge collision. This part of the program is primarily in &lt;code&gt;gameProcess.cpp&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Game processing&lt;/code&gt; layer. It includes the logic of the game. By utilizing the &lt;code&gt;object&lt;/code&gt; layer, it is responsible for how the game goes on, such as processing one turn and printing the result. This part of the program is primarily in &lt;code&gt;gameProcess.cpp&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Input&lt;/code&gt; layer. The &lt;code&gt;game processing&lt;/code&gt; layer needs input actions to process one turn, and to the &lt;code&gt;game processing&lt;/code&gt; layer, human input and AI input are of no difference. The &lt;code&gt;input&lt;/code&gt; layer gathers input actions from human and/or AI based on game mode and passes the information to the &lt;code&gt;game processing&lt;/code&gt; layer. This part of the program is primarily in &lt;code&gt;gameControl.cpp&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;AI&lt;/code&gt; layer. This layer takes in a game status and returns the best action for a particular player. This part of the program is primarily in &lt;code&gt;tankai.cpp&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Global control&lt;/code&gt; layer. This layer handles the command line arguments and organizes the whole program. This part of the program is primarily in &lt;code&gt;gameControl.cpp&lt;/code&gt; and &lt;code&gt;tankwar.cpp&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Objects&lt;/h2&gt;
+&lt;p&gt;Three objects are defined in the game's program.&lt;/p&gt;
+&lt;h3&gt;&lt;code&gt;Bullet&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;It contains all the information of one bullet, including its coordinates and direction.&lt;/p&gt;
+&lt;p&gt;The method &lt;code&gt;init&lt;/code&gt; is used to initialize a bullet.&lt;/p&gt;
+&lt;p&gt;You can find its declaration in &lt;code&gt;gameProcess.h&lt;/code&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;code&gt;Player&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;It contains all the information of one player, including its coordinates, direction and life.&lt;/p&gt;
+&lt;p&gt;The method:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;turn&lt;/code&gt; is used to turn the player in place;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;move&lt;/code&gt; is used to move the player straight forward;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;init&lt;/code&gt; is used to initialize the playher.&lt;/p&gt;
+&lt;p&gt;You can find its declaration in &lt;code&gt;gameProcess.h&lt;/code&gt;.&lt;/p&gt;
+&lt;h3&gt;&lt;code&gt;Game&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;It contains all the information of a game status, including two players and all the bullets.&lt;/p&gt;
+&lt;p&gt;The number of methods of this class is too large, but you can check out comments in &lt;code&gt;gameProcess.h&lt;/code&gt; to see what each method do.&lt;/p&gt;
+&lt;p&gt;You can find the declaration of &lt;code&gt;Game&lt;/code&gt; in &lt;code&gt;gameProcess.h&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;I/O format&lt;/h2&gt;
+&lt;p&gt;The I/O format of this tank war game has three features to improve user experience.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screen shot of the game" src="https://s1.ax1x.com/2022/08/06/vnL8YT.png"&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The map is colored. Players are painted with red and cyan and the boundary is painted yellow. This greatly reduces the difficulty of recognizing the location of the tanks and the boundary.&lt;/li&gt;
+&lt;li&gt;The directions of the bullets and tanks are presented by arrows. This is also a great improvement in user experience because now the directions are clearly shown.&lt;/li&gt;
+&lt;li&gt;All kinds of inputs in the game (except command line argument) are considered, i.e. if the input is not valid, the program won't crash. Instead, it will provide you with a notification and let you input again. I am fully aware the pain when you are about to win but crash the game just because you accidentally type &lt;code&gt;-&lt;/code&gt; instead of &lt;code&gt;0&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;AI&lt;/h2&gt;
+&lt;p&gt;The strategy of the AI is quite conservative for it assume its opponent is cleaver enough.&lt;/p&gt;
+&lt;p&gt;Every turn, AI can take one action and so does its opponent. The AI will take the action that the minimal &lt;code&gt;scores&lt;/code&gt; when its opponent takes one action is the highest.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;score&lt;/code&gt; is measured by a quite complex algorithm involving searching tree. It evaluates whether an action will lead to the end of the game, cause damage and result in a either good or bad situation.&lt;/p&gt;
+&lt;p&gt;Also, it's often boring to see two tanks with the same life collide with each other resulting in a draw. So I also add some deduction in score for this kind of behavior. But the AI won't stay away from its component because of another evaluation standard that rewards aggressive behavior.&lt;/p&gt;
+&lt;p&gt;The overall result that I can never win it shows that the AI is quite powerful.&lt;/p&gt;</content><category term="1. Projects"></category><category term="Project"></category><category term="Fun Stuff"></category><category term="C &amp; C++"></category></entry><entry><title>God of Avalon</title><link href="https://blog.zijuny.dev/god-of-avalon.html" rel="alternate"></link><published>2022-05-03T12:05:00+08:00</published><updated>2022-05-03T12:05:00+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2022-05-03:/god-of-avalon.html</id><summary type="html">&lt;p&gt;This is a online multiplayer real-time platform for the board game The Resistance: Avalon.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://avalon.fun/pdfs/rules.pdf"&gt;Rules of the game&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;For users&lt;/h2&gt;
+&lt;p&gt;If you are in SJTU campus/using an SJTU vpn (as long as you has an SJTU ip), you can visit &lt;a href="http://59.78.35.89:7998/"&gt;this site&lt;/a&gt; to enjoy the online Avalon god.&lt;/p&gt;
+&lt;p&gt;~~I …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is a online multiplayer real-time platform for the board game The Resistance: Avalon.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://avalon.fun/pdfs/rules.pdf"&gt;Rules of the game&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;For users&lt;/h2&gt;
+&lt;p&gt;If you are in SJTU campus/using an SJTU vpn (as long as you has an SJTU ip), you can visit &lt;a href="http://59.78.35.89:7998/"&gt;this site&lt;/a&gt; to enjoy the online Avalon god.&lt;/p&gt;
+&lt;p&gt;~~I haven't deployed it to any VPS, but I do have the plan.~~&lt;/p&gt;
+&lt;p&gt;Update: it has been deployed to a VPS. Visit &lt;a href="https://goa.zpatronus.top"&gt;this site&lt;/a&gt; to enjoy it.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://s1.ax1x.com/2022/11/23/z3h2ad.png" style="zoom: 50%;" /&gt;&lt;/p&gt;
+&lt;p&gt;The interface should be straight forward for people who have played this game before.&lt;/p&gt;
+&lt;p&gt;The polling interval is set to 4 seconds, so please a moment if you notice some desynchronization.&lt;/p&gt;
+&lt;h2&gt;For developers&lt;/h2&gt;
+&lt;p&gt;This project is built with Vue+Django.&lt;/p&gt;
+&lt;h3&gt;Frontend&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://github.com/zijunhz/GodOfAvalon-frontend"&gt;Frontend Repository&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;Backend&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://github.com/zijunhz/GodOfAvalon-backend"&gt;Backend Repository&lt;/a&gt;&lt;/p&gt;</content><category term="1. Projects"></category><category term="Project"></category><category term="Fun Stuff"></category><category term="Web Dev"></category><category term="Django"></category><category term="Vue"></category></entry><entry><title>A Number Guessing Game Bot</title><link href="https://blog.zijuny.dev/a-number-guessing-game-bot.html" rel="alternate"></link><published>2022-04-28T09:34:27+08:00</published><updated>2022-04-28T09:34:27+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2022-04-28:/a-number-guessing-game-bot.html</id><summary type="html">&lt;div id="guessing_game"&gt;
+    &lt;a target="_blank" href="https://luckytoilet.wordpress.com/2011/11/07/solving-the-ab-game-by-brute-force/"&gt;Here's the
+      rules.&lt;/a&gt;&lt;br&gt;
+    The following is a web implementation of the algorithms that uses the Information Theory. That can get the correct number in an average of 5.2 steps. &lt;br&gt;
+    &lt;button onclick="init()"&gt;Start the Game&lt;/button&gt;&lt;button onclick="result()"&gt;Correct!&lt;/button&gt;&lt;br&gt;
+    &lt;input id="reA" type="tel"&gt;A &lt;input id="reB" type="tel"&gt;B&lt;br&gt;
+    &lt;button onclick="kill()"&gt;Confirm&lt;/button&gt;
+    &lt;p id="inf"&gt;&lt;/p&gt;
+  &lt;/div&gt;
+&lt;p&gt;&lt;img scr="../images/avatar.png"&gt;&lt;/p&gt;
+&lt;script&gt;
+let rule_on_show = 0, init1 = 0, tern = 0, ans, first = 1, tot = 0, pre …&lt;/script&gt;</summary><content type="html">&lt;div id="guessing_game"&gt;
+    &lt;a target="_blank" href="https://luckytoilet.wordpress.com/2011/11/07/solving-the-ab-game-by-brute-force/"&gt;Here's the
+      rules.&lt;/a&gt;&lt;br&gt;
+    The following is a web implementation of the algorithms that uses the Information Theory. That can get the correct number in an average of 5.2 steps. &lt;br&gt;
+    &lt;button onclick="init()"&gt;Start the Game&lt;/button&gt;&lt;button onclick="result()"&gt;Correct!&lt;/button&gt;&lt;br&gt;
+    &lt;input id="reA" type="tel"&gt;A &lt;input id="reB" type="tel"&gt;B&lt;br&gt;
+    &lt;button onclick="kill()"&gt;Confirm&lt;/button&gt;
+    &lt;p id="inf"&gt;&lt;/p&gt;
+  &lt;/div&gt;
+&lt;p&gt;&lt;img scr="../images/avatar.png"&gt;&lt;/p&gt;
+&lt;script&gt;
+let rule_on_show = 0, init1 = 0, tern = 0, ans, first = 1, tot = 0, pre = 0, l = 0, check = 0, G = 0, isright = 0, lA = 0;
+let a = new Array(), b = new Array(), cmp = new Array(), rd = new Array();
+function build() {
+  for (let i = 0; i &lt;= 5; i++)cmp[i] = new Array();
+  for (let i = 0; i &lt;= 9; i++)for (let j = 0; j &lt;= 9; j++)for (let k = 0; k &lt;= 9; k++)for (let l = 0; l &lt;= 9; l++) {
+    if (i == j || i == k || i == l || j == k || j == l || k == l) continue;
+    a[++tot] = i *1000 + j* 100 + k *10 + l;
+  }
+}
+function init() {
+  document.getElementById("inf").innerHTML = '';
+  if (first == 1) {
+    build(); first = 0;
+  }
+  for (let i = 1; i &lt;= tot; i++)b[i] = 1;
+  check = 1; init1 = 1; tern = 0; isright = 0; lA = 0;
+  makeguess();
+}
+function getn(x, n) {
+  for (let i = 1; i &lt;= 4 - n; i++)x = Math.floor(x / 10);
+  return x % 10;
+}
+function compA(X, Y) {
+  let x = new Array(), y = new Array(), A = 0;
+  for (let i = 1; i &lt;= 4; i++)x[i] = getn(X, i);
+  for (let i = 1; i &lt;= 4; i++)y[i] = getn(Y, i);
+  for (let i = 1; i &lt;= 4; i++)if (x[i] == y[i]) A++;
+  return A;
+}
+function compB(X, Y) {
+  let x = new Array(), y = new Array(), B = 0;
+  for (let i = 1; i &lt;= 4; i++)x[i] = getn(X, i);
+  for (let i = 1; i &lt;= 4; i++)y[i] = getn(Y, i);
+  for (let i = 1; i &lt;= 4; i++)for (let j = 1; j &lt;= 4; j++)if (i != j &amp;&amp; x[i] == y[j]) B++;
+  return B;
+}
+function sqr(x) {
+  return x* x;
+}
+function abS(x) {
+  if (x &gt;= 0) return x; return -x;
+}
+function makeguess() {
+  tern++;
+  if (tern == 1) {
+    G = a[Math.ceil(Math.random() * Math.random() * tot * tot * tot) % tot + 1]; pre = 5040;
+  } else {
+    let bestans = 0, ans; l = 0, eps = 1e-3;
+    pre = 0;
+    for (let i = 1; i &lt;= tot; i++) {
+      pre += b[i]
+    }
+    for (let i = 1; i &lt;= tot; i++) {
+      if (b[i] == 0) continue;
+      for (let j = 0; j &lt;= 4; j++)for (let k = 0; k &lt;= 4 - j; k++)cmp[j][k] = 0;
+      for (let j = 1; j &lt;= tot; j++)
+        if (b[j] == 1) {
+          cmp[compA(a[j], a[i])][compB(a[j], a[i])]++;
+        }
+      ans = 0;
+      for (let j = 0; j &lt;= 4; j++)for (let k = 0; k &lt;= 4 - j; k++)
+        if (cmp[j][k] != 0) {
+          ans += Math.log(pre / cmp[j][k]) *cmp[j][k] / pre;//sqr(ave-cmp[j][k]);
+        }
+      //ans/=cnt;ans-=cnt*1.1;
+      if (abS(ans - bestans) &lt;= eps) {
+        rd[++l] = i;
+        console.log(ans + ' ' + a[rd[l]]);
+        continue;
+      }
+      if (ans &gt; bestans) {
+        console.log(ans + ' ' + a[rd[1]])
+        l = 1; rd[1] = i; bestans = ans;
+      }
+    }
+    G = a[rd[Math.ceil(Math.random() * Math.random() * tot * tot * tot) % l + 1]];
+  }
+  let t = '';
+  for (let i = 1; i &lt;= 4; i++)t = t + String(getn(G, i));
+  document.getElementById("inf").innerHTML = document.getElementById("inf").innerHTML + 'Attempt ' + String(tern) + ': ' + t + ' (' + String(pre) + ')';
+  //document.getElementById("inf").innerHTML=String(l);
+}
+function kill() {
+  if (init1 == 0) {
+    document.getElementById("inf").innerHTML = 'Game has not started'; return;
+  }
+  if (isright == 1) {
+    document.getElementById("inf").innerHTML = document.getElementById("inf").innerHTML + '&lt;br&gt;Hit the answer in ' + String(tern) + ' steps!'; init1 = 0;
+    return;
+  }
+  let gusA = document.getElementById("reA").value, gusB = document.getElementById("reB").value, A, B, ill = 0;
+  if (isNaN(gusA) || isNaN(gusB) || gusA == '' || gusB == '') ill = 1;
+  else {
+    A = Number(gusA); B = Number(gusB);
+    if (A &lt; 0 || B &lt; 0 || A &gt; 4 || B &gt; 4 || A + B &gt; 4) ill = 1;
+  }
+  if (ill == 1) {
+    document.getElementById("inf").innerHTML = document.getElementById("inf").innerHTML + '&lt;br&gt;Wrong Input!&lt;br&gt;'; return;
+  }
+  lA = A;
+  if (A == 4) {
+    document.getElementById("inf").innerHTML = document.getElementById("inf").innerHTML + '&lt;br&gt;Hit the answer in ' + String(tern) + ' steps!'; init1 = 0;
+    return;
+  }
+  let count = 0;
+  for (let i = 1; i &lt;= tot; i++) {
+    if (b[i] == 1 &amp;&amp; ((compA(a[i], G) != A || compB(a[i], G) != B) || a[i] == G)) b[i] = 0;
+    if (b[i] == 1) count++;
+  }
+  if (count == 0) {
+    document.getElementById("inf").innerHTML = document.getElementById("inf").innerHTML + '&lt;br&gt;Wrong Input!&lt;br&gt;'; init1 = 0; return;
+  }
+  document.getElementById("inf").innerHTML = document.getElementById("inf").innerHTML + ' ' + String(gusA) + 'A ' + String(gusB) + 'B&lt;br&gt;';
+  makeguess();
+}
+function result() {
+  isright = 1;
+  kill();
+}
+&lt;/script&gt;
+
+&lt;p&gt;The source of the CLI and GUI implementation of the game is available on &lt;a href="https://github.com/zijunhz/number-guessing"&gt;Github&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;del&gt;Since this project is used as a lab project for the course ENGR1010J Introduction to Computers and Programming at UM-SJTU Joint Institute, the Github repo is temporarily set to private.&lt;/del&gt;&lt;/p&gt;</content><category term="1. Projects"></category><category term="Fun Stuff"></category><category term="Project"></category></entry><entry><title>学生端杀手</title><link href="https://blog.zijuny.dev/xue-sheng-duan-sha-shou.html" rel="alternate"></link><published>2019-03-24T10:08:29+08:00</published><updated>2019-03-24T10:08:29+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2019-03-24:/xue-sheng-duan-sha-shou.html</id><summary type="html">&lt;p&gt;&lt;a href="https://github.com/zijunhz/MythwareStudentClientAssistant"&gt;Github Repo&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;前言&lt;/h3&gt;
+&lt;p&gt;目前大多数电子教室使用的学生端软件是极域电子教室，杀除它的方法也有很多。但对于大多数小白，记下这些 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://github.com/zijunhz/MythwareStudentClientAssistant"&gt;Github Repo&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;前言&lt;/h3&gt;
+&lt;p&gt;目前大多数电子教室使用的学生端软件是极域电子教室，杀除它的方法也有很多。但对于大多数小白，记下这些方法并不容易，于是萌生了开发这样一款傻瓜软件的想法。&lt;/p&gt;
+&lt;h3&gt;现有的杀除学生端方法&lt;/h3&gt;
+&lt;h4&gt;通过注册表获取学生端密码&lt;/h4&gt;
+&lt;p&gt;这个方法是我最早接触的方法，小学时想着杀除学生端于是就开始百度，排名前几就是这个。&lt;/p&gt;
+&lt;p&gt;具体而言有以下几步&lt;/p&gt;
+&lt;p&gt;1.win（键盘左下角的Windows徽标）+R，打开运行，输入regedit，点击确定。打开注册表管理器。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://s2.ax1x.com/2019/03/24/AYpGrD.png"&gt;&lt;/p&gt;
+&lt;p&gt;2.依次进入HKEY_LOCAL_MACHINE，SOFTWARE，TopDomain，e-Learning Class Standard，1.00。右侧UninstallPasswd的键值假设是psswd123，真实密码为去掉前5位psswd即123。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://s2.ax1x.com/2019/03/24/AYpyqg.png"&gt;&lt;/p&gt;
+&lt;p&gt;3.右键单击右下角任务栏上的学生端，点击设置，输入密码后，找到防杀进程，取消。&lt;/p&gt;
+&lt;p&gt;4.右键任务栏打开任务管理器，在进程中找到一项名为StudentMain的进程，结束任务即可杀除。&lt;/p&gt;
+&lt;h4&gt;通过命令杀除学生端&lt;/h4&gt;
+&lt;p&gt;主要有几种&lt;/p&gt;
+&lt;p&gt;一是通过刚刚的任务管理器，二是taskkill命令。但如果开了防杀进程，这两种都是无效的。&lt;/p&gt;
+&lt;p&gt;有没有有效的命令呢？&lt;/p&gt;
+&lt;p&gt;自然是有的。&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://baike.baidu.com/item/ntsd/5790171?fr=aladdin"&gt;ntsd&lt;/a&gt;是Windows中系统级的调试命令，但是自Windows Vista后不再集成于Windows中。&lt;/p&gt;
+&lt;p&gt;假设要杀除进程PID为123的进程，语法为&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ntsd&lt;span class="w"&gt; &lt;/span&gt;-c&lt;span class="w"&gt; &lt;/span&gt;q&lt;span class="w"&gt; &lt;/span&gt;-p&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;123&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;当然，也可以直接杀除进程名为xxx的进程，但由于PID才是进程的唯一对应标识（即可以有多个同名进程，但PID是唯一的），所以通常使用PID。&lt;/p&gt;
+&lt;h3&gt;程序设计&lt;/h3&gt;
+&lt;h4&gt;计划实现功能&lt;/h4&gt;
+&lt;p&gt;1.立即杀除，很好理解&lt;/p&gt;
+&lt;p&gt;2.定时杀除，广播前可以开启，广播到一半学生端就会被杀除&lt;/p&gt;
+&lt;p&gt;3.连续杀除，算是定时杀除的升级版，每隔一段时间定时杀除&lt;/p&gt;
+&lt;p&gt;4.重新开启学生端，显然，并不是所有人都知道学生端在哪，也并不是所有人都想一直关着学生端&lt;/p&gt;
+&lt;h4&gt;关键代码&lt;/h4&gt;
+&lt;p&gt;获取学生端PID，已知学生端进程名为StudentMain，其中，s="""StudentMain.exe"""&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Dim WmiService As Object, Processes As Object, Process As Object
+Set WmiService = GetObject(&amp;quot;winmgmts:{impersonationLevel=impersonate}!\\.\root\cimv2&amp;quot;)
+Set Processes = WmiService.ExecQuery(&amp;quot;SELECT * FROM Win32_Process WHERE Name = &amp;quot; &amp;amp; s)
+Dim x As String
+x = &amp;quot;x&amp;quot;
+For Each Process In Processes
+x = x &amp;amp; &amp;quot; &amp;quot; &amp;amp; Process.ProcessId
+Next
+If (x = &amp;quot;x&amp;quot;) Then
+    getpid = -1
+Else
+    getpid = Val(Mid(x, 2, Len(x) - 1))
+End If
+Set WmiService = Nothing
+Set Processes = Nothing
+Set Process = Nothing
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;释放ntsd，因为Windows 7应该没有集成了&lt;/p&gt;
+&lt;p&gt;首先要把ntsd.exe加到资源中，然后每次杀除前释放到程序目录（万一有熊孩子把生成的ntsd给删了）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;Dim&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;arr&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;As&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;Byte&lt;/span&gt;
+&lt;span class="nv"&gt;arr&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;LoadResData&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;101&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;CUSTOM&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;Open&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;App&lt;/span&gt;.&lt;span class="nv"&gt;Path&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;\ntsd1.exe&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;For&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;Binary&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;As&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="sc"&gt;#1&lt;/span&gt;
+&lt;span class="nv"&gt;Put&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="sc"&gt;#1&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;arr&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+&lt;span class="nv"&gt;Close&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="sc"&gt;#1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;杀除，其中，pid即为刚刚get的PID&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Shell App.Path &amp;amp; &amp;quot;/ntsd1 -c q -p &amp;quot;&amp;quot;&amp;quot; &amp;amp; Str(pid) &amp;amp; &amp;quot;&amp;quot;&amp;quot;&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;定时方面，总共使用3个计时器。&lt;/p&gt;
+&lt;p&gt;第一个计时器interval=1000，用于检测学生端状态并修改状态text和提示label的内容。&lt;/p&gt;
+&lt;p&gt;第二个和第三个计时器分别对应定时查杀和连续查杀。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://s2.ax1x.com/2019/03/24/AYCMjK.png"&gt;&lt;/p&gt;
+&lt;h3&gt;最终效果&lt;/h3&gt;
+&lt;p&gt;下周（2019.3.25-29）将去学校机房验证，现在在家就拿notepad++作为小白鼠叭orz&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://s2.ax1x.com/2019/03/24/AYPvzq.gif"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://s2.ax1x.com/2019/03/24/AYPqoQ.gif"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://s2.ax1x.com/2019/03/24/AYFAHS.gif"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://s2.ax1x.com/2019/03/24/AYFCct.gif"&gt;&lt;/p&gt;
+&lt;p&gt;3.29更新：&lt;/p&gt;
+&lt;p&gt;的确可行，偷传至FTP，不少同学发现了。&lt;/p&gt;
+&lt;p&gt;5.3更新：&lt;/p&gt;
+&lt;p&gt;有次老师走到身后时刚巧查杀，非常尴尬，寻思在全屏广播时也能自由控制，而不是定时。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://s2.ax1x.com/2019/05/03/EN5rgP.gif"&gt;&lt;/p&gt;
+&lt;p&gt;学生端杀手gen2能在鼠标移至左上角时自动杀除，下周将带去学校试验。&lt;/p&gt;
+&lt;h3&gt;关于360报毒&lt;/h3&gt;
+&lt;p&gt;360报毒原因：使用了资源文件附带ntsd.exe，凡是使用资源文件，360都会报毒。&lt;/p&gt;
+&lt;p&gt;有没有毒呢？&lt;/p&gt;
+&lt;p&gt;自然是没有的。请看完整代码：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://s2.ax1x.com/2019/03/29/A0j5n0.png"&gt;&lt;/p&gt;</content><category term="1. Projects"></category><category term="Project"></category></entry><entry><title>树莓派入门：安装与配置</title><link href="https://blog.zijuny.dev/shu-mei-pai-ru-men-an-zhuang-yu-pei-zhi.html" rel="alternate"></link><published>2019-02-01T10:40:55+08:00</published><updated>2019-02-01T10:40:55+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2019-02-01:/shu-mei-pai-ru-men-an-zhuang-yu-pei-zhi.html</id><summary type="html">&lt;h2&gt;简介&lt;/h2&gt;
+&lt;p&gt;树莓派是一块只有信用卡长宽的微型电脑，通常配备ARM处理器。麻雀虽小而接口丰富，五脏俱全。&lt;/p&gt;
+&lt;p&gt;比如我目前入手的树莓派3B …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;简介&lt;/h2&gt;
+&lt;p&gt;树莓派是一块只有信用卡长宽的微型电脑，通常配备ARM处理器。麻雀虽小而接口丰富，五脏俱全。&lt;/p&gt;
+&lt;p&gt;比如我目前入手的树莓派3B+有4个USB2.0，1个千兆以太网（支持以太网供电），1个3.5mm音频接口，1个摄像头接口，1个HDMI接口，1个Micro USB电源接口，1个DSI显示接口，内置WiFi与蓝牙。树莓派拥有超级广泛用途的一个重要原因是其配备40针GPIO接口，意味着树莓派的配件扩展可以极其丰富。&lt;/p&gt;
+&lt;h2&gt;选购&lt;/h2&gt;
+&lt;p&gt;首先不能对树莓派的性能有太高的指望，毕竟这只是台成本在200-300元的机子，比如3B+配备1.4GHz四核处理器与1G RAM。这里给出各版本对照表：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://s2.ax1x.com/2019/02/01/k31cVJ.png"&gt;&lt;/p&gt;
+&lt;p&gt;这张图制作较早，并没有包含树莓派3B+。3B+（280）比3B（264）更贵，但处理器主频在不超频情况下从1.2GHz提高到了1.4GHz。另外，上表中有成本为5美元的Zero，但在京东等平台上售价也都在150+，并没有实惠多少。&lt;/p&gt;
+&lt;p&gt;选完树莓派后可以根据自己的需求选取相应的传感器、配件等等。&lt;/p&gt;
+&lt;p&gt;这里推荐加装一个外壳和风扇。树莓派发热非常厉害，如果要超频则更甚，良好散热对使用寿命是有极大好处的。至于外壳，单纯因为树莓派看起来太单薄，电子元件裸露，容易损坏。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://s2.ax1x.com/2019/02/01/k33pqg.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;另外，需要一张Micro SD，推荐16GB+，class10以上。着重看读写速度。我选用的是闪迪至尊极速32GB，读入和写入分别为100MB/s和60MB/s&lt;/p&gt;
+&lt;h2&gt;安装系统&lt;/h2&gt;
+&lt;p&gt;由于是ARM处理器，因此在操作系统上稍有限制。可选各类ARMlinux以及windows10iot。&lt;/p&gt;
+&lt;p&gt;其他操作系统，日后研究，这里以官方推荐的操作系统Raspbian（基于Debian，自带很多硬件驱动）为例。&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://downloads.raspberrypi.org/raspbian_latest"&gt;下载操作系统&lt;/a&gt; &lt;a href="https://sourceforge.net/projects/win32diskimager/"&gt;下载Win32 Disk Imager&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;然后就是傻瓜操作，打开软件，选择img镜像，写入到SD卡上。&lt;/p&gt;
+&lt;h2&gt;基本配置&lt;/h2&gt;
+&lt;p&gt;SD卡插入树莓派，接上电源后自动开机。第一次开机连接一个显示器。&lt;/p&gt;
+&lt;p&gt;以前版本的Raspbian默认用户名和密码是pi和raspberry，现在好像可以在第一次开机自己设定密码了。&lt;/p&gt;
+&lt;p&gt;第一次开机会有一些设置，非常不推荐在这个过程中选择更新，我也不知道是网慢还是什么原因，经常卡在这儿。&lt;/p&gt;
+&lt;p&gt;接下来是一些推荐的配置（更改默认分辨率，开启VNC，更改软件源，安装vim）&lt;/p&gt;
+&lt;h4&gt;更改默认分辨率，开启VNC&lt;/h4&gt;
+&lt;p&gt;命令行输入如下命令进入设置。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo raspi-config
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;进入7 Advanced Options，在A5 Resolution可以更改分辨率。进入5 Interfacing Options，选择VNC enabled。&lt;/p&gt;
+&lt;p&gt;同时建议给树莓派分配专门的IP，方便VNC连接。这步要去路由器管理后台，找到DHCP保留或静态IP或绑定IP等等这样的设置，将树莓派的MAC绑在固定的IP上即可。&lt;/p&gt;
+&lt;p&gt;windows通过VNC访问树莓派也非常简单。在VNC开启后，VNC会默认开机启动。因此只要树莓派开机联网，在windows下使用VNCviewer，输入树莓派IP和访问密码（通常是树莓派密码或者是自己设定的），就能远程访问桌面了。&lt;/p&gt;
+&lt;h4&gt;更改软件源&lt;/h4&gt;
+&lt;p&gt;命令行输入如下命令就可以换到亲测比较优秀的一个源上（中科大的源）。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;sudo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;s&lt;/span&gt;
+&lt;span class="nv"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;e&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;deb http://mirrors.ustc.edu.cn/raspbian/raspbian/ stretch main contrib non-free rpi \n deb-src http://mirrors.ustc.edu.cn/raspbian/raspbian/ stretch main contrib non-free rpi&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;sources&lt;/span&gt;.&lt;span class="nv"&gt;list&lt;/span&gt;
+&lt;span class="nv"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;e&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;deb http://mirrors.ustc.edu.cn/archive.raspberrypi.org/ stretch main ui&amp;quot;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;sources&lt;/span&gt;.&lt;span class="nv"&gt;list&lt;/span&gt;.&lt;span class="nv"&gt;d&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;raspi&lt;/span&gt;.&lt;span class="nv"&gt;list&lt;/span&gt;
+&lt;span class="k"&gt;exit&lt;/span&gt;
+&lt;span class="nv"&gt;sudo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;apt&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;update&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;sudo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;apt&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;y&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;upgrade&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4&gt;安装vim&lt;/h4&gt;
+&lt;p&gt;居然没有默认安装orz。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo apt-get install vim
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="1. Projects"></category><category term="Fun Stuff"></category></entry><entry><title>在树莓派上搭建Nextcloud私有云</title><link href="https://blog.zijuny.dev/zai-shu-mei-pai-shang-da-jian-nextcloudsi-you-yun.html" rel="alternate"></link><published>2019-01-31T21:53:38+08:00</published><updated>2019-01-31T21:53:38+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2019-01-31:/zai-shu-mei-pai-shang-da-jian-nextcloudsi-you-yun.html</id><summary type="html">&lt;h2&gt;为什么是Nextcloud？&lt;/h2&gt;
+&lt;p&gt;在树莓派这个预算下，基本上是owncloud和nextcloud二分天下。而owncloud现在美国德国高层分歧大，技术开发们受不了于是另辟炉灶开发了nextcloud。也就是说，nextcloud是owncloud原班人马建的，这一点可以体 …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;为什么是Nextcloud？&lt;/h2&gt;
+&lt;p&gt;在树莓派这个预算下，基本上是owncloud和nextcloud二分天下。而owncloud现在美国德国高层分歧大，技术开发们受不了于是另辟炉灶开发了nextcloud。也就是说，nextcloud是owncloud原班人马建的，这一点可以体现在nextcloud的客户端也兼容owncloud。就目前而言，无论其功能还是美观程度都要甚于owncloud。唯一的不足是汉化不完全，但完全不影响使用。&lt;/p&gt;
+&lt;p&gt;nextcloud可以干什么？首先当然是私有云有的功能它都有。除此之外，nextcloud有多用户系统，容量控制系统，共享系统（有连接选项，因此可以共享给非用户）和出色的预览系统和出色的客户端、网页端。&lt;/p&gt;
+&lt;p&gt;成果图：&lt;/p&gt;
+&lt;p&gt;通过VNC远程桌面连接&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://s2.ax1x.com/2019/01/31/k3pL6K.png"&gt;&lt;/p&gt;
+&lt;p&gt;实体，很小巧&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://s2.ax1x.com/2019/01/31/k3pql6.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;网页登录页面&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://s2.ax1x.com/2019/01/31/k3pOOO.png"&gt;&lt;/p&gt;
+&lt;p&gt;网页端&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://s2.ax1x.com/2019/01/31/k3pbSx.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://1617z38d55.51mypc.cn/"&gt;外网访问，可能（高概率）不在线&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;准备&lt;/h2&gt;
+&lt;p&gt;树莓派。我的是3b+。树莓派需要联网，并且可以通过SSH或者各种如teamviewer、VNC等进行控制（或者您有钱 直接外接显示屏）。&lt;/p&gt;
+&lt;h2&gt;开始搭建&lt;/h2&gt;
+&lt;p&gt;有很多种方法可以安装nextcloud，比如换nextcloud的iso，比如用命令行纯手工安装。这里选一种最简单最稳的。&lt;/p&gt;
+&lt;p&gt;英语强的大佬可以直接看&lt;a href="https://docs.nextcloud.com/server/15/admin_manual/installation/index.html"&gt;官方教程&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;下载安装snap&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo apt install snapd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;下载安装Nextcloud&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo snap install nextcloud
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;下载安装过程时间较长。&lt;/p&gt;
+&lt;h3&gt;基础配置&lt;/h3&gt;
+&lt;p&gt;完成后，可以在树莓派浏览器上直接localhost:80登录也可以在其他电脑上输入树莓派的IP登录。&lt;/p&gt;
+&lt;p&gt;在页面上输入所需的管理员用户名和密码。&lt;/p&gt;
+&lt;p&gt;根据官网，这时候会有一个更改储存位置的选项，但我试了好多遍都没有发现，这一点还有待探究。&lt;/p&gt;
+&lt;h2&gt;花生壳内网穿透&lt;/h2&gt;
+&lt;p&gt;目前，nextcloud已经可以在内网正常运行了，那么如果想外网访问呢？&lt;/p&gt;
+&lt;p&gt;首先要解决的就是动态IP和穿透局域网的问题。&lt;/p&gt;
+&lt;p&gt;这里最无脑的就是使用花生壳。&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://hsk.oray.com/download/download?id=25"&gt;deb安装包&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;cd到下载目录&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo dpkg -i 文件名
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;安装完成后显示SN码、默认密码&lt;/p&gt;
+&lt;p&gt;登录&lt;a href="http://b.oray.com/"&gt;花生壳&lt;/a&gt;，输入SN码和默认密码，并按照提示激活。&lt;/p&gt;
+&lt;p&gt;然后可以选择直接选用这个作为账号密码也可以在右上角选择切换用户，登录自己账号后自动绑定。&lt;/p&gt;
+&lt;h2&gt;分配阿里云域名&lt;/h2&gt;
+&lt;p&gt;花生壳的默认域名又臭又长，考虑从阿里云的域名跳转过去。由于没满18岁域名无法备案，暂时无法实现。理论上给cloud.xxx.xxx解析一个CNAME就行了吧...&lt;/p&gt;</content><category term="1. Projects"></category><category term="Fun Stuff"></category></entry></feed>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>luoguP1875 佳佳的魔法药水</title>
+        <link rel="stylesheet" href="https://blog.zijuny.dev/theme/css/main.css" />
+        <link href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                type="application/atom+xml" rel="alternate" title="Zijun(Mark) Yang's Blog Atom Feed" />
+        <meta name="description" content="题目 这道题目有点奇怪。 我交堆优化dijk，怎么样都A不掉，都只有10分。 检查了7个小时，重构过，依然不行。 然后放下尊严写邻接矩阵写堆优 …" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://blog.zijuny.dev/">Zijun(Mark) Yang's Blog</a></h1>
+                <nav>
+                        <ul>
+                                <li><a href="/tags">Tags</a></li>
+
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/2-cs-hacks.html">2. CS & Hacks</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/3-web-dev.html">3. Web Dev</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/4-experiences-reflections.html">4. Experiences & Reflections</a></li>
+                                        <li class="active" ><a
+                                                        href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/6-misc.html">6. Misc</a></li>
+
+                                                <li><a href="/about-me">About Me</a></li>
+                        </ul>
+                </nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://blog.zijuny.dev/luogup1875-jia-jia-de-mo-fa-yao-shui.html" rel="bookmark"
+           title="Permalink to luoguP1875 佳佳的魔法药水">luoguP1875 佳佳的魔法药水</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-11-01T14:59:10+08:00">
+                Date: Thu 01 November 2018
+        </abbr>
+        <br />
+        <abbr class="modified" title="2018-11-01T14:59:10+08:00">
+                Updated: Thu 01 November 2018
+        </abbr>
+
+        <!--         <address class="vcard author">
+                By                         <a class="url fn" href="https://blog.zijuny.dev/author/zijunmark-yang.html">Zijun(Mark) Yang</a>
+        </address>
+ -->
+        <p>In <a href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a>.</p>
+<p>Tags: <a href="https://blog.zijuny.dev/tag/oi.html">OI</a>
+</p>        
+</footer><!-- /.post-info -->      <p><a href="https://www.luogu.org/problemnew/show/P1875">题目</a></p>
+<hr>
+<p>这道题目有点<em>奇怪</em>。</p>
+<p>我交堆优化dijk，怎么样都A不掉，都只有10分。</p>
+<p>检查了7个小时，重构过，依然不行。</p>
+<p>然后放下尊严写邻接矩阵写堆优化，一遍A....</p>
+<p>why？？？？</p>
+<hr>
+<p>大致是这么做的：</p>
+<p>每种药是一个点，假设a+b合成c，那么建一条a到c的边，边权为得到b的代价，建一条b到c的边，边权为得到a的代价。</p>
+<p>思考，一开始的时候，每种药都可以通过购买得到，假设价格<em>最小</em>的药是x，那么得到x一定不能更优了。因为如果更优，一定是通过其他两种药混合而成，而x已经是价格最低的药了，因此x通过其他两种药相加不可能更优。</p>
+<p>根据最短路的做法，我们可以用x更新其他药。但这里有个问题。</p>
+<blockquote>
+<p>假设x和y合成z。</p>
+<p>我们在这里只确定了x是最优的，并不能确定y是最优的；考虑到以后用y更新其他药的时候，也会有y和x合成z的操作，而那时，y是最优的，x也是最优的，他们合成z一定是最便宜的。</p>
+</blockquote>
+<p>因此用x更新其他药的时候，假设x和y合成z，那么只有当y已经被访问过，才执行更新操作。</p>
+<p>至于计算方案数，假设x和y合成z，那么z一共可以有x的方案数乘y的方案数种方案数。</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
+<span class="cp">#define ll long long</span>
+<span class="cp">#define N 1010</span>
+<span class="cp">#define mem(a,b) memset(a,b,sizeof(a))</span>
+<span class="cp">#define fsb(a,b,c) for(int a=b;a&lt;=c;a++)</span>
+<span class="cp">#define fbs(a,b,c) for(int a=b;a&gt;=c;a--)</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="n">N</span><span class="p">],</span><span class="n">n</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">vis</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+<span class="n">ll</span><span class="w"> </span><span class="n">d</span><span class="p">[</span><span class="n">N</span><span class="p">],</span><span class="n">f</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">qw</span><span class="o">&gt;</span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">rll</span><span class="p">(</span><span class="n">qw</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">){</span>
+<span class="w"> </span><span class="n">qw</span><span class="w"> </span><span class="n">f</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">isdigit</span><span class="p">(</span><span class="n">c</span><span class="p">))</span><span class="n">f</span><span class="o">=</span><span class="n">c</span><span class="o">==</span><span class="sc">&#39;-&#39;</span><span class="o">?</span><span class="mi">-1</span><span class="o">:</span><span class="n">f</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="k">while</span><span class="p">(</span><span class="n">isdigit</span><span class="p">(</span><span class="n">c</span><span class="p">))</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">&#39;0&#39;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="n">x</span><span class="o">*=</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span>
+<span class="w"> </span><span class="n">rll</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+<span class="w"> </span><span class="n">fsb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="n">rll</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="w"> </span><span class="n">mem</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">255</span><span class="p">);</span>
+<span class="w"> </span><span class="k">while</span><span class="p">(</span><span class="o">~</span><span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">x</span><span class="p">)){</span>
+<span class="w">  </span><span class="n">rll</span><span class="p">(</span><span class="n">y</span><span class="p">);</span><span class="n">rll</span><span class="p">(</span><span class="n">z</span><span class="p">);</span><span class="n">x</span><span class="o">++</span><span class="p">;</span><span class="n">y</span><span class="o">++</span><span class="p">;</span><span class="n">z</span><span class="o">++</span><span class="p">;</span><span class="n">a</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span><span class="o">=</span><span class="n">z</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="n">mem</span><span class="p">(</span><span class="n">vis</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+<span class="w"> </span><span class="n">fsb</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="mi">-1</span><span class="p">){</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">u</span><span class="o">=</span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">  </span><span class="n">fsb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+<span class="w">   </span><span class="n">u</span><span class="o">=</span><span class="p">((</span><span class="o">!</span><span class="n">vis</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">&amp;&amp;</span><span class="p">(</span><span class="n">u</span><span class="o">==</span><span class="mi">-1</span><span class="o">||</span><span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">&gt;</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span><span class="o">?</span><span class="n">i</span><span class="o">:</span><span class="n">u</span><span class="p">;</span>
+<span class="w">  </span><span class="n">vis</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span>
+<span class="w">  </span><span class="n">fsb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">){</span>
+<span class="w">   </span><span class="k">if</span><span class="p">((</span><span class="n">a</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="mi">-1</span><span class="p">)</span><span class="o">||</span><span class="p">(</span><span class="o">!</span><span class="n">vis</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">||</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">&gt;</span><span class="n">d</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">i</span><span class="p">]])</span><span class="k">continue</span><span class="p">;</span>
+<span class="w">   </span><span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">==</span><span class="n">d</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">i</span><span class="p">]])</span>
+<span class="w">    </span><span class="n">f</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">i</span><span class="p">]]</span><span class="o">+=</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">f</span><span class="p">[</span><span class="n">u</span><span class="p">];</span>
+<span class="w">   </span><span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">&lt;</span><span class="n">d</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">i</span><span class="p">]]){</span>
+<span class="w">    </span><span class="n">d</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">i</span><span class="p">]]</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">d</span><span class="p">[</span><span class="n">u</span><span class="p">];</span>
+<span class="w">    </span><span class="n">f</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="n">i</span><span class="p">]]</span><span class="o">=</span><span class="n">f</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">*</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%lld %lld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>代码其实有问题，不过数据比较水，没有出现x和x可以合成z的情况。如果这种情况合法，那么对方案数的贡献只有f(x)×(f(x)+1)/2。</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>Social</h2>
+                        <ul>
+                                <li><a href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                                                type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                                <li><a href="https://github.com/zpatronus">Github (really? listing github in the social widget??)</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <!-- <address id="about" class="vcard body">
+                        Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes
+                        great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address> -->
+
+                <!-- <p>The theme is by <a rel="nofollow"
+                                href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing
+                                Magazine</a>, thanks!</p> -->
+                <p>Copyright by Zijun(Mark) Yang. Licensed under DOES NOT HAVE A LICENSE YET.</p>
+        </footer>
+        <!-- /#about -->
+        <!-- /#contentinfo -->
+
+        <!--  -->
+</body>
+
+</html>

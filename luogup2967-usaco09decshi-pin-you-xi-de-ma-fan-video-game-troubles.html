@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>luoguP2967 [USACO09DEC]视频游戏的麻烦Video Game Troubles</title>
+        <link rel="stylesheet" href="https://blog.zijuny.dev/theme/css/main.css" />
+        <link href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                type="application/atom+xml" rel="alternate" title="Zijun(Mark) Yang's Blog Atom Feed" />
+        <meta name="description" content="题目 f(i,j)表示前i个游戏平台花费j的最大愉悦值。 难点在于保证买该平台游戏，则游戏平台一定要买。 如果按照金明的预算方案那样对于每个附属品 …" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://blog.zijuny.dev/">Zijun(Mark) Yang's Blog</a></h1>
+                <nav>
+                        <ul>
+                                <li><a href="/tags">Tags</a></li>
+
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/2-cs-hacks.html">2. CS & Hacks</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/3-web-dev.html">3. Web Dev</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/4-experiences-reflections.html">4. Experiences & Reflections</a></li>
+                                        <li class="active" ><a
+                                                        href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/6-misc.html">6. Misc</a></li>
+
+                                                <li><a href="/about-me">About Me</a></li>
+                        </ul>
+                </nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://blog.zijuny.dev/luogup2967-usaco09decshi-pin-you-xi-de-ma-fan-video-game-troubles.html" rel="bookmark"
+           title="Permalink to luoguP2967 [USACO09DEC]视频游戏的麻烦Video Game Troubles">luoguP2967 [USACO09DEC]视频游戏的麻烦Video Game Troubles</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-11-05T07:07:54+08:00">
+                Date: Mon 05 November 2018
+        </abbr>
+        <br />
+        <abbr class="modified" title="2018-11-05T07:07:54+08:00">
+                Updated: Mon 05 November 2018
+        </abbr>
+
+        <!--         <address class="vcard author">
+                By                         <a class="url fn" href="https://blog.zijuny.dev/author/zijunmark-yang.html">Zijun(Mark) Yang</a>
+        </address>
+ -->
+        <p>In <a href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a>.</p>
+<p>Tags: <a href="https://blog.zijuny.dev/tag/oi.html">OI</a>
+</p>        
+</footer><!-- /.post-info -->      <p><a href="https://www.luogu.org/problemnew/show/P2967">题目</a></p>
+<hr>
+<p>f(i,j)表示前i个游戏平台花费j的最大愉悦值。</p>
+<p>难点在于保证买该平台游戏，则游戏平台一定要买。</p>
+<p>如果按照金明的预算方案那样对于每个附属品选/不选肯定要T。</p>
+<p>考虑f(i,j)=max( f(i-1,j-x)+y , f(i-1,j) )，这里x和y是一个附属物品的体积和价值。</p>
+<p>如果直接这么转移就会出现不买平台直接买游戏的尴尬。</p>
+<p>因此我们考虑先强制买平台。下文中平台价格为p</p>
+<div class="highlight"><pre><span></span><code><span class="n">f</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">=</span><span class="n">f</span><span class="p">(</span><span class="n">i</span><span class="mi">-1</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="n">p</span><span class="p">)</span>
+</code></pre></div>
+
+<p>对于一个平台的附属游戏，只有买了平台才能生效。所以从p+x开始转移</p>
+<div class="highlight"><pre><span></span><code><span class="n">f</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">),</span><span class="n">f</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="n">y</span><span class="p">)</span><span class="w">      </span><span class="n">p</span><span class="o">+</span><span class="n">x</span><span class="o">&lt;=</span><span class="n">j</span><span class="o">&lt;=</span><span class="n">v</span>
+</code></pre></div>
+
+<p>然后考虑不买的情况</p>
+<div class="highlight"><pre><span></span><code><span class="n">f</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">),</span><span class="n">f</span><span class="p">(</span><span class="n">i</span><span class="mi">-1</span><span class="p">,</span><span class="n">j</span><span class="p">))</span>
+</code></pre></div>
+
+<p>如果直接开f(i,j)数组，空间要爆。显然f(i)只与f(i-1)有关，滚动数组。</p>
+<h5>code</h5>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
+<span class="cp">#define N 60</span>
+<span class="cp">#define V 100010</span>
+<span class="cp">#define max(a,b) ((a)&gt;(b)?(a):(b))</span>
+<span class="cp">#define fsb(a,b,c) for(register int a=b;a&lt;=(c);a++)</span>
+<span class="cp">#define fbs(a,b,c) for(register int a=b;a&gt;=(c);a--)</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">V</span><span class="p">],</span><span class="n">nw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">lt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">ans</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">qw</span><span class="o">&gt;</span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">rll</span><span class="p">(</span><span class="n">qw</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">){</span>
+<span class="w"> </span><span class="n">qw</span><span class="w"> </span><span class="n">f</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">isdigit</span><span class="p">(</span><span class="n">c</span><span class="p">))</span><span class="n">f</span><span class="o">=</span><span class="n">c</span><span class="o">==</span><span class="sc">&#39;-&#39;</span><span class="o">?</span><span class="mi">-1</span><span class="o">:</span><span class="n">f</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="k">while</span><span class="p">(</span><span class="n">isdigit</span><span class="p">(</span><span class="n">c</span><span class="p">))</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">&#39;0&#39;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="n">x</span><span class="o">*=</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span>
+<span class="w"> </span><span class="n">rll</span><span class="p">(</span><span class="n">n</span><span class="p">);</span><span class="n">rll</span><span class="p">(</span><span class="n">v</span><span class="p">);</span><span class="n">memset</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">f</span><span class="p">));</span>
+<span class="w"> </span><span class="n">fsb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">){</span>
+<span class="w">  </span><span class="n">rll</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="w">  </span><span class="n">fsb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">v</span><span class="p">)</span><span class="n">f</span><span class="p">[</span><span class="n">nw</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">f</span><span class="p">[</span><span class="n">lt</span><span class="p">][</span><span class="n">i</span><span class="o">-</span><span class="n">p</span><span class="p">];</span>
+<span class="w">  </span><span class="n">rll</span><span class="p">(</span><span class="n">g</span><span class="p">);</span>
+<span class="w">  </span><span class="n">fsb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">g</span><span class="p">){</span>
+<span class="w">   </span><span class="n">rll</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="n">rll</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+<span class="w">   </span><span class="n">fbs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">p</span><span class="o">+</span><span class="n">x</span><span class="p">)</span><span class="n">f</span><span class="p">[</span><span class="n">nw</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">nw</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="n">f</span><span class="p">[</span><span class="n">nw</span><span class="p">][</span><span class="n">i</span><span class="o">-</span><span class="n">x</span><span class="p">]</span><span class="o">+</span><span class="n">y</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">fsb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">v</span><span class="p">)</span><span class="n">f</span><span class="p">[</span><span class="n">nw</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">nw</span><span class="p">][</span><span class="n">i</span><span class="p">],</span><span class="n">f</span><span class="p">[</span><span class="n">lt</span><span class="p">][</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">  </span><span class="n">swap</span><span class="p">(</span><span class="n">lt</span><span class="p">,</span><span class="n">nw</span><span class="p">);</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="n">fsb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">v</span><span class="p">)</span><span class="n">ans</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span><span class="n">f</span><span class="p">[</span><span class="n">lt</span><span class="p">][</span><span class="n">i</span><span class="p">]);</span>
+<span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>Social</h2>
+                        <ul>
+                                <li><a href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                                                type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                                <li><a href="https://github.com/zpatronus">Github (really? listing github in the social widget??)</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <!-- <address id="about" class="vcard body">
+                        Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes
+                        great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address> -->
+
+                <!-- <p>The theme is by <a rel="nofollow"
+                                href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing
+                                Magazine</a>, thanks!</p> -->
+                <p>Copyright by Zijun(Mark) Yang. Licensed under DOES NOT HAVE A LICENSE YET.</p>
+        </footer>
+        <!-- /#about -->
+        <!-- /#contentinfo -->
+
+        <!--  -->
+</body>
+
+</html>

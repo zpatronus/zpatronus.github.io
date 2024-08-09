@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>Math is Hard</title>
+        <link rel="stylesheet" href="https://blog.zijuny.dev/theme/css/main.css" />
+        <link href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                type="application/atom+xml" rel="alternate" title="Zijun(Mark) Yang's Blog Atom Feed" />
+        <meta name="description" content="Monoid monoid=magma+associativity+identity Magma A magma is a set M matched with an operation • that sends any two elements a, b ∈ M to another..." />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://blog.zijuny.dev/">Zijun(Mark) Yang's Blog</a></h1>
+                <nav>
+                        <ul>
+                                <li><a href="/tags">Tags</a></li>
+
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/2-cs-hacks.html">2. CS & Hacks</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/3-web-dev.html">3. Web Dev</a></li>
+                                        <li class="active" ><a
+                                                        href="https://blog.zijuny.dev/category/4-experiences-reflections.html">4. Experiences & Reflections</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/6-misc.html">6. Misc</a></li>
+
+                                                <li><a href="/about-me">About Me</a></li>
+                        </ul>
+                </nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://blog.zijuny.dev/math-is-hard.html" rel="bookmark"
+           title="Permalink to Math is Hard">Math is Hard</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2022-06-03T21:25:03+08:00">
+                Date: Fri 03 June 2022
+        </abbr>
+        <br />
+        <abbr class="modified" title="2022-06-03T21:25:03+08:00">
+                Updated: Fri 03 June 2022
+        </abbr>
+
+        <!--         <address class="vcard author">
+                By                         <a class="url fn" href="https://blog.zijuny.dev/author/zijunmark-yang.html">Zijun(Mark) Yang</a>
+        </address>
+ -->
+        <p>In <a href="https://blog.zijuny.dev/category/4-experiences-reflections.html">4. Experiences & Reflections</a>.</p>
+<p>Tags: <a href="https://blog.zijuny.dev/tag/notes.html">Notes</a>
+</p>        
+</footer><!-- /.post-info -->      <h2>Monoid</h2>
+<p><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/0/07/Algebraic_structures_-_magma_to_group.svg"></p>
+<p>monoid=magma+associativity+identity</p>
+<h2>Magma</h2>
+<p>A magma is a set M matched with an operation • that sends any two elements a, b ∈ M to another element, a • b ∈ M, i.e. <span class="math">\((M,\cdot)\)</span> is a magma, if</p>
+<div class="math">$$
+\forall a,b \in M, a \cdot b \in M
+$$</div>
+<h2>Determinant of 3x3 matrix and its derivative</h2>
+<p>$$
+A_{3\times3}(t)=[v_1(t)\  v_2(t)\ v_3(t)]\</p>
+<p>\mathrm{det}(A(t))=(v_1(t)\times v_2(t))\cdot v_3(t)\
+$$</p>
+<p>By applying Leibniz rule for vector and dot product,</p>
+<div class="math">$$
+\frac{\mathrm{d}}{\mathrm{d}t}\mathrm{det}A(t)=\mathrm{det}[\dot{v}_1(t)\ v_2(t)\ v_3(t)]+\mathrm{det}[v_1(t)\ \dot{v}_2(t)\ v_3(t)]+\mathrm{det}[v_1(t)\ v_2(t)\ \dot{v}_3(t)]
+$$</div>
+<h2>Hessian Matrix</h2>
+<p><a href="https://zh.wikipedia.org/zh-tw/%E9%BB%91%E5%A1%9E%E7%9F%A9%E9%99%A3">Wiki</a></p>
+<div class="math">$$H_{i,j}=\frac{\partial ^2 f}{\partial x_i \partial x_j}$$</div>
+<div class="math">$$H=\nabla ^2 f$$</div>
+<h2>Determinant</h2>
+<p>Properties:</p>
+<h3>Property 1</h3>
+<p>Let <span class="math">\(A\in R^{n\times n}\)</span></p>
+<div class="math">$$
+det(A)=det(A^T)
+\\
+det(A)=(-1)^n det(-A)
+$$</div>
+<p><span class="math">\(-1\)</span> can be replaced by any number <span class="math">\(c\)</span></p>
+<h3>Property 2</h3>
+<p>Multiply one column (or one row) by <span class="math">\(k\)</span>,</p>
+<div class="math">$$
+\left| \begin{matrix}{l}
+ a_{11}&amp;  a_{12}&amp;  \cdots&amp;  a_{1n}\\
+ \vdots&amp;  \vdots&amp;  \ddots&amp;  \vdots\\
+ ka_{i1}&amp;  ka_{i2}&amp;  \cdots&amp;  ka_{in}\\
+ \vdots&amp;  \vdots&amp;  \ddots&amp;  \vdots\\
+ a_{n1}&amp;  a_{n2}&amp;  \cdots&amp;  a_{nn}\\
+\end{matrix} \right|=k\left| \begin{matrix}{l}
+ a_{11}&amp;  a_{12}&amp;  \cdots&amp;  a_{1n}\\
+ \vdots&amp;  \vdots&amp;  \ddots&amp;  \vdots\\
+ a_{i1}&amp;  a_{i2}&amp;  \cdots&amp;  a_{in}\\
+ \vdots&amp;  \vdots&amp;  \ddots&amp;  \vdots\\
+ a_{n1}&amp;  a_{n2}&amp;  \cdots&amp;  a_{nn}\\
+\end{matrix} \right|
+$$</div>
+<p>The determinant of the new matrix is k times the determinant of the original matrix.</p>
+<h2>Properties about Cross Product</h2>
+<div class="math">$$
+a\cdot \left( b\times c \right) =b\cdot \left( c\times a \right) =c\cdot \left( a\times b \right)
+\\
+a\times a=0
+\\
+(a\times b) \cdot a =0
+\\
+a\times \left( b\times c \right) +b\times \left( c\times a \right) +c\times \left( a\times b \right) =0
+\\
+\left( a\times b \right) \times \left( a\times c \right) =\left( a\cdot \left( b\times c \right) \right) a
+$$</div>
+<p>For <span class="math">\(a,b,c,d\in \mathbb{R}^3\)</span>:</p>
+<div class="math">$$
+a\times \left( b\times c \right) =\left( a\cdot c \right) b-\left( a\cdot c \right) c
+\\
+(a\times b)\times (a\times c)=(a\cdot (b\times c))a=det(a,b,c)a
+$$</div>
+<p>which is also know as the vector triple product.</p>
+<div class="math">$$
+(a\times b)\cdot(c\times d)=(a\cdot c)(b\cdot d)-(a\cdot d)(b\cdot c)
+$$</div>
+<p>whose proof is given here:</p>
+<p><img alt="Proof of the Lagrange identity on vector product" src="https://s1.ax1x.com/2022/06/12/XgqMpn.png"></p>
+<h2>Property of Orthonormal Matrix</h2>
+<div class="math">$$
+Q^TQ=I\\
+Q^T=Q^{-1}
+$$</div>
+<h2>Linear Transformation In Transformed Basis</h2>
+<div class="math">$$
+v'=P^{-1}APv
+$$</div>
+<p>where <span class="math">\(P\)</span> is the basis of the transformed basis (new basis) in the standard basis (our basis) and <span class="math">\(A\)</span> is the transformation in the standard basis.</p>
+<p><img alt="Linear transformation in transformed basis" src="https://s1.ax1x.com/2022/06/12/XgBGdg.png"></p>
+<h2>Rotation Matrix</h2>
+<div class="math">$$
+R=\left[ \begin{matrix}
+ \cos \theta&amp;  -\sin \theta&amp;  0\\
+ \sin \theta&amp;  \cos \theta&amp;  0\\
+ 0&amp;  0&amp;  1\\
+\end{matrix} \right]
+$$</div>
+<p>rotates points in the <span class="math">\(xy\)</span> plane counterclockwise through an angle <span class="math">\(\theta\)</span>.</p>
+<h3>Judge whether a matrix is a rotation matrix</h3>
+<p>A matrix is a rotation matrix iff <span class="math">\(R^T=R^{-1}\)</span> i.e. <span class="math">\(R^TR=I\)</span> and <span class="math">\(detR=1\)</span></p>
+<h3>Calculate the axis of the rotation matrix</h3>
+<p>The axis of the rotation matrix stays unchanged after rotation, i.e. <span class="math">\(Rx=x\)</span>, <span class="math">\((R-I)x=0\)</span></p>
+<p>Solving the equation and we get the axis of the rotation.</p>
+<h3>Calculate the rotation angle of the rotation matrix</h3>
+<p>Choose a random vector, usually <span class="math">\(v=(1,0,0,...,0)\)</span>. Therefor, <span class="math">\(w=Rv\)</span>, i.e. <span class="math">\(v\)</span> after rotation, is the actually the first column of <span class="math">\(R\)</span> (or you can just do the calculate).</p>
+<p>Let <span class="math">\(a\)</span> be the vector representing the axis of the rotation.</p>
+<p>We can use <span class="math">\(v'=v-\frac{aa^T}{a^Ta}v\)</span> to get the vector perpendicular to the axis while pointing from the axis to the end of <span class="math">\(v\)</span>. Similarly, use <span class="math">\(w'=w-\frac{aa^T}{a^Ta}w\)</span> to get the vector perpendicular to the axis while pointing from the axis t othe end of <span class="math">\(w\)</span>.</p>
+<p>It's easy to find that <span class="math">\(Span(v',w')\)</span> is perpendicular to the axis <span class="math">\(a\)</span>. Therefor, the angle between <span class="math">\(v'\)</span> and <span class="math">\(w'\)</span> is the angle of the rotation, i.e. <span class="math">\(\arccos(\frac{&lt;v',w'&gt;}{||v'||||w'||})\)</span></p>
+<h2>QR Factorization</h2>
+<p>Reference: <a href="https://www.youtube.com/watch?v=J41Ypt6Mftc">this video</a> and <a href="https://www.youtube.com/watch?v=0MtwqhIwdrI">this video(better, starts at 25:30)</a></p>
+<div class="math">$$
+q_3=\frac{C}{||C||} \\
+C=c-\frac{A^T c}{A^T A}A-\frac{B^T c}{B^T B}B
+$$</div>
+<h2>Nullity of a Matrix</h2>
+<p>Basically, the dimension of the null space.</p>
+<h2>Null Space / Kernel of a Matrix</h2>
+<p>Reference: <a href="https://www.youtube.com/watch?v=8o5Cmfpeo6g&amp;t=1692s">this video</a> and <a href="https://www.youtube.com/watch?v=VqP2tREMvt0">this video(talks about how to calc)</a></p>
+<p>The null space of <span class="math">\(A\)</span> is all solution <span class="math">\(x\)</span> (a vector), s.t. <span class="math">\(Ax=0\)</span>. Often denoted as <span class="math">\(N(A)\)</span> or <span class="math">\(ker(A)\)</span></p>
+<h2>Rank of a Matrix</h2>
+<p>Basically, the dimension of the column space.</p>
+<p>Reference: <a href="https://stattrek.com/matrix-algebra/matrix-rank.aspx">this page</a></p>
+<p>It tell you how to calc the rank of a matrix.</p>
+<h2>Projection Matrix</h2>
+<p>Reference: <a href="http://mlwiki.org/index.php/Projection_onto_Subspaces">this page</a></p>
+<p>Use <code>Ctrl+F</code> to search for the <code>Projection Matrix</code> part, in which you can find how to solve projection matrix onto certain space.</p>
+<p>A projection matrix onto a col space of <span class="math">\(Q\)</span> is:</p>
+<div class="math">$$P=Q(Q^TQ)^{-1}Q^T$$</div>
+<p>Specifically, if <span class="math">\(Q\)</span> is a square orthonormal matrix, then <span class="math">\(P=I\)</span></p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>Social</h2>
+                        <ul>
+                                <li><a href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                                                type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                                <li><a href="https://github.com/zpatronus">Github (really? listing github in the social widget??)</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <!-- <address id="about" class="vcard body">
+                        Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes
+                        great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address> -->
+
+                <!-- <p>The theme is by <a rel="nofollow"
+                                href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing
+                                Magazine</a>, thanks!</p> -->
+                <p>Copyright by Zijun(Mark) Yang. Licensed under DOES NOT HAVE A LICENSE YET.</p>
+        </footer>
+        <!-- /#about -->
+        <!-- /#contentinfo -->
+
+        <!--  -->
+</body>
+
+</html>

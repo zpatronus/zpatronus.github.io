@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>树莓派入门：安装与配置</title>
+        <link rel="stylesheet" href="https://blog.zijuny.dev/theme/css/main.css" />
+        <link href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                type="application/atom+xml" rel="alternate" title="Zijun(Mark) Yang's Blog Atom Feed" />
+        <meta name="description" content="简介 树莓派是一块只有信用卡长宽的微型电脑，通常配备ARM处理器。麻雀虽小而接口丰富，五脏俱全。 比如我目前入手的树莓派3B …" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://blog.zijuny.dev/">Zijun(Mark) Yang's Blog</a></h1>
+                <nav>
+                        <ul>
+                                <li><a href="/tags">Tags</a></li>
+
+                                        <li class="active" ><a
+                                                        href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/2-cs-hacks.html">2. CS & Hacks</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/3-web-dev.html">3. Web Dev</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/4-experiences-reflections.html">4. Experiences & Reflections</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/6-misc.html">6. Misc</a></li>
+
+                                                <li><a href="/about-me">About Me</a></li>
+                        </ul>
+                </nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://blog.zijuny.dev/shu-mei-pai-ru-men-an-zhuang-yu-pei-zhi.html" rel="bookmark"
+           title="Permalink to 树莓派入门：安装与配置">树莓派入门：安装与配置</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2019-02-01T10:40:55+08:00">
+                Date: Fri 01 February 2019
+        </abbr>
+        <br />
+        <abbr class="modified" title="2019-02-01T10:40:55+08:00">
+                Updated: Fri 01 February 2019
+        </abbr>
+
+        <!--         <address class="vcard author">
+                By                         <a class="url fn" href="https://blog.zijuny.dev/author/zijunmark-yang.html">Zijun(Mark) Yang</a>
+        </address>
+ -->
+        <p>In <a href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a>.</p>
+<p>Tags: <a href="https://blog.zijuny.dev/tag/fun-stuff.html">Fun Stuff</a>
+</p>        
+</footer><!-- /.post-info -->      <h2>简介</h2>
+<p>树莓派是一块只有信用卡长宽的微型电脑，通常配备ARM处理器。麻雀虽小而接口丰富，五脏俱全。</p>
+<p>比如我目前入手的树莓派3B+有4个USB2.0，1个千兆以太网（支持以太网供电），1个3.5mm音频接口，1个摄像头接口，1个HDMI接口，1个Micro USB电源接口，1个DSI显示接口，内置WiFi与蓝牙。树莓派拥有超级广泛用途的一个重要原因是其配备40针GPIO接口，意味着树莓派的配件扩展可以极其丰富。</p>
+<h2>选购</h2>
+<p>首先不能对树莓派的性能有太高的指望，毕竟这只是台成本在200-300元的机子，比如3B+配备1.4GHz四核处理器与1G RAM。这里给出各版本对照表：</p>
+<p><img alt="" src="https://s2.ax1x.com/2019/02/01/k31cVJ.png"></p>
+<p>这张图制作较早，并没有包含树莓派3B+。3B+（280）比3B（264）更贵，但处理器主频在不超频情况下从1.2GHz提高到了1.4GHz。另外，上表中有成本为5美元的Zero，但在京东等平台上售价也都在150+，并没有实惠多少。</p>
+<p>选完树莓派后可以根据自己的需求选取相应的传感器、配件等等。</p>
+<p>这里推荐加装一个外壳和风扇。树莓派发热非常厉害，如果要超频则更甚，良好散热对使用寿命是有极大好处的。至于外壳，单纯因为树莓派看起来太单薄，电子元件裸露，容易损坏。</p>
+<p><img alt="" src="https://s2.ax1x.com/2019/02/01/k33pqg.jpg"></p>
+<p>另外，需要一张Micro SD，推荐16GB+，class10以上。着重看读写速度。我选用的是闪迪至尊极速32GB，读入和写入分别为100MB/s和60MB/s</p>
+<h2>安装系统</h2>
+<p>由于是ARM处理器，因此在操作系统上稍有限制。可选各类ARMlinux以及windows10iot。</p>
+<p>其他操作系统，日后研究，这里以官方推荐的操作系统Raspbian（基于Debian，自带很多硬件驱动）为例。</p>
+<p><a href="http://downloads.raspberrypi.org/raspbian_latest">下载操作系统</a> <a href="https://sourceforge.net/projects/win32diskimager/">下载Win32 Disk Imager</a></p>
+<p>然后就是傻瓜操作，打开软件，选择img镜像，写入到SD卡上。</p>
+<h2>基本配置</h2>
+<p>SD卡插入树莓派，接上电源后自动开机。第一次开机连接一个显示器。</p>
+<p>以前版本的Raspbian默认用户名和密码是pi和raspberry，现在好像可以在第一次开机自己设定密码了。</p>
+<p>第一次开机会有一些设置，非常不推荐在这个过程中选择更新，我也不知道是网慢还是什么原因，经常卡在这儿。</p>
+<p>接下来是一些推荐的配置（更改默认分辨率，开启VNC，更改软件源，安装vim）</p>
+<h4>更改默认分辨率，开启VNC</h4>
+<p>命令行输入如下命令进入设置。</p>
+<div class="highlight"><pre><span></span><code>sudo raspi-config
+</code></pre></div>
+
+<p>进入7 Advanced Options，在A5 Resolution可以更改分辨率。进入5 Interfacing Options，选择VNC enabled。</p>
+<p>同时建议给树莓派分配专门的IP，方便VNC连接。这步要去路由器管理后台，找到DHCP保留或静态IP或绑定IP等等这样的设置，将树莓派的MAC绑在固定的IP上即可。</p>
+<p>windows通过VNC访问树莓派也非常简单。在VNC开启后，VNC会默认开机启动。因此只要树莓派开机联网，在windows下使用VNCviewer，输入树莓派IP和访问密码（通常是树莓派密码或者是自己设定的），就能远程访问桌面了。</p>
+<h4>更改软件源</h4>
+<p>命令行输入如下命令就可以换到亲测比较优秀的一个源上（中科大的源）。</p>
+<div class="highlight"><pre><span></span><code><span class="nv">sudo</span><span class="w"> </span><span class="o">-</span><span class="nv">s</span>
+<span class="nv">echo</span><span class="w"> </span><span class="o">-</span><span class="nv">e</span><span class="w"> </span><span class="s2">&quot;deb http://mirrors.ustc.edu.cn/raspbian/raspbian/ stretch main contrib non-free rpi \n deb-src http://mirrors.ustc.edu.cn/raspbian/raspbian/ stretch main contrib non-free rpi&quot;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">apt</span><span class="o">/</span><span class="nv">sources</span>.<span class="nv">list</span>
+<span class="nv">echo</span><span class="w"> </span><span class="o">-</span><span class="nv">e</span><span class="w"> </span><span class="s2">&quot;deb http://mirrors.ustc.edu.cn/archive.raspberrypi.org/ stretch main ui&quot;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">apt</span><span class="o">/</span><span class="nv">sources</span>.<span class="nv">list</span>.<span class="nv">d</span><span class="o">/</span><span class="nv">raspi</span>.<span class="nv">list</span>
+<span class="k">exit</span>
+<span class="nv">sudo</span><span class="w"> </span><span class="nv">apt</span><span class="w"> </span><span class="nv">update</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">sudo</span><span class="w"> </span><span class="nv">apt</span><span class="w"> </span><span class="o">-</span><span class="nv">y</span><span class="w"> </span><span class="nv">upgrade</span>
+</code></pre></div>
+
+<h4>安装vim</h4>
+<p>居然没有默认安装orz。</p>
+<div class="highlight"><pre><span></span><code>sudo apt-get install vim
+</code></pre></div>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>Social</h2>
+                        <ul>
+                                <li><a href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                                                type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                                <li><a href="https://github.com/zpatronus">Github (really? listing github in the social widget??)</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <!-- <address id="about" class="vcard body">
+                        Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes
+                        great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address> -->
+
+                <!-- <p>The theme is by <a rel="nofollow"
+                                href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing
+                                Magazine</a>, thanks!</p> -->
+                <p>Copyright by Zijun(Mark) Yang. Licensed under DOES NOT HAVE A LICENSE YET.</p>
+        </footer>
+        <!-- /#about -->
+        <!-- /#contentinfo -->
+
+        <!--  -->
+</body>
+
+</html>

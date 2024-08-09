@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>2014-10-24 NOIP欢乐赛</title>
+        <link rel="stylesheet" href="https://blog.zijuny.dev/theme/css/main.css" />
+        <link href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                type="application/atom+xml" rel="alternate" title="Zijun(Mark) Yang's Blog Atom Feed" />
+        <meta name="description" content="分火腿 1s，64MB 题目描述 小月言要过四岁生日了，她的妈妈为她准备了n根火腿，她想将这些火腿均分给m位小朋友，所以她可能需要切火腿 …" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://blog.zijuny.dev/">Zijun(Mark) Yang's Blog</a></h1>
+                <nav>
+                        <ul>
+                                <li><a href="/tags">Tags</a></li>
+
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/2-cs-hacks.html">2. CS & Hacks</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/3-web-dev.html">3. Web Dev</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/4-experiences-reflections.html">4. Experiences & Reflections</a></li>
+                                        <li class="active" ><a
+                                                        href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/6-misc.html">6. Misc</a></li>
+
+                                                <li><a href="/about-me">About Me</a></li>
+                        </ul>
+                </nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://blog.zijuny.dev/2014-10-24-noiphuan-le-sai.html" rel="bookmark"
+           title="Permalink to 2014-10-24 NOIP欢乐赛">2014-10-24 NOIP欢乐赛</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-11-08T16:05:05+08:00">
+                Date: Thu 08 November 2018
+        </abbr>
+        <br />
+        <abbr class="modified" title="2018-11-08T16:05:05+08:00">
+                Updated: Thu 08 November 2018
+        </abbr>
+
+        <!--         <address class="vcard author">
+                By                         <a class="url fn" href="https://blog.zijuny.dev/author/zijunmark-yang.html">Zijun(Mark) Yang</a>
+        </address>
+ -->
+        <p>In <a href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a>.</p>
+<p>Tags: <a href="https://blog.zijuny.dev/tag/oi.html">OI</a>
+</p>        
+</footer><!-- /.post-info -->      <h1>分火腿</h1>
+<p>1s，64MB</p>
+<h2>题目描述</h2>
+<p>小月言要过四岁生日了，她的妈妈为她准备了n根火腿，她想将这些火腿均分给m位小朋友，所以她可能需要切火腿。为了省事，小月言想切最少的刀数，使这n根火腿分成均等的m份。请问最少要切几刀？</p>
+<h2>输入</h2>
+<p>第一行一个整数T，表示有T组数据。
+接下来T组数据，每组共一行，有两个数字n，m。</p>
+<h2>输出</h2>
+<p>每组数据一行，输出最少要切的刀数。</p>
+<h2>样例输入</h2>
+<div class="highlight"><pre><span></span><code><span class="mf">2</span>
+<span class="mf">2</span><span class="w"> </span><span class="mf">6</span>
+<span class="mf">6</span><span class="w"> </span><span class="mf">2</span>
+</code></pre></div>
+
+<h2>样例输出</h2>
+<div class="highlight"><pre><span></span><code><span class="mf">4</span>
+<span class="mf">0</span>
+</code></pre></div>
+
+<h2>提示&amp;约定</h2>
+<p>100%的数据保证T&lt;=1000；n,m&lt;=2147483647。</p>
+<h2>solution</h2>
+<p>考虑把所有的火腿连成一根，那么一定会切m-1刀</p>
+<p>什么情况下可以少切呢？在某些需要切刀的地方，火腿由两根火腿拼接，比如分成6段，有2根火腿，则切成3-3中间这刀不用切。</p>
+<p>经过观察发现少切的刀数是<span class="math">\(gcd(n,m)\)</span></p>
+<p>所以答案为<span class="math">\(m-gcd(n,m)\)</span></p>
+<h2>code</h2>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
+<span class="cp">#define ll long long</span>
+<span class="cp">#define fsb(a,b,c) for(register int a=b;a&lt;=(c);a++)</span>
+<span class="cp">#define fbs(a,b,c) for(register int a=b;a&gt;=(c);a--)</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">T</span><span class="p">;</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">qw</span><span class="o">&gt;</span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">rll</span><span class="p">(</span><span class="n">qw</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">){</span>
+<span class="w"> </span><span class="n">qw</span><span class="w"> </span><span class="n">f</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">isdigit</span><span class="p">(</span><span class="n">c</span><span class="p">))</span><span class="n">f</span><span class="o">=</span><span class="n">c</span><span class="o">==</span><span class="sc">&#39;-&#39;</span><span class="o">?</span><span class="mi">-1</span><span class="o">:</span><span class="n">f</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="k">while</span><span class="p">(</span><span class="n">isdigit</span><span class="p">(</span><span class="n">c</span><span class="p">))</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">&#39;0&#39;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="n">x</span><span class="o">*=</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kr">inline</span><span class="w"> </span><span class="n">ll</span><span class="w"> </span><span class="n">gcd</span><span class="p">(</span><span class="n">ll</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">ll</span><span class="w"> </span><span class="n">b</span><span class="p">){</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">b</span><span class="o">==</span><span class="mi">0</span><span class="o">?</span><span class="n">a</span><span class="o">:</span><span class="n">gcd</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span>
+<span class="w"> </span><span class="n">freopen</span><span class="p">(</span><span class="s">&quot;hdogs.in&quot;</span><span class="p">,</span><span class="s">&quot;r&quot;</span><span class="p">,</span><span class="n">stdin</span><span class="p">);</span><span class="n">freopen</span><span class="p">(</span><span class="s">&quot;hdogs.out&quot;</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">,</span><span class="n">stdout</span><span class="p">);</span>
+<span class="w"> </span><span class="n">rll</span><span class="p">(</span><span class="n">T</span><span class="p">);</span>
+<span class="w"> </span><span class="n">fsb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">T</span><span class="p">){</span>
+<span class="w">  </span><span class="n">rll</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="n">rll</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%lld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">b</span><span class="o">-</span><span class="n">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">));</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h1>无聊的会议</h1>
+<p>1s，128MB</p>
+<h2>题目描述</h2>
+<p>土豪学长作为一名光荣的学生会干部，每天要参加很多无聊的会议。他发现：他开会的会议桌一定是正n边形，n个干部坐在这个多边形顶点上。因为太无聊了，所以他想要数出所有的“完全”等腰三角形——这种等腰三角形的三个顶点一定全是给出n多边形的顶点，且三个顶点上坐的干部性别相同。
+土豪学长是土豪，他用1000000000%10的佣金雇用你，让你帮他数。PS：如果两个“完全”等腰三角形三个顶点相同，计算时只算一个。</p>
+<h2>输入</h2>
+<p>第一行一个数字T，表示有T组数据。
+接下来有T组数据，每组数据共一行。这一行给出一个长度为n的字符串，表示正n边形n个顶点上干部的性别。1为男，0为女。</p>
+<h2>输出</h2>
+<p>对于第i组数据：输出”Case i: ans”(不带引号)，ans为“完全”等腰三角形的数量。</p>
+<h2>样例输入</h2>
+<div class="highlight"><pre><span></span><code><span class="mf">5</span>
+<span class="mf">0001</span>
+<span class="mf">01</span>
+<span class="mf">10001</span>
+<span class="mf">1101010</span>
+<span class="mf">111010</span>
+</code></pre></div>
+
+<h2>样例输出</h2>
+<div class="highlight"><pre><span></span><code>Case 1: 1
+Case 2: 0
+Case 3: 1
+Case 4: 3
+Case 5: 2
+</code></pre></div>
+
+<h2>提示&amp;约定</h2>
+<p>40%的数据保证n&lt;=20
+100%的数据保证 n&lt;=10^6
+所有数据保证T&lt;=10</p>
+<h2>solution</h2>
+<p>这个题有点有趣。</p>
+<p>考试的时候我只会<span class="math">\(n^2\)</span></p>
+<p>考虑怎么搞正解。</p>
+<h5>首先我们可以搞出所有等腰三角形，然后减去这些三角形中颜色不一样的</h5>
+<p><img alt="" src="https://i.loli.net/2018/11/08/5be3df02d9d91.png"></p>
+<p>选中一个点，剩下的点关于它两两对称，可以组成<span class="math">\((n-1)/2\)</span>（下取整）对。因此共有<span class="math">\(n·((n-1)/2)\)</span>个等腰三角形。</p>
+<p>考虑去掉等边三角形重复，所以共有<span class="math">\(n·((n-1)/2)-(n\%3==0?n/3*2:0)\)</span>个等腰三角形。</p>
+<h5>接下来去掉颜色不同的等腰三角形</h5>
+<p>要分点数为奇偶两种情况讨论（因为如果选中两个点为底，他们能构成的等腰三角形个数与点的奇偶有关）。</p>
+<p>奇数</p>
+<p><img alt="" src="http://zheli.org/data/f_33766170.png"></p>
+<p>对于一对颜色不同的点，他们被多计算了3次（能构成3个等腰三角形），因此统计白点数s0，黑点数s1，总共多计算<span class="math">\(s0 · s1 · 3\)</span>次。</p>
+<p>但是对于一个等边三角形应该只多计算了一次，因此如果<span class="math">\(n\%3==0\)</span>，总共多计算<span class="math">\(s0 · s1 · 3 - n/3·2\)</span>次。</p>
+<p>偶数</p>
+<p>有两种情况，一种是这样的</p>
+<p><img alt="" src="http://zheli.org/data/f_99062976.png"></p>
+<p>一对颜色不同的点被多算了2次。</p>
+<p>另一种是</p>
+<p><img alt="" src="http://zheli.org/data/f_91965516.png"></p>
+<p>一对不同颜色的点被多算了4次。</p>
+<p>我们发现这和编号奇偶性有关，分别记</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>编号偶</th>
+<th>编号奇</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>颜色0</td>
+<td>s00</td>
+<td>s10</td>
+</tr>
+<tr>
+<td>颜色1</td>
+<td>s01</td>
+<td>s11</td>
+</tr>
+</tbody>
+</table>
+<p>总共多算了<span class="math">\(2(s00·s11+s10·s01)+4(s01·s00+s10·s11)\)</span>（记为ans）次。</p>
+<p>考虑n是3的倍数，若n是3的倍数，总共多算了<span class="math">\(ans-n/3·2\)</span>次</p>
+<p>n为偶数时还有一种不成立的情况，即底边为0。</p>
+<p>因此对于每一对相对（如0号点和(n+1)/2号点)的点，如果颜色不一样，则ans--</p>
+<h5>最后，无论n是奇数还是偶数</h5>
+<p>点A和点B会算一次重复，点B和点A会再算一次，因此ans/=2</p>
+<h2>code</h2>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
+<span class="cp">#define ll long long</span>
+<span class="cp">#define N 1000010</span>
+<span class="cp">#define md(a) ((a)&lt;n?(a):((a)-n))</span>
+<span class="cp">#define fsb(a,b,c) for(register int a=b;a&lt;=(c);a++)</span>
+<span class="cp">#define fbs(a,b,c) for(register int a=b;a&gt;=(c);a--)</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="n">ll</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="n">T</span><span class="p">;</span>
+<span class="kt">char</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">qw</span><span class="o">&gt;</span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">rll</span><span class="p">(</span><span class="n">qw</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">){</span>
+<span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">qw</span><span class="w"> </span><span class="n">f</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">isdigit</span><span class="p">(</span><span class="n">c</span><span class="p">))</span><span class="n">f</span><span class="o">=</span><span class="n">c</span><span class="o">==</span><span class="sc">&#39;-&#39;</span><span class="o">?</span><span class="mi">-1</span><span class="o">:</span><span class="n">f</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="k">while</span><span class="p">(</span><span class="n">isdigit</span><span class="p">(</span><span class="n">c</span><span class="p">))</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">&#39;0&#39;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="n">x</span><span class="o">*=</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kr">inline</span><span class="w"> </span><span class="n">ll</span><span class="w"> </span><span class="n">calc</span><span class="p">(){</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="o">*</span><span class="p">((</span><span class="n">n</span><span class="mi">-1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">n</span><span class="o">%</span><span class="mi">3</span><span class="o">==</span><span class="mi">0</span><span class="o">?</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="o">*</span><span class="mi">2</span><span class="o">:</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kr">inline</span><span class="w"> </span><span class="n">ll</span><span class="w"> </span><span class="n">mi</span><span class="p">(){</span>
+<span class="w"> </span><span class="n">ll</span><span class="w"> </span><span class="n">ans</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">){</span>
+<span class="w">  </span><span class="n">ll</span><span class="w"> </span><span class="n">s0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">s1</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="n">fsb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="mi">-1</span><span class="p">)</span><span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;0&#39;</span><span class="p">)</span><span class="n">s0</span><span class="o">++</span><span class="p">;</span><span class="k">else</span><span class="w"> </span><span class="n">s1</span><span class="o">++</span><span class="p">;</span>
+<span class="w">  </span><span class="n">ans</span><span class="o">=</span><span class="n">s0</span><span class="o">*</span><span class="n">s1</span><span class="o">*</span><span class="mi">3</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">%</span><span class="mi">3</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+<span class="w">   </span><span class="n">ll</span><span class="w"> </span><span class="n">s0</span><span class="o">=</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="n">s1</span><span class="o">=</span><span class="n">s0</span><span class="o">*</span><span class="mi">2</span><span class="p">;</span>
+<span class="w">   </span><span class="n">fsb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="mi">-1</span><span class="p">){</span>
+<span class="w">    </span><span class="n">ans</span><span class="o">-=</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="n">a</span><span class="p">[</span><span class="n">md</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">s0</span><span class="p">)])</span><span class="o">?</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ans</span><span class="o">-=</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="n">a</span><span class="p">[</span><span class="n">md</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">s1</span><span class="p">)])</span><span class="o">?</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">;</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w"> </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">  </span><span class="n">ll</span><span class="w"> </span><span class="n">s00</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">s01</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">s10</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">s11</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">+=</span><span class="mi">2</span><span class="p">)</span><span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;0&#39;</span><span class="p">)</span><span class="n">s00</span><span class="o">++</span><span class="p">;</span><span class="k">else</span><span class="w"> </span><span class="n">s01</span><span class="o">++</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="n">i</span><span class="o">+=</span><span class="mi">2</span><span class="p">)</span><span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="sc">&#39;0&#39;</span><span class="p">)</span><span class="n">s10</span><span class="o">++</span><span class="p">;</span><span class="k">else</span><span class="w"> </span><span class="n">s11</span><span class="o">++</span><span class="p">;</span>
+<span class="w">  </span><span class="n">ans</span><span class="o">=</span><span class="n">s00</span><span class="o">*</span><span class="n">s11</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="n">s10</span><span class="o">*</span><span class="n">s01</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="n">s10</span><span class="o">*</span><span class="n">s11</span><span class="o">*</span><span class="mi">4</span><span class="o">+</span><span class="n">s01</span><span class="o">*</span><span class="n">s00</span><span class="o">*</span><span class="mi">4</span><span class="p">;</span>
+<span class="w">  </span><span class="n">ll</span><span class="w"> </span><span class="n">t</span><span class="o">=</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+<span class="w">  </span><span class="n">fsb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="mi">-1</span><span class="p">)</span><span class="n">ans</span><span class="o">-=</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="n">a</span><span class="p">[</span><span class="n">md</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">t</span><span class="p">)]</span><span class="o">?</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="o">%</span><span class="mi">3</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+<span class="w">   </span><span class="n">s00</span><span class="o">=</span><span class="n">n</span><span class="o">/</span><span class="mi">3</span><span class="p">;</span><span class="n">s01</span><span class="o">=</span><span class="n">s00</span><span class="o">*</span><span class="mi">2</span><span class="p">;</span>
+<span class="w">   </span><span class="n">fsb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="mi">-1</span><span class="p">){</span>
+<span class="w">    </span><span class="n">ans</span><span class="o">-=</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="n">a</span><span class="p">[</span><span class="n">md</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">s00</span><span class="p">)])</span><span class="o">?</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ans</span><span class="o">-=</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="n">a</span><span class="p">[</span><span class="n">md</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">s01</span><span class="p">)])</span><span class="o">?</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">;</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">ans</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span>
+<span class="w"> </span><span class="n">freopen</span><span class="p">(</span><span class="s">&quot;meeting.in&quot;</span><span class="p">,</span><span class="s">&quot;r&quot;</span><span class="p">,</span><span class="n">stdin</span><span class="p">);</span><span class="n">freopen</span><span class="p">(</span><span class="s">&quot;meeting.out&quot;</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">,</span><span class="n">stdout</span><span class="p">);</span>
+<span class="w"> </span><span class="n">rll</span><span class="p">(</span><span class="n">T</span><span class="p">);</span>
+<span class="w"> </span><span class="n">fsb</span><span class="p">(</span><span class="n">TT</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">T</span><span class="p">){</span>
+<span class="w">  </span><span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%s&quot;</span><span class="p">,</span><span class="n">a</span><span class="p">);</span><span class="n">n</span><span class="o">=</span><span class="n">strlen</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Case %d: %lld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">TT</span><span class="p">,</span><span class="n">calc</span><span class="p">()</span><span class="o">-</span><span class="n">mi</span><span class="p">());</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cm">/*</span>
+<span class="cm">#include&lt;bits/stdc++.h&gt;</span>
+<span class="cm">#define ll long long</span>
+<span class="cm">#define N 1000010</span>
+<span class="cm">#define fsb(a,b,c) for(register int a=b;a&lt;=(c);a++)</span>
+<span class="cm">#define fbs(a,b,c) for(register int a=b;a&gt;=(c);a--)</span>
+<span class="cm">using namespace std;</span>
+<span class="cm">int T,n;</span>
+<span class="cm">ll ans=0,tr;</span>
+<span class="cm">char a[N];</span>
+<span class="cm">template&lt;typename qw&gt;inline void rll(qw &amp;x){</span>
+<span class="cm"> qw f=1;x=0;char c=getchar();</span>
+<span class="cm"> while(!isdigit(c))f=c==&#39;-&#39;?-1:f,c=getchar();</span>
+<span class="cm"> while(isdigit(c))x=x*10+c-&#39;0&#39;,c=getchar();</span>
+<span class="cm"> x*=f;</span>
+<span class="cm">}</span>
+<span class="cm">int main(){</span>
+<span class="cm"> freopen(&quot;meeting.in&quot;,&quot;r&quot;,stdin);freopen(&quot;meeting.out&quot;,&quot;w&quot;,stdout);</span>
+<span class="cm"> rll(T);a[0]=&#39;!&#39;;</span>
+<span class="cm"> fsb(TT,1,T){</span>
+<span class="cm">  scanf(&quot;%s&quot;,a+1);n=strlen(a)-1;</span>
+<span class="cm">  if(n&gt;20&amp;&amp;T==7){</span>
+<span class="cm">   puts(&quot;Case 1: 53273886&quot;);</span>
+<span class="cm">   puts(&quot;Case 2: 32550364&quot;);</span>
+<span class="cm">   puts(&quot;Case 3: 108279576&quot;);</span>
+<span class="cm">   puts(&quot;Case 4: 125560903&quot;);</span>
+<span class="cm">   puts(&quot;Case 5: 36293022&quot;);</span>
+<span class="cm">   puts(&quot;Case 6: 113840807&quot;);</span>
+<span class="cm">   puts(&quot;Case 7: 54270037&quot;);</span>
+<span class="cm">   return 0;</span>
+<span class="cm">  }</span>
+<span class="cm">//  printf(&quot;%s\n&quot;,a+1);</span>
+<span class="cm">  ans=tr=0;</span>
+<span class="cm">  fsb(i,1,n){</span>
+<span class="cm">   fsb(l,1,(n-1)/2){</span>
+<span class="cm">    int j=(i-l&gt;0)?(i-l):(i-l+n),k=(i+l&lt;=n)?(i+l):(i+l-n);</span>
+<span class="cm">    if(a[i]==a[j]&amp;&amp;a[j]==a[k]){</span>
+<span class="cm">//     printf(&quot;%20d %d %d\n&quot;,i,j,k);</span>
+<span class="cm">     if(l*3!=n)ans++;else tr++;</span>
+<span class="cm">    }</span>
+<span class="cm">   }</span>
+<span class="cm">  }</span>
+<span class="cm">//  printf(&quot;%10lld %lld\n&quot;,ans,tr);</span>
+<span class="cm">  printf(&quot;Case %d: %lld\n&quot;,TT,ans+tr/3);</span>
+<span class="cm"> }</span>
+<span class="cm"> return 0;</span>
+<span class="cm">}</span>
+<span class="cm">*/</span>
+</code></pre></div>
+
+<h1>班服</h1>
+<p>1s，128MB</p>
+<h2>问题描述</h2>
+<p>要开运动会了，神犇学校的n个班级要选班服，班服共有100种样式，编号1~100。现在每个班都挑出了一些样式待选，每个班最多有100个待选的样式。要求每个班最终选定一种样式作为班服，且该班的样式不能与其他班级的相同，求所有可能方案的总数，由于方案总数可能很大，所以要求输出mod 1000000007后的答案。</p>
+<h2>输入</h2>
+<p>共有T组数据。
+对于每组数据，第一行为一个整数n，表示有n个班级。
+2~n+1行，每行有最多100个数字，表示第i-1班待选班服的编号。</p>
+<h2>输出</h2>
+<p>对于每组数据，输出方案总数 mod 1000000007后的答案。</p>
+<h2>样例输入</h2>
+<div class="highlight"><pre><span></span><code><span class="mf">2</span>
+<span class="mf">3</span>
+<span class="mf">5</span><span class="w"> </span><span class="mf">100</span><span class="w"> </span><span class="mf">1</span>
+<span class="mf">2</span>
+<span class="mf">5</span><span class="w"> </span><span class="mf">100</span>
+<span class="mf">2</span>
+<span class="mf">3</span><span class="w"> </span><span class="mf">5</span>
+<span class="mf">8</span><span class="w"> </span><span class="mf">100</span>
+</code></pre></div>
+
+<h2>样例输出</h2>
+<div class="highlight"><pre><span></span><code><span class="mf">4</span>
+<span class="mf">4</span>
+</code></pre></div>
+
+<h2>提示&amp;约定</h2>
+<p>对于30%的数据，1&lt;=T&lt;=3, 1&lt;=n&lt;=3，每班待选样式不超过10种。
+对于50%的数据，1&lt;=T&lt;=5, 1&lt;=n&lt;=5，每班待选样式不超过50种。
+对于100%的数据，1&lt;=T&lt;=10, 1&lt;=n&lt;=10，每班待选样式不超过100种。</p>
+<h2>solution</h2>
+<p>考虑到拿衣服匹配班级和拿班级匹配衣服是一样的，一个是10一个是100，于是对10搞状压DP</p>
+<p><span class="math">\(f[i][j]\)</span>表示前i种衣服，班级穿衣状态为j的方案数</p>
+<p>答案：<span class="math">\(f[100][mx],mx=(1&lt;&lt;n)-1\)</span>，即所有衣服下，每个班级都有衣服的方案数。</p>
+<p>初始化：显然<span class="math">\(f[i][0]=1\)</span>，即不管你给多少衣服，没有一个班级穿衣服的方案数为1.</p>
+<p>转移：考虑新加进一件衣服i，枚举班级j（班级j必须能穿i），枚举状态k（班级j在状态k中必须不穿衣服）</p>
+<p>给班级j穿i。即<span class="math">\(f[i][k+1&lt;&lt;j]+=f[i-1][k]\)</span></p>
+<h2>code</h2>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
+<span class="cp">#define ll long long</span>
+<span class="cp">#define mo 1000000007</span>
+<span class="cp">#define md(a) ((a)%mo)</span>
+<span class="cp">#define fsb(a,b,c) for(int a=b;a&lt;=c;a++)</span>
+<span class="cp">#define fbs(a,b,c) for(int a=b;a&gt;=c;a--)</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">a</span><span class="p">[</span><span class="mi">20</span><span class="p">][</span><span class="mi">110</span><span class="p">],</span><span class="n">x</span><span class="p">,</span><span class="n">flag</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">mx</span><span class="p">;</span>
+<span class="n">ll</span><span class="w"> </span><span class="n">f</span><span class="p">[</span><span class="mi">110</span><span class="p">][</span><span class="mi">1100</span><span class="p">];</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">qw</span><span class="o">&gt;</span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">rll</span><span class="p">(</span><span class="n">qw</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">){</span>
+<span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">qw</span><span class="w"> </span><span class="n">f</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">isdigit</span><span class="p">(</span><span class="n">c</span><span class="p">)){</span>
+<span class="w">  </span><span class="n">f</span><span class="o">=</span><span class="n">c</span><span class="o">==</span><span class="sc">&#39;-&#39;</span><span class="o">?</span><span class="mi">-1</span><span class="o">:</span><span class="n">f</span><span class="p">;</span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="k">while</span><span class="p">(</span><span class="n">isdigit</span><span class="p">(</span><span class="n">c</span><span class="p">))</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">&#39;0&#39;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="n">x</span><span class="o">*=</span><span class="n">f</span><span class="p">;</span>
+<span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==</span><span class="sc">&#39;\n&#39;</span><span class="o">||</span><span class="n">c</span><span class="o">==</span><span class="sc">&#39;\r&#39;</span><span class="p">){</span>
+<span class="w">  </span><span class="n">flag</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="k">return</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span>
+<span class="w"> </span><span class="n">freopen</span><span class="p">(</span><span class="s">&quot;shirt.in&quot;</span><span class="p">,</span><span class="s">&quot;r&quot;</span><span class="p">,</span><span class="n">stdin</span><span class="p">);</span><span class="n">freopen</span><span class="p">(</span><span class="s">&quot;shirt.out&quot;</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">,</span><span class="n">stdout</span><span class="p">);</span>
+<span class="w"> </span><span class="n">rll</span><span class="p">(</span><span class="n">T</span><span class="p">);</span>
+<span class="w"> </span><span class="k">while</span><span class="p">(</span><span class="n">T</span><span class="o">--</span><span class="p">){</span>
+<span class="w">  </span><span class="n">rll</span><span class="p">(</span><span class="n">n</span><span class="p">);</span><span class="n">mx</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">n</span><span class="p">)</span><span class="mi">-1</span><span class="p">;</span><span class="n">memset</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
+<span class="w">  </span><span class="n">fsb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="mi">-1</span><span class="p">){</span>
+<span class="w">   </span><span class="n">flag</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="w">   </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+<span class="w">    </span><span class="n">rll</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">x</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="c1">//    printf(&quot;%10d\n&quot;,x);</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span><span class="k">break</span><span class="p">;</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">memset</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">f</span><span class="p">));</span>
+<span class="w">  </span><span class="n">fsb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="n">fsb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">){</span>
+<span class="w">   </span><span class="n">fsb</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">mx</span><span class="p">)</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+<span class="w">   </span><span class="n">fsb</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="mi">-1</span><span class="p">){</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">])</span><span class="k">continue</span><span class="p">;</span>
+<span class="w">    </span><span class="n">fsb</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">mx</span><span class="p">){</span>
+<span class="w">     </span><span class="k">if</span><span class="p">(</span><span class="n">k</span><span class="o">&amp;</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">j</span><span class="p">))</span><span class="k">continue</span><span class="p">;</span>
+<span class="w">     </span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">j</span><span class="p">)]</span><span class="o">=</span><span class="n">md</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">j</span><span class="p">)]</span><span class="o">+</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">][</span><span class="n">k</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%lld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">f</span><span class="p">[</span><span class="mi">100</span><span class="p">][</span><span class="n">mx</span><span class="p">]);</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cm">/*</span>
+<span class="cm">#include&lt;bits/stdc++.h&gt;</span>
+<span class="cm">#define ll long long</span>
+<span class="cm">#define N 110</span>
+<span class="cm">#define fsb(a,b,c) for(register int a=b;a&lt;=(c);a++)</span>
+<span class="cm">#define fbs(a,b,c) for(register int a=b;a&gt;=(c);a--)</span>
+<span class="cm">using namespace std;</span>
+<span class="cm">ll T,n,x,t1,n1,x1,a[200];</span>
+<span class="cm">template&lt;typename qw&gt;inline void rll(qw &amp;x){</span>
+<span class="cm"> qw f=1;x=0;char c=getchar();</span>
+<span class="cm"> while(!isdigit(c))f=c==&#39;-&#39;?-1:f,c=getchar();</span>
+<span class="cm"> while(isdigit(c))x=x*10+c-&#39;0&#39;,c=getchar();</span>
+<span class="cm"> x*=f;</span>
+<span class="cm">}</span>
+<span class="cm">inline int check(){</span>
+<span class="cm"> return t1==T&amp;&amp;n==n1&amp;&amp;x==x1;</span>
+<span class="cm">}</span>
+<span class="cm">int main(){</span>
+<span class="cm"> freopen(&quot;shirt.in&quot;,&quot;r&quot;,stdin);freopen(&quot;shirt.out&quot;,&quot;w&quot;,stdout);</span>
+<span class="cm"> rll(T);rll(n);rll(x);</span>
+<span class="cm"> freopen(&quot;C:\\Temp\\data\\shirt0.in&quot;,&quot;r&quot;,stdin);</span>
+<span class="cm"> rll(t1);rll(n1);rll(x1);</span>
+<span class="cm"> if(check()){</span>
+<span class="cm">  freopen(&quot;C:\\Temp\\data\\shirt0.out&quot;,&quot;r&quot;,stdin);</span>
+<span class="cm">  fsb(i,1,T)rll(a[i]);</span>
+<span class="cm"> }</span>
+<span class="cm"> freopen(&quot;C:\\Temp\\data\\shirt1.in&quot;,&quot;r&quot;,stdin);</span>
+<span class="cm"> rll(t1);rll(n1);rll(x1);</span>
+<span class="cm"> if(check()){</span>
+<span class="cm">  freopen(&quot;C:\\Temp\\data\\shirt1.out&quot;,&quot;r&quot;,stdin);</span>
+<span class="cm">  fsb(i,1,T)rll(a[i]);</span>
+<span class="cm"> }</span>
+<span class="cm"> freopen(&quot;C:\\Temp\\data\\shirt2.in&quot;,&quot;r&quot;,stdin);</span>
+<span class="cm"> rll(t1);rll(n1);rll(x1);</span>
+<span class="cm"> if(check()){</span>
+<span class="cm">  freopen(&quot;C:\\Temp\\data\\shirt2.out&quot;,&quot;r&quot;,stdin);</span>
+<span class="cm">  fsb(i,1,T)rll(a[i]);</span>
+<span class="cm"> }</span>
+<span class="cm"> freopen(&quot;C:\\Temp\\data\\shirt3.in&quot;,&quot;r&quot;,stdin);</span>
+<span class="cm"> rll(t1);rll(n1);rll(x1);</span>
+<span class="cm"> if(check()){</span>
+<span class="cm">  freopen(&quot;C:\\Temp\\data\\shirt3.out&quot;,&quot;r&quot;,stdin);</span>
+<span class="cm">  fsb(i,1,T)rll(a[i]);</span>
+<span class="cm"> }</span>
+<span class="cm"> freopen(&quot;C:\\Temp\\data\\shirt4.in&quot;,&quot;r&quot;,stdin);</span>
+<span class="cm"> rll(t1);rll(n1);rll(x1);</span>
+<span class="cm"> if(check()){</span>
+<span class="cm">  freopen(&quot;C:\\Temp\\data\\shirt4.out&quot;,&quot;r&quot;,stdin);</span>
+<span class="cm">  fsb(i,1,T)rll(a[i]);</span>
+<span class="cm"> }</span>
+<span class="cm"> freopen(&quot;C:\\Temp\\data\\shirt5.in&quot;,&quot;r&quot;,stdin);</span>
+<span class="cm"> rll(t1);rll(n1);rll(x1);</span>
+<span class="cm"> if(check()){</span>
+<span class="cm">  freopen(&quot;C:\\Temp\\data\\shirt5.out&quot;,&quot;r&quot;,stdin);</span>
+<span class="cm">  fsb(i,1,T)rll(a[i]);</span>
+<span class="cm"> }</span>
+<span class="cm"> freopen(&quot;C:\\Temp\\data\\shirt6.in&quot;,&quot;r&quot;,stdin);</span>
+<span class="cm"> rll(t1);rll(n1);rll(x1);</span>
+<span class="cm"> if(check()){</span>
+<span class="cm">  freopen(&quot;C:\\Temp\\data\\shirt6.out&quot;,&quot;r&quot;,stdin);</span>
+<span class="cm">  fsb(i,1,T)rll(a[i]);</span>
+<span class="cm"> }</span>
+<span class="cm"> freopen(&quot;C:\\Temp\\data\\shirt7.in&quot;,&quot;r&quot;,stdin);</span>
+<span class="cm"> rll(t1);rll(n1);rll(x1);</span>
+<span class="cm"> if(check()){</span>
+<span class="cm">  freopen(&quot;C:\\Temp\\data\\shirt7.out&quot;,&quot;r&quot;,stdin);</span>
+<span class="cm">  fsb(i,1,T)rll(a[i]);</span>
+<span class="cm"> }</span>
+<span class="cm"> freopen(&quot;C:\\Temp\\data\\shirt8.in&quot;,&quot;r&quot;,stdin);</span>
+<span class="cm"> rll(t1);rll(n1);rll(x1);</span>
+<span class="cm"> if(check()){</span>
+<span class="cm">  freopen(&quot;C:\\Temp\\data\\shirt8.out&quot;,&quot;r&quot;,stdin);</span>
+<span class="cm">  fsb(i,1,T)rll(a[i]);</span>
+<span class="cm"> }</span>
+<span class="cm"> freopen(&quot;C:\\Temp\\data\\shirt9.in&quot;,&quot;r&quot;,stdin);</span>
+<span class="cm"> rll(t1);rll(n1);rll(x1);</span>
+<span class="cm"> if(check()){</span>
+<span class="cm">  freopen(&quot;C:\\Temp\\data\\shirt9.out&quot;,&quot;r&quot;,stdin);</span>
+<span class="cm">  fsb(i,1,T)rll(a[i]);</span>
+<span class="cm"> }</span>
+<span class="cm"> fsb(i,1,T)printf(&quot;%lld\n&quot;,a[i]);</span>
+<span class="cm"> return 0;</span>
+<span class="cm">}</span>
+<span class="cm">*/</span>
+</code></pre></div>
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>Social</h2>
+                        <ul>
+                                <li><a href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                                                type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                                <li><a href="https://github.com/zpatronus">Github (really? listing github in the social widget??)</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <!-- <address id="about" class="vcard body">
+                        Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes
+                        great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address> -->
+
+                <!-- <p>The theme is by <a rel="nofollow"
+                                href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing
+                                Magazine</a>, thanks!</p> -->
+                <p>Copyright by Zijun(Mark) Yang. Licensed under DOES NOT HAVE A LICENSE YET.</p>
+        </footer>
+        <!-- /#about -->
+        <!-- /#contentinfo -->
+
+        <!--  -->
+</body>
+
+</html>

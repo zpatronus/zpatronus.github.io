@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Zijun(Mark) Yang's Blog - 4. Experiences &amp; Reflections</title><link href="https://blog.zijuny.dev/" rel="alternate"></link><link href="https://blog.zijuny.dev/feeds/4-experiences-reflections.atom.xml" rel="self"></link><id>https://blog.zijuny.dev/</id><updated>2022-08-21T19:58:39+08:00</updated><entry><title>Definition of Maturation in My Dictionary</title><link href="https://blog.zijuny.dev/definition-of-maturation-in-my-dictionary.html" rel="alternate"></link><published>2022-08-21T19:58:39+08:00</published><updated>2022-08-21T19:58:39+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2022-08-21:/definition-of-maturation-in-my-dictionary.html</id><content type="html">&lt;p&gt;Maturation is to pack oneself into a class, so that others do not need to know how exactly you handle their function calls.&lt;/p&gt;</content><category term="4. Experiences &amp; Reflections"></category><category term="Whisper"></category></entry><entry><title>Definition of Love in My Dictionary</title><link href="https://blog.zijuny.dev/definition-of-love-in-my-dictionary.html" rel="alternate"></link><published>2022-08-21T19:51:59+08:00</published><updated>2022-08-21T19:51:59+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2022-08-21:/definition-of-love-in-my-dictionary.html</id><content type="html">&lt;p&gt;To love someone is to let her keep a piece of my soul, a Horcrux.&lt;/p&gt;
+&lt;p&gt;To departure is to call back that broken soul.&lt;/p&gt;</content><category term="4. Experiences &amp; Reflections"></category><category term="Whisper"></category></entry><entry><title>Math is Hard</title><link href="https://blog.zijuny.dev/math-is-hard.html" rel="alternate"></link><published>2022-06-03T21:25:03+08:00</published><updated>2022-06-03T21:25:03+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2022-06-03:/math-is-hard.html</id><summary type="html">&lt;h2&gt;Monoid&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="" src="https://upload.wikimedia.org/wikipedia/commons/0/07/Algebraic_structures_-_magma_to_group.svg"&gt;&lt;/p&gt;
+&lt;p&gt;monoid=magma+associativity+identity&lt;/p&gt;
+&lt;h2&gt;Magma&lt;/h2&gt;
+&lt;p&gt;A magma is a set M matched with an operation • that sends any two elements a, b ∈ M to another element, a • b ∈ M, i.e. &lt;span class="math"&gt;\((M,\cdot)\)&lt;/span&gt; is a magma, if&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\forall a,b \in M, a \cdot b \in M
+$$&lt;/div&gt;
+&lt;h2&gt;Determinant of …&lt;/h2&gt;&lt;script type='text/javascript'&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</summary><content type="html">&lt;h2&gt;Monoid&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="" src="https://upload.wikimedia.org/wikipedia/commons/0/07/Algebraic_structures_-_magma_to_group.svg"&gt;&lt;/p&gt;
+&lt;p&gt;monoid=magma+associativity+identity&lt;/p&gt;
+&lt;h2&gt;Magma&lt;/h2&gt;
+&lt;p&gt;A magma is a set M matched with an operation • that sends any two elements a, b ∈ M to another element, a • b ∈ M, i.e. &lt;span class="math"&gt;\((M,\cdot)\)&lt;/span&gt; is a magma, if&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\forall a,b \in M, a \cdot b \in M
+$$&lt;/div&gt;
+&lt;h2&gt;Determinant of 3x3 matrix and its derivative&lt;/h2&gt;
+&lt;p&gt;$$
+A_{3\times3}(t)=[v_1(t)\  v_2(t)\ v_3(t)]\&lt;/p&gt;
+&lt;p&gt;\mathrm{det}(A(t))=(v_1(t)\times v_2(t))\cdot v_3(t)\
+$$&lt;/p&gt;
+&lt;p&gt;By applying Leibniz rule for vector and dot product,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\frac{\mathrm{d}}{\mathrm{d}t}\mathrm{det}A(t)=\mathrm{det}[\dot{v}_1(t)\ v_2(t)\ v_3(t)]+\mathrm{det}[v_1(t)\ \dot{v}_2(t)\ v_3(t)]+\mathrm{det}[v_1(t)\ v_2(t)\ \dot{v}_3(t)]
+$$&lt;/div&gt;
+&lt;h2&gt;Hessian Matrix&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://zh.wikipedia.org/zh-tw/%E9%BB%91%E5%A1%9E%E7%9F%A9%E9%99%A3"&gt;Wiki&lt;/a&gt;&lt;/p&gt;
+&lt;div class="math"&gt;$$H_{i,j}=\frac{\partial ^2 f}{\partial x_i \partial x_j}$$&lt;/div&gt;
+&lt;div class="math"&gt;$$H=\nabla ^2 f$$&lt;/div&gt;
+&lt;h2&gt;Determinant&lt;/h2&gt;
+&lt;p&gt;Properties:&lt;/p&gt;
+&lt;h3&gt;Property 1&lt;/h3&gt;
+&lt;p&gt;Let &lt;span class="math"&gt;\(A\in R^{n\times n}\)&lt;/span&gt;&lt;/p&gt;
+&lt;div class="math"&gt;$$
+det(A)=det(A^T)
+\\
+det(A)=(-1)^n det(-A)
+$$&lt;/div&gt;
+&lt;p&gt;&lt;span class="math"&gt;\(-1\)&lt;/span&gt; can be replaced by any number &lt;span class="math"&gt;\(c\)&lt;/span&gt;&lt;/p&gt;
+&lt;h3&gt;Property 2&lt;/h3&gt;
+&lt;p&gt;Multiply one column (or one row) by &lt;span class="math"&gt;\(k\)&lt;/span&gt;,&lt;/p&gt;
+&lt;div class="math"&gt;$$
+\left| \begin{matrix}{l}
+ a_{11}&amp;amp;  a_{12}&amp;amp;  \cdots&amp;amp;  a_{1n}\\
+ \vdots&amp;amp;  \vdots&amp;amp;  \ddots&amp;amp;  \vdots\\
+ ka_{i1}&amp;amp;  ka_{i2}&amp;amp;  \cdots&amp;amp;  ka_{in}\\
+ \vdots&amp;amp;  \vdots&amp;amp;  \ddots&amp;amp;  \vdots\\
+ a_{n1}&amp;amp;  a_{n2}&amp;amp;  \cdots&amp;amp;  a_{nn}\\
+\end{matrix} \right|=k\left| \begin{matrix}{l}
+ a_{11}&amp;amp;  a_{12}&amp;amp;  \cdots&amp;amp;  a_{1n}\\
+ \vdots&amp;amp;  \vdots&amp;amp;  \ddots&amp;amp;  \vdots\\
+ a_{i1}&amp;amp;  a_{i2}&amp;amp;  \cdots&amp;amp;  a_{in}\\
+ \vdots&amp;amp;  \vdots&amp;amp;  \ddots&amp;amp;  \vdots\\
+ a_{n1}&amp;amp;  a_{n2}&amp;amp;  \cdots&amp;amp;  a_{nn}\\
+\end{matrix} \right|
+$$&lt;/div&gt;
+&lt;p&gt;The determinant of the new matrix is k times the determinant of the original matrix.&lt;/p&gt;
+&lt;h2&gt;Properties about Cross Product&lt;/h2&gt;
+&lt;div class="math"&gt;$$
+a\cdot \left( b\times c \right) =b\cdot \left( c\times a \right) =c\cdot \left( a\times b \right)
+\\
+a\times a=0
+\\
+(a\times b) \cdot a =0
+\\
+a\times \left( b\times c \right) +b\times \left( c\times a \right) +c\times \left( a\times b \right) =0
+\\
+\left( a\times b \right) \times \left( a\times c \right) =\left( a\cdot \left( b\times c \right) \right) a
+$$&lt;/div&gt;
+&lt;p&gt;For &lt;span class="math"&gt;\(a,b,c,d\in \mathbb{R}^3\)&lt;/span&gt;:&lt;/p&gt;
+&lt;div class="math"&gt;$$
+a\times \left( b\times c \right) =\left( a\cdot c \right) b-\left( a\cdot c \right) c
+\\
+(a\times b)\times (a\times c)=(a\cdot (b\times c))a=det(a,b,c)a
+$$&lt;/div&gt;
+&lt;p&gt;which is also know as the vector triple product.&lt;/p&gt;
+&lt;div class="math"&gt;$$
+(a\times b)\cdot(c\times d)=(a\cdot c)(b\cdot d)-(a\cdot d)(b\cdot c)
+$$&lt;/div&gt;
+&lt;p&gt;whose proof is given here:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Proof of the Lagrange identity on vector product" src="https://s1.ax1x.com/2022/06/12/XgqMpn.png"&gt;&lt;/p&gt;
+&lt;h2&gt;Property of Orthonormal Matrix&lt;/h2&gt;
+&lt;div class="math"&gt;$$
+Q^TQ=I\\
+Q^T=Q^{-1}
+$$&lt;/div&gt;
+&lt;h2&gt;Linear Transformation In Transformed Basis&lt;/h2&gt;
+&lt;div class="math"&gt;$$
+v'=P^{-1}APv
+$$&lt;/div&gt;
+&lt;p&gt;where &lt;span class="math"&gt;\(P\)&lt;/span&gt; is the basis of the transformed basis (new basis) in the standard basis (our basis) and &lt;span class="math"&gt;\(A\)&lt;/span&gt; is the transformation in the standard basis.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Linear transformation in transformed basis" src="https://s1.ax1x.com/2022/06/12/XgBGdg.png"&gt;&lt;/p&gt;
+&lt;h2&gt;Rotation Matrix&lt;/h2&gt;
+&lt;div class="math"&gt;$$
+R=\left[ \begin{matrix}
+ \cos \theta&amp;amp;  -\sin \theta&amp;amp;  0\\
+ \sin \theta&amp;amp;  \cos \theta&amp;amp;  0\\
+ 0&amp;amp;  0&amp;amp;  1\\
+\end{matrix} \right]
+$$&lt;/div&gt;
+&lt;p&gt;rotates points in the &lt;span class="math"&gt;\(xy\)&lt;/span&gt; plane counterclockwise through an angle &lt;span class="math"&gt;\(\theta\)&lt;/span&gt;.&lt;/p&gt;
+&lt;h3&gt;Judge whether a matrix is a rotation matrix&lt;/h3&gt;
+&lt;p&gt;A matrix is a rotation matrix iff &lt;span class="math"&gt;\(R^T=R^{-1}\)&lt;/span&gt; i.e. &lt;span class="math"&gt;\(R^TR=I\)&lt;/span&gt; and &lt;span class="math"&gt;\(detR=1\)&lt;/span&gt;&lt;/p&gt;
+&lt;h3&gt;Calculate the axis of the rotation matrix&lt;/h3&gt;
+&lt;p&gt;The axis of the rotation matrix stays unchanged after rotation, i.e. &lt;span class="math"&gt;\(Rx=x\)&lt;/span&gt;, &lt;span class="math"&gt;\((R-I)x=0\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Solving the equation and we get the axis of the rotation.&lt;/p&gt;
+&lt;h3&gt;Calculate the rotation angle of the rotation matrix&lt;/h3&gt;
+&lt;p&gt;Choose a random vector, usually &lt;span class="math"&gt;\(v=(1,0,0,...,0)\)&lt;/span&gt;. Therefor, &lt;span class="math"&gt;\(w=Rv\)&lt;/span&gt;, i.e. &lt;span class="math"&gt;\(v\)&lt;/span&gt; after rotation, is the actually the first column of &lt;span class="math"&gt;\(R\)&lt;/span&gt; (or you can just do the calculate).&lt;/p&gt;
+&lt;p&gt;Let &lt;span class="math"&gt;\(a\)&lt;/span&gt; be the vector representing the axis of the rotation.&lt;/p&gt;
+&lt;p&gt;We can use &lt;span class="math"&gt;\(v'=v-\frac{aa^T}{a^Ta}v\)&lt;/span&gt; to get the vector perpendicular to the axis while pointing from the axis to the end of &lt;span class="math"&gt;\(v\)&lt;/span&gt;. Similarly, use &lt;span class="math"&gt;\(w'=w-\frac{aa^T}{a^Ta}w\)&lt;/span&gt; to get the vector perpendicular to the axis while pointing from the axis t othe end of &lt;span class="math"&gt;\(w\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;It's easy to find that &lt;span class="math"&gt;\(Span(v',w')\)&lt;/span&gt; is perpendicular to the axis &lt;span class="math"&gt;\(a\)&lt;/span&gt;. Therefor, the angle between &lt;span class="math"&gt;\(v'\)&lt;/span&gt; and &lt;span class="math"&gt;\(w'\)&lt;/span&gt; is the angle of the rotation, i.e. &lt;span class="math"&gt;\(\arccos(\frac{&amp;lt;v',w'&amp;gt;}{||v'||||w'||})\)&lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;QR Factorization&lt;/h2&gt;
+&lt;p&gt;Reference: &lt;a href="https://www.youtube.com/watch?v=J41Ypt6Mftc"&gt;this video&lt;/a&gt; and &lt;a href="https://www.youtube.com/watch?v=0MtwqhIwdrI"&gt;this video(better, starts at 25:30)&lt;/a&gt;&lt;/p&gt;
+&lt;div class="math"&gt;$$
+q_3=\frac{C}{||C||} \\
+C=c-\frac{A^T c}{A^T A}A-\frac{B^T c}{B^T B}B
+$$&lt;/div&gt;
+&lt;h2&gt;Nullity of a Matrix&lt;/h2&gt;
+&lt;p&gt;Basically, the dimension of the null space.&lt;/p&gt;
+&lt;h2&gt;Null Space / Kernel of a Matrix&lt;/h2&gt;
+&lt;p&gt;Reference: &lt;a href="https://www.youtube.com/watch?v=8o5Cmfpeo6g&amp;amp;t=1692s"&gt;this video&lt;/a&gt; and &lt;a href="https://www.youtube.com/watch?v=VqP2tREMvt0"&gt;this video(talks about how to calc)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The null space of &lt;span class="math"&gt;\(A\)&lt;/span&gt; is all solution &lt;span class="math"&gt;\(x\)&lt;/span&gt; (a vector), s.t. &lt;span class="math"&gt;\(Ax=0\)&lt;/span&gt;. Often denoted as &lt;span class="math"&gt;\(N(A)\)&lt;/span&gt; or &lt;span class="math"&gt;\(ker(A)\)&lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;Rank of a Matrix&lt;/h2&gt;
+&lt;p&gt;Basically, the dimension of the column space.&lt;/p&gt;
+&lt;p&gt;Reference: &lt;a href="https://stattrek.com/matrix-algebra/matrix-rank.aspx"&gt;this page&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;It tell you how to calc the rank of a matrix.&lt;/p&gt;
+&lt;h2&gt;Projection Matrix&lt;/h2&gt;
+&lt;p&gt;Reference: &lt;a href="http://mlwiki.org/index.php/Projection_onto_Subspaces"&gt;this page&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Use &lt;code&gt;Ctrl+F&lt;/code&gt; to search for the &lt;code&gt;Projection Matrix&lt;/code&gt; part, in which you can find how to solve projection matrix onto certain space.&lt;/p&gt;
+&lt;p&gt;A projection matrix onto a col space of &lt;span class="math"&gt;\(Q\)&lt;/span&gt; is:&lt;/p&gt;
+&lt;div class="math"&gt;$$P=Q(Q^TQ)^{-1}Q^T$$&lt;/div&gt;
+&lt;p&gt;Specifically, if &lt;span class="math"&gt;\(Q\)&lt;/span&gt; is a square orthonormal matrix, then &lt;span class="math"&gt;\(P=I\)&lt;/span&gt;&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="4. Experiences &amp; Reflections"></category><category term="Notes"></category></entry></feed>

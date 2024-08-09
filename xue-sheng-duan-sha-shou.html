@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>学生端杀手</title>
+        <link rel="stylesheet" href="https://blog.zijuny.dev/theme/css/main.css" />
+        <link href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                type="application/atom+xml" rel="alternate" title="Zijun(Mark) Yang's Blog Atom Feed" />
+        <meta name="description" content="Github Repo 前言 目前大多数电子教室使用的学生端软件是极域电子教室，杀除它的方法也有很多。但对于大多数小白，记下这些 …" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://blog.zijuny.dev/">Zijun(Mark) Yang's Blog</a></h1>
+                <nav>
+                        <ul>
+                                <li><a href="/tags">Tags</a></li>
+
+                                        <li class="active" ><a
+                                                        href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/2-cs-hacks.html">2. CS & Hacks</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/3-web-dev.html">3. Web Dev</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/4-experiences-reflections.html">4. Experiences & Reflections</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/6-misc.html">6. Misc</a></li>
+
+                                                <li><a href="/about-me">About Me</a></li>
+                        </ul>
+                </nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://blog.zijuny.dev/xue-sheng-duan-sha-shou.html" rel="bookmark"
+           title="Permalink to 学生端杀手">学生端杀手</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2019-03-24T10:08:29+08:00">
+                Date: Sun 24 March 2019
+        </abbr>
+        <br />
+        <abbr class="modified" title="2019-03-24T10:08:29+08:00">
+                Updated: Sun 24 March 2019
+        </abbr>
+
+        <!--         <address class="vcard author">
+                By                         <a class="url fn" href="https://blog.zijuny.dev/author/zijunmark-yang.html">Zijun(Mark) Yang</a>
+        </address>
+ -->
+        <p>In <a href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a>.</p>
+<p>Tags: <a href="https://blog.zijuny.dev/tag/project.html">Project</a>
+</p>        
+</footer><!-- /.post-info -->      <p><a href="https://github.com/zijunhz/MythwareStudentClientAssistant">Github Repo</a></p>
+<h3>前言</h3>
+<p>目前大多数电子教室使用的学生端软件是极域电子教室，杀除它的方法也有很多。但对于大多数小白，记下这些方法并不容易，于是萌生了开发这样一款傻瓜软件的想法。</p>
+<h3>现有的杀除学生端方法</h3>
+<h4>通过注册表获取学生端密码</h4>
+<p>这个方法是我最早接触的方法，小学时想着杀除学生端于是就开始百度，排名前几就是这个。</p>
+<p>具体而言有以下几步</p>
+<p>1.win（键盘左下角的Windows徽标）+R，打开运行，输入regedit，点击确定。打开注册表管理器。</p>
+<p><img alt="" src="https://s2.ax1x.com/2019/03/24/AYpGrD.png"></p>
+<p>2.依次进入HKEY_LOCAL_MACHINE，SOFTWARE，TopDomain，e-Learning Class Standard，1.00。右侧UninstallPasswd的键值假设是psswd123，真实密码为去掉前5位psswd即123。</p>
+<p><img alt="" src="https://s2.ax1x.com/2019/03/24/AYpyqg.png"></p>
+<p>3.右键单击右下角任务栏上的学生端，点击设置，输入密码后，找到防杀进程，取消。</p>
+<p>4.右键任务栏打开任务管理器，在进程中找到一项名为StudentMain的进程，结束任务即可杀除。</p>
+<h4>通过命令杀除学生端</h4>
+<p>主要有几种</p>
+<p>一是通过刚刚的任务管理器，二是taskkill命令。但如果开了防杀进程，这两种都是无效的。</p>
+<p>有没有有效的命令呢？</p>
+<p>自然是有的。</p>
+<p><a href="https://baike.baidu.com/item/ntsd/5790171?fr=aladdin">ntsd</a>是Windows中系统级的调试命令，但是自Windows Vista后不再集成于Windows中。</p>
+<p>假设要杀除进程PID为123的进程，语法为</p>
+<div class="highlight"><pre><span></span><code>ntsd<span class="w"> </span>-c<span class="w"> </span>q<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;123&quot;</span>
+</code></pre></div>
+
+<p>当然，也可以直接杀除进程名为xxx的进程，但由于PID才是进程的唯一对应标识（即可以有多个同名进程，但PID是唯一的），所以通常使用PID。</p>
+<h3>程序设计</h3>
+<h4>计划实现功能</h4>
+<p>1.立即杀除，很好理解</p>
+<p>2.定时杀除，广播前可以开启，广播到一半学生端就会被杀除</p>
+<p>3.连续杀除，算是定时杀除的升级版，每隔一段时间定时杀除</p>
+<p>4.重新开启学生端，显然，并不是所有人都知道学生端在哪，也并不是所有人都想一直关着学生端</p>
+<h4>关键代码</h4>
+<p>获取学生端PID，已知学生端进程名为StudentMain，其中，s="""StudentMain.exe"""</p>
+<div class="highlight"><pre><span></span><code>Dim WmiService As Object, Processes As Object, Process As Object
+Set WmiService = GetObject(&quot;winmgmts:{impersonationLevel=impersonate}!\\.\root\cimv2&quot;)
+Set Processes = WmiService.ExecQuery(&quot;SELECT * FROM Win32_Process WHERE Name = &quot; &amp; s)
+Dim x As String
+x = &quot;x&quot;
+For Each Process In Processes
+x = x &amp; &quot; &quot; &amp; Process.ProcessId
+Next
+If (x = &quot;x&quot;) Then
+    getpid = -1
+Else
+    getpid = Val(Mid(x, 2, Len(x) - 1))
+End If
+Set WmiService = Nothing
+Set Processes = Nothing
+Set Process = Nothing
+</code></pre></div>
+
+<p>释放ntsd，因为Windows 7应该没有集成了</p>
+<p>首先要把ntsd.exe加到资源中，然后每次杀除前释放到程序目录（万一有熊孩子把生成的ntsd给删了）</p>
+<div class="highlight"><pre><span></span><code><span class="nv">Dim</span><span class="w"> </span><span class="nv">arr</span><span class="ss">()</span><span class="w"> </span><span class="nv">As</span><span class="w"> </span><span class="nv">Byte</span>
+<span class="nv">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">LoadResData</span><span class="ss">(</span><span class="mi">101</span>,<span class="w"> </span><span class="s2">&quot;CUSTOM&quot;</span><span class="ss">)</span>
+<span class="nv">Open</span><span class="w"> </span><span class="nv">App</span>.<span class="nv">Path</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="s2">&quot;\ntsd1.exe&quot;</span><span class="w"> </span><span class="k">For</span><span class="w"> </span><span class="nv">Binary</span><span class="w"> </span><span class="nv">As</span><span class="w"> </span><span class="sc">#1</span>
+<span class="nv">Put</span><span class="w"> </span><span class="sc">#1</span>,<span class="w"> </span>,<span class="w"> </span><span class="nv">arr</span><span class="ss">()</span>
+<span class="nv">Close</span><span class="w"> </span><span class="sc">#1</span>
+</code></pre></div>
+
+<p>杀除，其中，pid即为刚刚get的PID</p>
+<div class="highlight"><pre><span></span><code>Shell App.Path &amp; &quot;/ntsd1 -c q -p &quot;&quot;&quot; &amp; Str(pid) &amp; &quot;&quot;&quot;&quot;
+</code></pre></div>
+
+<p>定时方面，总共使用3个计时器。</p>
+<p>第一个计时器interval=1000，用于检测学生端状态并修改状态text和提示label的内容。</p>
+<p>第二个和第三个计时器分别对应定时查杀和连续查杀。</p>
+<p><img alt="" src="https://s2.ax1x.com/2019/03/24/AYCMjK.png"></p>
+<h3>最终效果</h3>
+<p>下周（2019.3.25-29）将去学校机房验证，现在在家就拿notepad++作为小白鼠叭orz</p>
+<p><img alt="" src="https://s2.ax1x.com/2019/03/24/AYPvzq.gif"></p>
+<p><img alt="" src="https://s2.ax1x.com/2019/03/24/AYPqoQ.gif"></p>
+<p><img alt="" src="https://s2.ax1x.com/2019/03/24/AYFAHS.gif"></p>
+<p><img alt="" src="https://s2.ax1x.com/2019/03/24/AYFCct.gif"></p>
+<p>3.29更新：</p>
+<p>的确可行，偷传至FTP，不少同学发现了。</p>
+<p>5.3更新：</p>
+<p>有次老师走到身后时刚巧查杀，非常尴尬，寻思在全屏广播时也能自由控制，而不是定时。</p>
+<p><img alt="" src="https://s2.ax1x.com/2019/05/03/EN5rgP.gif"></p>
+<p>学生端杀手gen2能在鼠标移至左上角时自动杀除，下周将带去学校试验。</p>
+<h3>关于360报毒</h3>
+<p>360报毒原因：使用了资源文件附带ntsd.exe，凡是使用资源文件，360都会报毒。</p>
+<p>有没有毒呢？</p>
+<p>自然是没有的。请看完整代码：</p>
+<p><img alt="" src="https://s2.ax1x.com/2019/03/29/A0j5n0.png"></p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>Social</h2>
+                        <ul>
+                                <li><a href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                                                type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                                <li><a href="https://github.com/zpatronus">Github (really? listing github in the social widget??)</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <!-- <address id="about" class="vcard body">
+                        Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes
+                        great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address> -->
+
+                <!-- <p>The theme is by <a rel="nofollow"
+                                href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing
+                                Magazine</a>, thanks!</p> -->
+                <p>Copyright by Zijun(Mark) Yang. Licensed under DOES NOT HAVE A LICENSE YET.</p>
+        </footer>
+        <!-- /#about -->
+        <!-- /#contentinfo -->
+
+        <!--  -->
+</body>
+
+</html>

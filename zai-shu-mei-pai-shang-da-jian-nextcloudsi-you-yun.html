@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>在树莓派上搭建Nextcloud私有云</title>
+        <link rel="stylesheet" href="https://blog.zijuny.dev/theme/css/main.css" />
+        <link href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                type="application/atom+xml" rel="alternate" title="Zijun(Mark) Yang's Blog Atom Feed" />
+        <meta name="description" content="为什么是Nextcloud？ 在树莓派这个预算下，基本上是owncloud和nextcloud二分天下。而owncloud现在美国德国高层分歧大，技术开发们受不了于是另辟炉灶开发了nextcloud。也就是说，nextcloud是owncloud原班人马建的，这一点可以体 …" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://blog.zijuny.dev/">Zijun(Mark) Yang's Blog</a></h1>
+                <nav>
+                        <ul>
+                                <li><a href="/tags">Tags</a></li>
+
+                                        <li class="active" ><a
+                                                        href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/2-cs-hacks.html">2. CS & Hacks</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/3-web-dev.html">3. Web Dev</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/4-experiences-reflections.html">4. Experiences & Reflections</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/6-misc.html">6. Misc</a></li>
+
+                                                <li><a href="/about-me">About Me</a></li>
+                        </ul>
+                </nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://blog.zijuny.dev/zai-shu-mei-pai-shang-da-jian-nextcloudsi-you-yun.html" rel="bookmark"
+           title="Permalink to 在树莓派上搭建Nextcloud私有云">在树莓派上搭建Nextcloud私有云</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2019-01-31T21:53:38+08:00">
+                Date: Thu 31 January 2019
+        </abbr>
+        <br />
+        <abbr class="modified" title="2019-01-31T21:53:38+08:00">
+                Updated: Thu 31 January 2019
+        </abbr>
+
+        <!--         <address class="vcard author">
+                By                         <a class="url fn" href="https://blog.zijuny.dev/author/zijunmark-yang.html">Zijun(Mark) Yang</a>
+        </address>
+ -->
+        <p>In <a href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a>.</p>
+<p>Tags: <a href="https://blog.zijuny.dev/tag/fun-stuff.html">Fun Stuff</a>
+</p>        
+</footer><!-- /.post-info -->      <h2>为什么是Nextcloud？</h2>
+<p>在树莓派这个预算下，基本上是owncloud和nextcloud二分天下。而owncloud现在美国德国高层分歧大，技术开发们受不了于是另辟炉灶开发了nextcloud。也就是说，nextcloud是owncloud原班人马建的，这一点可以体现在nextcloud的客户端也兼容owncloud。就目前而言，无论其功能还是美观程度都要甚于owncloud。唯一的不足是汉化不完全，但完全不影响使用。</p>
+<p>nextcloud可以干什么？首先当然是私有云有的功能它都有。除此之外，nextcloud有多用户系统，容量控制系统，共享系统（有连接选项，因此可以共享给非用户）和出色的预览系统和出色的客户端、网页端。</p>
+<p>成果图：</p>
+<p>通过VNC远程桌面连接</p>
+<p><img alt="" src="https://s2.ax1x.com/2019/01/31/k3pL6K.png"></p>
+<p>实体，很小巧</p>
+<p><img alt="" src="https://s2.ax1x.com/2019/01/31/k3pql6.jpg"></p>
+<p>网页登录页面</p>
+<p><img alt="" src="https://s2.ax1x.com/2019/01/31/k3pOOO.png"></p>
+<p>网页端</p>
+<p><img alt="" src="https://s2.ax1x.com/2019/01/31/k3pbSx.png"></p>
+<p><a href="http://1617z38d55.51mypc.cn/">外网访问，可能（高概率）不在线</a></p>
+<h2>准备</h2>
+<p>树莓派。我的是3b+。树莓派需要联网，并且可以通过SSH或者各种如teamviewer、VNC等进行控制（或者您有钱 直接外接显示屏）。</p>
+<h2>开始搭建</h2>
+<p>有很多种方法可以安装nextcloud，比如换nextcloud的iso，比如用命令行纯手工安装。这里选一种最简单最稳的。</p>
+<p>英语强的大佬可以直接看<a href="https://docs.nextcloud.com/server/15/admin_manual/installation/index.html">官方教程</a></p>
+<h3>下载安装snap</h3>
+<div class="highlight"><pre><span></span><code>sudo apt install snapd
+</code></pre></div>
+
+<h3>下载安装Nextcloud</h3>
+<div class="highlight"><pre><span></span><code>sudo snap install nextcloud
+</code></pre></div>
+
+<p>下载安装过程时间较长。</p>
+<h3>基础配置</h3>
+<p>完成后，可以在树莓派浏览器上直接localhost:80登录也可以在其他电脑上输入树莓派的IP登录。</p>
+<p>在页面上输入所需的管理员用户名和密码。</p>
+<p>根据官网，这时候会有一个更改储存位置的选项，但我试了好多遍都没有发现，这一点还有待探究。</p>
+<h2>花生壳内网穿透</h2>
+<p>目前，nextcloud已经可以在内网正常运行了，那么如果想外网访问呢？</p>
+<p>首先要解决的就是动态IP和穿透局域网的问题。</p>
+<p>这里最无脑的就是使用花生壳。</p>
+<p><a href="http://hsk.oray.com/download/download?id=25">deb安装包</a></p>
+<p>cd到下载目录</p>
+<div class="highlight"><pre><span></span><code>sudo dpkg -i 文件名
+</code></pre></div>
+
+<p>安装完成后显示SN码、默认密码</p>
+<p>登录<a href="http://b.oray.com/">花生壳</a>，输入SN码和默认密码，并按照提示激活。</p>
+<p>然后可以选择直接选用这个作为账号密码也可以在右上角选择切换用户，登录自己账号后自动绑定。</p>
+<h2>分配阿里云域名</h2>
+<p>花生壳的默认域名又臭又长，考虑从阿里云的域名跳转过去。由于没满18岁域名无法备案，暂时无法实现。理论上给cloud.xxx.xxx解析一个CNAME就行了吧...</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>Social</h2>
+                        <ul>
+                                <li><a href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                                                type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                                <li><a href="https://github.com/zpatronus">Github (really? listing github in the social widget??)</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <!-- <address id="about" class="vcard body">
+                        Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes
+                        great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address> -->
+
+                <!-- <p>The theme is by <a rel="nofollow"
+                                href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing
+                                Magazine</a>, thanks!</p> -->
+                <p>Copyright by Zijun(Mark) Yang. Licensed under DOES NOT HAVE A LICENSE YET.</p>
+        </footer>
+        <!-- /#about -->
+        <!-- /#contentinfo -->
+
+        <!--  -->
+</body>
+
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>luoguU50590 数字</title>
+        <link rel="stylesheet" href="https://blog.zijuny.dev/theme/css/main.css" />
+        <link href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                type="application/atom+xml" rel="alternate" title="Zijun(Mark) Yang's Blog Atom Feed" />
+        <meta name="description" content="题目(num) 我们可有用DP很快地求出用x个数字构成y的方案数 f[i][j]=f[i-1][m-a[k]] 其中a()为数字集合S中的数。 主要难点在于题目中条件3：前后和相等或奇偶和相等。考虑 …" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://blog.zijuny.dev/">Zijun(Mark) Yang's Blog</a></h1>
+                <nav>
+                        <ul>
+                                <li><a href="/tags">Tags</a></li>
+
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/2-cs-hacks.html">2. CS & Hacks</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/3-web-dev.html">3. Web Dev</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/4-experiences-reflections.html">4. Experiences & Reflections</a></li>
+                                        <li class="active" ><a
+                                                        href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/6-misc.html">6. Misc</a></li>
+
+                                                <li><a href="/about-me">About Me</a></li>
+                        </ul>
+                </nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://blog.zijuny.dev/luoguu50590-shu-zi.html" rel="bookmark"
+           title="Permalink to luoguU50590 数字">luoguU50590 数字</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-11-05T11:26:08+08:00">
+                Date: Mon 05 November 2018
+        </abbr>
+        <br />
+        <abbr class="modified" title="2018-11-05T11:26:08+08:00">
+                Updated: Mon 05 November 2018
+        </abbr>
+
+        <!--         <address class="vcard author">
+                By                         <a class="url fn" href="https://blog.zijuny.dev/author/zijunmark-yang.html">Zijun(Mark) Yang</a>
+        </address>
+ -->
+        <p>In <a href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a>.</p>
+<p>Tags: <a href="https://blog.zijuny.dev/tag/oi.html">OI</a>
+</p>        
+</footer><!-- /.post-info -->      <p><a href="https://www.luogu.org/problemnew/show/U50590">题目(num)</a></p>
+<hr>
+<p>我们可有用DP很快地求出用x个数字构成y的方案数</p>
+<div class="highlight"><pre><span></span><code><span class="n">f</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]=</span><span class="n">f</span><span class="o">[</span><span class="n">i-1</span><span class="o">][</span><span class="n">m-a[k</span><span class="o">]</span><span class="err">]</span>
+</code></pre></div>
+
+<p>其中a()为数字集合S中的数。</p>
+<hr>
+<p>主要难点在于题目中条件3：前后和相等<em>或</em>奇偶和相等。考虑容斥。</p>
+<p>我们可以很快地求出前后和相等+奇偶和相等的方案数，再减去既是前后和相等又是奇偶和相等的方案数即可。</p>
+<hr>
+<p>我们已知用x个数字构成y的方案数，如何快速求前后和相等的方案数？</p>
+<p>前后和相等时，这个数字可以表示为【       A       】【       B       】，由两端长度为n的数字构成，且他们的和相等。</p>
+<p>首先显然要枚举前后和，假设为i。则A有<em>f(n,i)</em>种取法，B也有<em>f(n,i)</em>种取法，因此前后和相等且为i的方案数为<span class="math">\(sqr(f(n,i))\)</span></p>
+<p>对于所有的前后和，答案为<span class="math">\(\sum sqr(f[n][i])\)</span></p>
+<hr>
+<p>如何快速求奇偶和相等的方案数？</p>
+<p>脑补把上文的A和B的每个数字穿插。新构成的数就是A1B1A2B2A3B3...AnBn，这时新构成的数奇偶和相等。</p>
+<p>因此方案数和前后和相等的方案数相等，为<span class="math">\(\sum sqr(f[n][i])\)</span></p>
+<hr>
+<p>如何快速求奇偶和相等<em>且</em>前后和相等的方案数？</p>
+<p>考虑一个数x我们可以把它分成【A】【B】前后长度各位n的两部分，记A0为A中偶数位的和，A1为A中奇数位的和，B0为B中偶数位的和，B1为B中奇数位的和。</p>
+<p>要使得前后和相等且奇偶和相等，则</p>
+<div class="highlight"><pre><span></span><code>A0+A1=B0+B1
+A0+B0=A1+B1
+</code></pre></div>
+
+<p>解得</p>
+<div class="highlight"><pre><span></span><code>A0=B1
+A1=B0
+</code></pre></div>
+
+<p>分别求出A0=B1 A1=B0的对数，相乘即为答案。</p>
+<p><em>下文中A0 A1 B0 B1分别表示处于这些位置的数字的个数，而非处于这些位置的数字的和</em></p>
+<p>如果n是偶数，例如n=4</p>
+<table>
+<thead>
+<tr>
+<th>位数</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>奇偶</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>属于</td>
+<td>A1</td>
+<td>A0</td>
+<td>A1</td>
+<td>A0</td>
+<td>B1</td>
+<td>B0</td>
+<td>B1</td>
+<td>B0</td>
+</tr>
+</tbody>
+</table>
+<p>A0=2 A1=2 B0=2 B1=2</p>
+<p>重复答案：<span class="math">\(\sum (f[A0][i]·f[B1][i])·\sum (f[A1][i]·f[B0][i])=\sum (f[2][i]·f[2][i])·\sum (f[2][i]·f[2][i])\)</span></p>
+<p>如果n是奇数，例如n=5</p>
+<table>
+<thead>
+<tr>
+<th>位数</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>奇偶</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>属于</td>
+<td>A1</td>
+<td>A0</td>
+<td>A1</td>
+<td>A0</td>
+<td>A1</td>
+<td>B0</td>
+<td>B1</td>
+<td>B0</td>
+<td>B1</td>
+<td>B0</td>
+</tr>
+</tbody>
+</table>
+<p>A0=2 A1=3 B0=3 B1=2</p>
+<p>重复答案：<span class="math">\(\sum ( f[A0][i] · f[B1][i] ) · \sum ( f[A1][i] · f[B0][i] ) = \sum ( f[2][i] · f[2][i] ) · \sum ( f[3][i] · f[3][i] )\)</span></p>
+<p>可以发现<span class="math">\(A0=B1&lt;=A1=B0\)</span></p>
+<p>设<span class="math">\(t1=A0=B1，t2=A1=B0\)</span>，则重复的答案为<span class="math">\(\sum sqr(f[t1][i]) · \sum sqr(f[t2][i])\)</span></p>
+<hr>
+<p>容斥一下，最终答案为</p>
+<p><span class="math">\(2·\sum sqr(f[n][i])-\sum sqr(f[t1][i]) · \sum sqr(f[t2][i])\)</span></p>
+<hr>
+<h5>code</h5>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
+<span class="cp">#define ll long long</span>
+<span class="cp">#define mo 999983</span>
+<span class="cp">#define md(a) (((a)%mo+mo)%mo)</span>
+<span class="cp">#define md2(a) ((a)%mo)</span>
+<span class="cp">#define N 1010</span>
+<span class="cp">#define SUM 9010</span>
+<span class="cp">#define sqr(a) ((a)*(a))</span>
+<span class="cp">#define max(a,b) ((a)&gt;(b)?(a):(b))</span>
+<span class="cp">#define fsb(a,b,c) for(ll a=b;a&lt;=(c);a++)</span>
+<span class="cp">#define fbs(a,b,c) for(ll a=b;a&gt;=(c);a--)</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="n">ll</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="n">vis</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span><span class="n">a</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span><span class="n">m</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">f</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="n">SUM</span><span class="p">],</span><span class="n">mx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">maxx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ans</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">sum1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">sum2</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="kt">char</span><span class="w"> </span><span class="n">s</span><span class="p">[</span><span class="mi">20</span><span class="p">];</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">qw</span><span class="o">&gt;</span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">rll</span><span class="p">(</span><span class="n">qw</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">){</span>
+<span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">qw</span><span class="w"> </span><span class="n">f</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">isdigit</span><span class="p">(</span><span class="n">c</span><span class="p">))</span><span class="n">f</span><span class="o">=</span><span class="n">c</span><span class="o">==</span><span class="sc">&#39;-&#39;</span><span class="o">?</span><span class="mi">-1</span><span class="o">:</span><span class="n">f</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="k">while</span><span class="p">(</span><span class="n">isdigit</span><span class="p">(</span><span class="n">c</span><span class="p">))</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">&#39;0&#39;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="n">x</span><span class="o">*=</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span>
+<span class="w"> </span><span class="n">freopen</span><span class="p">(</span><span class="s">&quot;num.in&quot;</span><span class="p">,</span><span class="s">&quot;r&quot;</span><span class="p">,</span><span class="n">stdin</span><span class="p">);</span><span class="n">freopen</span><span class="p">(</span><span class="s">&quot;num.out&quot;</span><span class="p">,</span><span class="s">&quot;w&quot;</span><span class="p">,</span><span class="n">stdout</span><span class="p">);</span>
+<span class="c1">// ll T=clock();</span>
+<span class="w"> </span><span class="n">rll</span><span class="p">(</span><span class="n">n</span><span class="p">);</span><span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%s&quot;</span><span class="p">,</span><span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="sc">&#39;!&#39;</span><span class="p">;</span>
+<span class="w"> </span><span class="n">fbs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">strlen</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="mi">-1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">vis</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="sc">&#39;0&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+<span class="w">   </span><span class="n">vis</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="sc">&#39;0&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">a</span><span class="p">[</span><span class="o">++</span><span class="n">m</span><span class="p">]</span><span class="o">=</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="sc">&#39;0&#39;</span><span class="p">;</span><span class="n">maxx</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="n">maxx</span><span class="p">,</span><span class="n">a</span><span class="p">[</span><span class="n">m</span><span class="p">]);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w"> </span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="w"> </span><span class="n">fsb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">){</span>
+<span class="w">  </span><span class="n">fsb</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="p">)</span>
+<span class="w">   </span><span class="n">fbs</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">mx</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+<span class="w">    </span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">=</span><span class="n">md2</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">+</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="mi">-1</span><span class="p">][</span><span class="n">k</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]]);</span>
+<span class="w">  </span><span class="n">mx</span><span class="o">+=</span><span class="n">maxx</span><span class="p">;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="c1">// fsb(i,0,mx)printf(&quot;%10d %d\n&quot;,i,f[n][i]);</span>
+<span class="c1">// printf(&quot;%d\n&quot;,clock()-T);</span>
+<span class="w"> </span><span class="n">ll</span><span class="w"> </span><span class="n">t1</span><span class="o">=</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">t2</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="n">t1</span><span class="p">;</span>
+<span class="w"> </span><span class="n">fsb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">mx</span><span class="p">){</span>
+<span class="w">  </span><span class="n">ans</span><span class="o">=</span><span class="n">md2</span><span class="p">(</span><span class="n">ans</span><span class="o">+</span><span class="n">md2</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">sqr</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">i</span><span class="p">])));</span>
+<span class="w">  </span><span class="n">sum1</span><span class="o">=</span><span class="n">md2</span><span class="p">(</span><span class="n">sum1</span><span class="o">+</span><span class="n">md2</span><span class="p">(</span><span class="n">sqr</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">t1</span><span class="p">][</span><span class="n">i</span><span class="p">])));</span>
+<span class="w">  </span><span class="n">sum2</span><span class="o">=</span><span class="n">md2</span><span class="p">(</span><span class="n">sum2</span><span class="o">+</span><span class="n">md2</span><span class="p">(</span><span class="n">sqr</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">t2</span><span class="p">][</span><span class="n">i</span><span class="p">])));</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%lld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">md</span><span class="p">(</span><span class="n">ans</span><span class="o">-</span><span class="n">md2</span><span class="p">(</span><span class="n">sum1</span><span class="o">*</span><span class="n">sum2</span><span class="p">)));</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>Social</h2>
+                        <ul>
+                                <li><a href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                                                type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                                <li><a href="https://github.com/zpatronus">Github (really? listing github in the social widget??)</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <!-- <address id="about" class="vcard body">
+                        Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes
+                        great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address> -->
+
+                <!-- <p>The theme is by <a rel="nofollow"
+                                href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing
+                                Magazine</a>, thanks!</p> -->
+                <p>Copyright by Zijun(Mark) Yang. Licensed under DOES NOT HAVE A LICENSE YET.</p>
+        </footer>
+        <!-- /#about -->
+        <!-- /#contentinfo -->
+
+        <!--  -->
+</body>
+
+</html>

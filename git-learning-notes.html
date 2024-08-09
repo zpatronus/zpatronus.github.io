@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>Git Learning Notes</title>
+        <link rel="stylesheet" href="https://blog.zijuny.dev/theme/css/main.css" />
+        <link href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                type="application/atom+xml" rel="alternate" title="Zijun(Mark) Yang's Blog Atom Feed" />
+        <meta name="description" content="Workflow When using git to collaborate with others, the following workflow should be taken: git checkout main to switch the local branch to main...." />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://blog.zijuny.dev/">Zijun(Mark) Yang's Blog</a></h1>
+                <nav>
+                        <ul>
+                                <li><a href="/tags">Tags</a></li>
+
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a></li>
+                                        <li class="active" ><a
+                                                        href="https://blog.zijuny.dev/category/2-cs-hacks.html">2. CS & Hacks</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/3-web-dev.html">3. Web Dev</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/4-experiences-reflections.html">4. Experiences & Reflections</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/6-misc.html">6. Misc</a></li>
+
+                                                <li><a href="/about-me">About Me</a></li>
+                        </ul>
+                </nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://blog.zijuny.dev/git-learning-notes.html" rel="bookmark"
+           title="Permalink to Git Learning Notes">Git Learning Notes</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2022-04-28T09:09:12+08:00">
+                Date: Thu 28 April 2022
+        </abbr>
+        <br />
+        <abbr class="modified" title="2022-04-28T09:09:12+08:00">
+                Updated: Thu 28 April 2022
+        </abbr>
+
+        <!--         <address class="vcard author">
+                By                         <a class="url fn" href="https://blog.zijuny.dev/author/zijunmark-yang.html">Zijun(Mark) Yang</a>
+        </address>
+ -->
+        <p>In <a href="https://blog.zijuny.dev/category/2-cs-hacks.html">2. CS & Hacks</a>.</p>
+<p>Tags: <a href="https://blog.zijuny.dev/tag/notes.html">Notes</a>
+<a href="https://blog.zijuny.dev/tag/git.html">Git</a>
+</p>        
+</footer><!-- /.post-info -->      <h2>Workflow</h2>
+<p>When using git to collaborate with others, the following workflow should be taken:</p>
+<ol>
+<li><code>git checkout main</code> to switch the local branch to main.</li>
+<li><code>git pull origin main</code> to pull the remote main branch to the local branch to catch up the work.</li>
+<li><code>git checkout -b newLocalBranchName</code> to create a new local branch that you are going to work on. Usually the name of the branch is related what you are going to do.</li>
+<li>Coding. <code>git add .</code> and <code>git commit -m "blablabla"</code></li>
+<li><code>git push origin newRemoteBranchName</code> to create a new remote branch that you are going to commit your work to. Usually the remote branch name is the same as the local branch name.</li>
+<li>In this step, you might commit several time and it's tedious to type a long git push command. Therefore, you can use <code>git push --set-upstream origin newRemoteBranchName</code> to link the local branch with the remote branch, so that next time you want to commit and push to the remote branch, you can simply use the command <code>git push</code>.</li>
+<li>Create a <code>git pull</code> request in <code>github</code> or whatever git platform you use and merge the new remote branch to the remote main branch.</li>
+<li>Repeat 1~6 if you are going to work on a different thing in this project.</li>
+</ol>
+<h2>Init</h2>
+<h3>Create a New Repository</h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>init
+git<span class="w"> </span>add<span class="w"> </span>README.md
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;first commit&quot;</span>
+git<span class="w"> </span>branch<span class="w"> </span>-M<span class="w"> </span>main
+git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>&lt;whatever<span class="w"> </span>ssh<span class="w"> </span>repository<span class="w"> </span>address&gt;
+git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div>
+
+<h3>Push an Existing Repository</h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>&lt;whatever<span class="w"> </span>ssh<span class="w"> </span>repository<span class="w"> </span>address&gt;
+git<span class="w"> </span>branch<span class="w"> </span>-M<span class="w"> </span>main<span class="w"> </span><span class="c1"># This is how you rename a branch&#39;s name. &quot;Main&quot; is preferred because &quot;master&quot; can be offending.</span>
+git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div>
+
+<h2>.gitignore</h2>
+<p>The <code>.gitignore</code> file can fail to work from time to time, especially when you want to ignore a file that has been tracked before.</p>
+<p>Try the following commands to fix this problem:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>rm<span class="w"> </span>-r<span class="w"> </span>--cached<span class="w"> </span>.
+git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Untracked files issue resolved to fix .gitignore&quot;</span>
+git<span class="w"> </span>push
+</code></pre></div>
+
+<p>What these commands do is that they clear all the cache and reestablish the track during which <code>.gitignore</code> is loaded.</p>
+<h2>Git Commit Messages in Appropriate Formatting</h2>
+<p>Reference: <a href="https://www.freecodecamp.org/news/writing-good-commit-messages-a-practical-guide/">How to Write Good Commit Messages: A Practical Git Guide</a></p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;&lt;type&gt;: &lt;verb&gt; &lt;object&gt;&#39;</span>
+</code></pre></div>
+
+<p>type:</p>
+<ul>
+<li>
+<p><code>feat</code>: add a new feature</p>
+</li>
+<li>
+<p><code>fix</code>: fix a bug</p>
+</li>
+<li>
+<p><code>style</code>: change the coding style without any other functional changes</p>
+</li>
+<li>
+<p><code>refactor</code>: rewrite</p>
+</li>
+<li>
+<p><code>test</code>: everything related to testing</p>
+</li>
+<li>
+<p><code>docs</code>: everything related to documentation</p>
+</li>
+<li>
+<p><code>chore</code>: regular maintenance</p>
+</li>
+</ul>
+<p>e.g. <code>feat(homepage): add register button</code></p>
+<p>If you are working on something not related to software development, say a lab report, then there's no such thing as adding a feature. In this case, just use verb+object to describe your work. e.g. <code>add data sheet</code></p>
+<h2>Branch Related</h2>
+<h3>Rename a branch</h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>branch<span class="w"> </span>-m<span class="w"> </span>newNameForBranch
+</code></pre></div>
+
+<h3>Delete branch</h3>
+<p>If you want to delete a local branch:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>branch<span class="w"> </span>-d<span class="w"> </span>nameOfYourBranch
+</code></pre></div>
+
+<p>If you want to delete a remote branch:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>-d<span class="w"> </span>nameOfRemoteBranch
+</code></pre></div>
+
+<h3>Clone from certain branch</h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>--branch<span class="w"> </span>&lt;branchname&gt;<span class="w"> </span>&lt;remote-repo-url&gt;
+</code></pre></div>
+
+<h3>Create new branch and switch to it</h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>anyNameYouLike
+</code></pre></div>
+
+<h3>List all branches</h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>branch
+</code></pre></div>
+
+<h3>Switch between different branches locally</h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>nameOfTargetedBranch
+</code></pre></div>
+
+<h2>Push Related</h2>
+<h3>Push to certain branch in the upstream (if not exist one, create one)</h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>nameOfTheUpstreamBranch
+</code></pre></div>
+
+<h3>Set/change upstream</h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>push<span class="w"> </span>--set-upstream<span class="w"> </span>origin<span class="w"> </span>nameOfUpStream
+</code></pre></div>
+
+<h2>Pull Related</h2>
+<p>Pull from certain branch</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>nameOfTheUpstreamBranch
+</code></pre></div>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>Social</h2>
+                        <ul>
+                                <li><a href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                                                type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                                <li><a href="https://github.com/zpatronus">Github (really? listing github in the social widget??)</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <!-- <address id="about" class="vcard body">
+                        Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes
+                        great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address> -->
+
+                <!-- <p>The theme is by <a rel="nofollow"
+                                href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing
+                                Magazine</a>, thanks!</p> -->
+                <p>Copyright by Zijun(Mark) Yang. Licensed under DOES NOT HAVE A LICENSE YET.</p>
+        </footer>
+        <!-- /#about -->
+        <!-- /#contentinfo -->
+
+        <!--  -->
+</body>
+
+</html>
