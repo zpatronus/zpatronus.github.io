@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>luoguP2975 [USACO10JAN]轮流Taking Turns</title>
+        <link rel="stylesheet" href="https://blog.zijuny.dev/theme/css/main.css" />
+        <link href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                type="application/atom+xml" rel="alternate" title="Zijun(Mark) Yang's Blog Atom Feed" />
+        <meta name="description" content="题目 \(f[i]\)表示\(i..n\)能取到的最大和 \(g[i]\)表示\(i..n\)取到最大和时，最先取到的点 从后往前跑，对于一个点，考虑它取不取 ​ 如 …if..." />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://blog.zijuny.dev/">Zijun(Mark) Yang's Blog</a></h1>
+                <nav>
+                        <ul>
+                                <li><a href="/tags">Tags</a></li>
+
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/2-cs-hacks.html">2. CS & Hacks</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/3-web-dev.html">3. Web Dev</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/4-experiences-reflections.html">4. Experiences & Reflections</a></li>
+                                        <li class="active" ><a
+                                                        href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/6-misc.html">6. Misc</a></li>
+
+                                                <li><a href="/about-me">About Me</a></li>
+                        </ul>
+                </nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://blog.zijuny.dev/luogup2975-usaco10janlun-liu-taking-turns.html" rel="bookmark"
+           title="Permalink to luoguP2975 [USACO10JAN]轮流Taking Turns">luoguP2975 [USACO10JAN]轮流Taking Turns</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-11-06T16:05:31+08:00">
+                Date: Tue 06 November 2018
+        </abbr>
+        <br />
+        <abbr class="modified" title="2018-11-06T16:05:31+08:00">
+                Updated: Tue 06 November 2018
+        </abbr>
+
+        <!--         <address class="vcard author">
+                By                         <a class="url fn" href="https://blog.zijuny.dev/author/zijunmark-yang.html">Zijun(Mark) Yang</a>
+        </address>
+ -->
+        <p>In <a href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a>.</p>
+<p>Tags: <a href="https://blog.zijuny.dev/tag/oi.html">OI</a>
+</p>        
+</footer><!-- /.post-info -->      <p><a href="https://www.luogu.org/problemnew/show/P2975">题目</a></p>
+<hr>
+<p><span class="math">\(f[i]\)</span>表示<span class="math">\(i..n\)</span>能取到的最大和</p>
+<p><span class="math">\(g[i]\)</span>表示<span class="math">\(i..n\)</span>取到最大和时，最先取到的点</p>
+<p>从后往前跑，对于一个点，考虑它取不取</p>
+<p>​ 如果不取，<span class="math">\(f[i]=f[i+1],g[i]=g[i+1]\)</span></p>
+<p>​ 如果取，<span class="math">\(f[i]=f[g[i+1]+1]+a[i],g[i]=i\)</span></p>
+<p>因为<span class="math">\(g[i+1]\)</span>表示<span class="math">\(i+1\)</span>取最大和时，最先取到的点，如果取i，那么下一头牛就会取<span class="math">\(i+1..n\)</span>的最大和，也就是取第<span class="math">\(g[i+1]\)</span>个。那么当前这头牛就只能从<span class="math">\(g[i+1]+1\)</span>开始取，所以是<span class="math">\(f[i]=f[g[i+1]+1]+a[i]\)</span></p>
+<hr>
+<h5>code</h5>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
+<span class="cp">#define ll long long</span>
+<span class="cp">#define N 700010</span>
+<span class="cp">#define mem(a,b) memset(a,b,sizeof(a))</span>
+<span class="cp">#define fsb(a,b,c) for(ll a=b;a&lt;=(c);a++)</span>
+<span class="cp">#define fbs(a,b,c) for(ll a=b;a&gt;=(c);a--)</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="n">ll</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="n">f</span><span class="p">[</span><span class="n">N</span><span class="p">],</span><span class="n">g</span><span class="p">[</span><span class="n">N</span><span class="p">],</span><span class="n">a</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">qw</span><span class="o">&gt;</span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">rll</span><span class="p">(</span><span class="n">qw</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">){</span>
+<span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">qw</span><span class="w"> </span><span class="n">f</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">isdigit</span><span class="p">(</span><span class="n">c</span><span class="p">))</span><span class="n">f</span><span class="o">=</span><span class="n">c</span><span class="o">==</span><span class="sc">&#39;-&#39;</span><span class="o">?</span><span class="mi">-1</span><span class="o">:</span><span class="n">f</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="k">while</span><span class="p">(</span><span class="n">isdigit</span><span class="p">(</span><span class="n">c</span><span class="p">))</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">&#39;0&#39;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="n">x</span><span class="o">*=</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span>
+<span class="w"> </span><span class="n">rll</span><span class="p">(</span><span class="n">n</span><span class="p">);</span><span class="n">fsb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="n">rll</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span><span class="n">mem</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span><span class="n">mem</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+<span class="w"> </span><span class="n">fbs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">){</span>
+<span class="w">  </span><span class="k">if</span><span class="p">((</span><span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="o">||</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">)){</span>
+<span class="w">   </span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">   </span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">f</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span><span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%lld %lld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">f</span><span class="p">[</span><span class="n">g</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>Social</h2>
+                        <ul>
+                                <li><a href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                                                type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                                <li><a href="https://github.com/zpatronus">Github (really? listing github in the social widget??)</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <!-- <address id="about" class="vcard body">
+                        Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes
+                        great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address> -->
+
+                <!-- <p>The theme is by <a rel="nofollow"
+                                href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing
+                                Magazine</a>, thanks!</p> -->
+                <p>Copyright by Zijun(Mark) Yang. Licensed under DOES NOT HAVE A LICENSE YET.</p>
+        </footer>
+        <!-- /#about -->
+        <!-- /#contentinfo -->
+
+        <!--  -->
+</body>
+
+</html>

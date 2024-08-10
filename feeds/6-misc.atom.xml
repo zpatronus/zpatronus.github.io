@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Zijun(Mark) Yang's Blog - 6. Misc</title><link href="https://blog.zijuny.dev/" rel="alternate"></link><link href="https://blog.zijuny.dev/feeds/6-misc.atom.xml" rel="self"></link><id>https://blog.zijuny.dev/</id><updated>2024-08-03T20:34:00+08:00</updated><entry><title>Hello Pelican</title><link href="https://blog.zijuny.dev/hello-pelican.html" rel="alternate"></link><published>2024-08-03T20:34:00+08:00</published><updated>2024-08-03T20:34:00+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2024-08-03:/hello-pelican.html</id><summary type="html">&lt;p&gt;I've decided to migrate my blog from Hexo to Pelican. The main reason? I want a lighter site. Maybe I'm getting older and a bit more boring, but I've grown tired of all the fancy CSS animations. Simplicity just feels right these days. Also, it's a pain in the butt …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I've decided to migrate my blog from Hexo to Pelican. The main reason? I want a lighter site. Maybe I'm getting older and a bit more boring, but I've grown tired of all the fancy CSS animations. Simplicity just feels right these days. Also, it's a pain in the butt to migrate Hexo's source from one computer to another. With Python's venv magic, everything will be easy (hopefully).&lt;/p&gt;</content><category term="6. Misc"></category><category term="Misc"></category></entry><entry><title>About Me</title><link href="https://blog.zijuny.dev/about-me.html" rel="alternate"></link><published>2024-08-03T09:17:00+08:00</published><updated>2024-08-03T09:17:00+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2024-08-03:/about-me.html</id><summary type="html">&lt;ul&gt;
+&lt;li&gt;🔭 I am Zijun(Mark) Yang, an undergraduate majoring in CS at UMich and ECE at UM-SJTU Joint Institute.&lt;/li&gt;
+&lt;li&gt;👨‍💻 I'm currently working on &lt;a href="https://www.xrvm.com/soft-tools/os/Linux"&gt;RISC-V XuanTie Linux System Platform&lt;/a&gt; at &lt;a href="https://damo.alibaba.com/?language=en"&gt;DAMO Academy&lt;/a&gt; Alibaba Inc.&lt;/li&gt;
+&lt;li&gt;🛠️ Budget dev boards are my playground, with the &lt;a href="http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-3.html"&gt;Orange Pi Zero 3&lt;/a&gt; and &lt;a href="https://wiki.sipeed.com/hardware/en/lichee/RV_Nano/1_intro.html"&gt;LicheeRV Nano&lt;/a&gt; being my favorites …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;ul&gt;
+&lt;li&gt;🔭 I am Zijun(Mark) Yang, an undergraduate majoring in CS at UMich and ECE at UM-SJTU Joint Institute.&lt;/li&gt;
+&lt;li&gt;👨‍💻 I'm currently working on &lt;a href="https://www.xrvm.com/soft-tools/os/Linux"&gt;RISC-V XuanTie Linux System Platform&lt;/a&gt; at &lt;a href="https://damo.alibaba.com/?language=en"&gt;DAMO Academy&lt;/a&gt; Alibaba Inc.&lt;/li&gt;
+&lt;li&gt;🛠️ Budget dev boards are my playground, with the &lt;a href="http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-3.html"&gt;Orange Pi Zero 3&lt;/a&gt; and &lt;a href="https://wiki.sipeed.com/hardware/en/lichee/RV_Nano/1_intro.html"&gt;LicheeRV Nano&lt;/a&gt; being my favorites!&lt;/li&gt;
+&lt;li&gt;To humans, I speak Mandarin and English; to silicon, I speak (modern) C++ (for 10+ years), C, C#, Python (Django and Streamlit framework), MATLAB, JavaScript, HTML, CSS and Vue framework. (Credit to &lt;a href="https://fkfd.me/"&gt;fkfd.me&lt;/a&gt; for coming up with this sentence structure.)&lt;/li&gt;
+&lt;li&gt;⚡ This is &lt;a href="https://zijuny.dev/"&gt;my website&lt;/a&gt; in which you can find a short list of my projects.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt="Top Langs" src="https://github-readme-stats.vercel.app/api/top-langs/?username=zpatronus&amp;amp;layout=compact&amp;amp;theme=dark&amp;amp;hide=html"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="zPatronus's GitHub stats" src="https://github-readme-stats.vercel.app/api?username=zpatronus&amp;amp;count_private=true&amp;amp;show_icons=true&amp;amp;theme=dark"&gt;&lt;/p&gt;</content><category term="6. Misc"></category></entry><entry><title>Vocabulary</title><link href="https://blog.zijuny.dev/vocabulary.html" rel="alternate"></link><published>2022-05-16T19:19:16+08:00</published><updated>2022-05-16T19:19:16+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2022-05-16:/vocabulary.html</id><summary type="html">&lt;h2&gt;A&lt;/h2&gt;
+&lt;p&gt;antisymmetric matrix: &lt;span class="math"&gt;\(A^T=-A\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;angular frequency: aka, angular velocity, radial frequency and circular frequency. Denoted as &lt;span class="math"&gt;\(\omega\)&lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;B&lt;/h2&gt;
+&lt;p&gt;buoyancy: 浮力。&lt;/p&gt;
+&lt;h2&gt;C&lt;/h2&gt;
+&lt;p&gt;curvature: 曲率。&lt;/p&gt;
+&lt;h2&gt;D&lt;/h2&gt;
+&lt;p&gt;directly proportional to: 成正比。&lt;/p&gt;
+&lt;p&gt;displacement: 位移。注意与distance（路程）区分。&lt;/p&gt;
+&lt;p&gt;distance: 路程。注意 …&lt;/p&gt;&lt;script type='text/javascript'&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</summary><content type="html">&lt;h2&gt;A&lt;/h2&gt;
+&lt;p&gt;antisymmetric matrix: &lt;span class="math"&gt;\(A^T=-A\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;angular frequency: aka, angular velocity, radial frequency and circular frequency. Denoted as &lt;span class="math"&gt;\(\omega\)&lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;B&lt;/h2&gt;
+&lt;p&gt;buoyancy: 浮力。&lt;/p&gt;
+&lt;h2&gt;C&lt;/h2&gt;
+&lt;p&gt;curvature: 曲率。&lt;/p&gt;
+&lt;h2&gt;D&lt;/h2&gt;
+&lt;p&gt;directly proportional to: 成正比。&lt;/p&gt;
+&lt;p&gt;displacement: 位移。注意与distance（路程）区分。&lt;/p&gt;
+&lt;p&gt;distance: 路程。注意与displacement（位移）区分。&lt;/p&gt;
+&lt;h2&gt;E&lt;/h2&gt;
+&lt;p&gt;elastic force: 弹力。&lt;/p&gt;
+&lt;p&gt;extrema: 极值&lt;/p&gt;
+&lt;h2&gt;I&lt;/h2&gt;
+&lt;p&gt;inversely proportional to: 成反比。&lt;/p&gt;
+&lt;h2&gt;N&lt;/h2&gt;
+&lt;p&gt;normal: 法向的。&lt;/p&gt;
+&lt;h2&gt;O&lt;/h2&gt;
+&lt;p&gt;orthogonal matrix: 正交矩阵，&lt;span class="math"&gt;\(A^T=A^{-1}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;orthonormal: 标准正交，i.e. 正交，且模长为1.&lt;/p&gt;
+&lt;h2&gt;P&lt;/h2&gt;
+&lt;p&gt;projection matrix: matrix &lt;span class="math"&gt;\(A\)&lt;/span&gt; s.t. &lt;span class="math"&gt;\(A^2=A\)&lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;R&lt;/h2&gt;
+&lt;p&gt;radial: 径向的。&lt;/p&gt;
+&lt;h2&gt;S&lt;/h2&gt;
+&lt;p&gt;speed: 速率。注意与velocity（速度）区分。&lt;/p&gt;
+&lt;p&gt;symmetric matrix: &lt;span class="math"&gt;\(A=A^T\)&lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;T&lt;/h2&gt;
+&lt;p&gt;tangential: 切向的。&lt;/p&gt;
+&lt;p&gt;transverse: 横向的。&lt;/p&gt;
+&lt;h2&gt;V&lt;/h2&gt;
+&lt;p&gt;velocity: 速度。注意与speed（速率）区分。&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="6. Misc"></category><category term="Notes"></category></entry><entry><title>Goodbye World</title><link href="https://blog.zijuny.dev/goodbye-world.html" rel="alternate"></link><published>2022-04-26T10:42:54+08:00</published><updated>2022-04-26T10:42:54+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2022-04-26:/goodbye-world.html</id><content type="html">&lt;h2&gt;This is my First Hexo Blog&lt;/h2&gt;
+&lt;p&gt;Goodbye world! (Why not 'Hello World!', you might ask. That's what people in the industry do. Well, that's the reason. )&lt;/p&gt;
+&lt;p&gt;Test formula: $ \frac{x_1^2} {\sqrt{y_2^2} } $&lt;/p&gt;
+&lt;p&gt;Test images:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="avatar" src="/images/avatar.png"&gt;&lt;/p&gt;
+&lt;p&gt;Becoming Web Leader of NIMO&lt;/p&gt;</content><category term="6. Misc"></category><category term="Misc"></category></entry><entry><title>Photoshop知识点整理</title><link href="https://blog.zijuny.dev/photoshopzhi-shi-dian-zheng-li.html" rel="alternate"></link><published>2019-06-16T11:37:06+08:00</published><updated>2019-06-16T11:37:06+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2019-06-16:/photoshopzhi-shi-dian-zheng-li.html</id><summary type="html">&lt;h1&gt;各种图层&lt;/h1&gt;
+&lt;p&gt;以下图层默认“图层可见性”为真&lt;/p&gt;
+&lt;h2&gt;文字图层&lt;/h2&gt;
+&lt;p&gt;滤镜：×&lt;/p&gt;
+&lt;p&gt;图层样式：√&lt;/p&gt;
+&lt;p&gt;自由变换：√，可以调整字号、拉伸文字&lt;/p&gt;
+&lt;p&gt;更改不透明度：√&lt;/p&gt;
+&lt;p&gt;删除：唯 …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;各种图层&lt;/h1&gt;
+&lt;p&gt;以下图层默认“图层可见性”为真&lt;/p&gt;
+&lt;h2&gt;文字图层&lt;/h2&gt;
+&lt;p&gt;滤镜：×&lt;/p&gt;
+&lt;p&gt;图层样式：√&lt;/p&gt;
+&lt;p&gt;自由变换：√，可以调整字号、拉伸文字&lt;/p&gt;
+&lt;p&gt;更改不透明度：√&lt;/p&gt;
+&lt;p&gt;删除：唯一图层×；非唯一图层√&lt;/p&gt;
+&lt;p&gt;复制：√&lt;/p&gt;
+&lt;p&gt;移动：√&lt;/p&gt;
+&lt;p&gt;渐变/油漆桶：×&lt;/p&gt;
+&lt;h2&gt;背景锁图层&lt;/h2&gt;
+&lt;p&gt;!! 背景锁图层的“背景”二字为斜体&lt;/p&gt;
+&lt;p&gt;滤镜：√&lt;/p&gt;
+&lt;p&gt;图层样式：×&lt;/p&gt;
+&lt;p&gt;自由变换：×；存在选区√&lt;/p&gt;
+&lt;p&gt;更改不透明度：×&lt;/p&gt;
+&lt;p&gt;删除：唯一图层×；非唯一图层√&lt;/p&gt;
+&lt;p&gt;复制：√，且复制出的图层为不带锁常规图层&lt;/p&gt;
+&lt;p&gt;移动：×；存在选区√&lt;/p&gt;
+&lt;h2&gt;黑锁图层&lt;/h2&gt;
+&lt;p&gt;滤镜：×&lt;/p&gt;
+&lt;p&gt;图层样式：×&lt;/p&gt;
+&lt;p&gt;自由变换：×&lt;/p&gt;
+&lt;p&gt;更改不透明度：×&lt;/p&gt;
+&lt;p&gt;删除：×&lt;/p&gt;
+&lt;p&gt;复制：√，且复制出的图层为黑锁图层；存在选区则复制出常规图层&lt;/p&gt;
+&lt;p&gt;移动：×&lt;/p&gt;
+&lt;h1&gt;各种操作适用条件&lt;/h1&gt;
+&lt;h2&gt;滤镜&lt;/h2&gt;
+&lt;p&gt;没有黑锁&lt;/p&gt;
+&lt;p&gt;不是背景图层&lt;/p&gt;
+&lt;p&gt;图层可见&lt;/p&gt;
+&lt;p&gt;所选区域非空&lt;/p&gt;
+&lt;h2&gt;图层样式&lt;/h2&gt;
+&lt;p&gt;没有黑锁&lt;/p&gt;
+&lt;p&gt;不是背景图层&lt;/p&gt;
+&lt;h2&gt;自由变换&lt;/h2&gt;
+&lt;p&gt;没有黑锁&lt;/p&gt;
+&lt;p&gt;不是一整个背景图层&lt;/p&gt;
+&lt;p&gt;图层可见&lt;/p&gt;
+&lt;h2&gt;更改不透明度&lt;/h2&gt;
+&lt;p&gt;没有黑锁&lt;/p&gt;
+&lt;p&gt;不是背景图层&lt;/p&gt;
+&lt;p&gt;图层可见&lt;/p&gt;
+&lt;h2&gt;删除&lt;/h2&gt;
+&lt;p&gt;没有黑锁&lt;/p&gt;
+&lt;p&gt;不是唯一的图层&lt;/p&gt;
+&lt;h2&gt;重命名&lt;/h2&gt;
+&lt;p&gt;不是背景图层&lt;/p&gt;
+&lt;h1&gt;其他&lt;/h1&gt;
+&lt;h2&gt;(可能)导致图层增加的操作&lt;/h2&gt;
+&lt;p&gt;新建/复制图层&lt;/p&gt;
+&lt;p&gt;在非空图层上使用文字工具&lt;/p&gt;
+&lt;h2&gt;蒙版&lt;/h2&gt;
+&lt;p&gt;类似选区，意义在于保护被蒙住的部分&lt;/p&gt;
+&lt;p&gt;文字蒙版工具会在选中图层上创建一个选区&lt;/p&gt;
+&lt;h2&gt;链接图层&lt;/h2&gt;
+&lt;p&gt;两个图层同步移动、缩放&lt;/p&gt;</content><category term="6. Misc"></category><category term="Misc"></category></entry><entry><title>模板/知识库</title><link href="https://blog.zijuny.dev/mo-ban-zhi-shi-ku.html" rel="alternate"></link><published>2018-10-27T11:50:25+08:00</published><updated>2018-10-27T11:50:25+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2018-10-27:/mo-ban-zhi-shi-ku.html</id><summary type="html">&lt;h1&gt;逆元&lt;/h1&gt;
+&lt;p&gt;求x在%p意义下的逆元&lt;/p&gt;
+&lt;p&gt;即x^(p-2)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;#define md(a) (((a)%p+p)%p)&lt;/span&gt;
+&lt;span class="kr"&gt;inline&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ll&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;po&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ll&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ll&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;mo&lt;/span&gt;&lt;span class="mi"&gt;-3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1&gt;位运算 …&lt;/h1&gt;</summary><content type="html">&lt;h1&gt;逆元&lt;/h1&gt;
+&lt;p&gt;求x在%p意义下的逆元&lt;/p&gt;
+&lt;p&gt;即x^(p-2)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;#define md(a) (((a)%p+p)%p)&lt;/span&gt;
+&lt;span class="kr"&gt;inline&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ll&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;po&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ll&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ll&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;mo&lt;/span&gt;&lt;span class="mi"&gt;-3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;md&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1&gt;位运算&lt;/h1&gt;
+&lt;p&gt;&lt;img alt="位运算" src="https://s1.ax1x.com/2018/10/29/igtmn0.png"&gt;&lt;/p&gt;</content><category term="6. Misc"></category><category term="OI"></category></entry></feed>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>Things I Did to Start a Public GNU/Linux Server Among My Friends</title>
+        <link rel="stylesheet" href="https://blog.zijuny.dev/theme/css/main.css" />
+        <link href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                type="application/atom+xml" rel="alternate" title="Zijun(Mark) Yang's Blog Atom Feed" />
+        <meta name="description" content="0. Create 2 users An admin user and a public user pub. Since there's no malicious guys in my friends, I'm not preparing to create an account for..." />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://blog.zijuny.dev/">Zijun(Mark) Yang's Blog</a></h1>
+                <nav>
+                        <ul>
+                                <li><a href="/tags">Tags</a></li>
+
+                                        <li class="active" ><a
+                                                        href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/2-cs-hacks.html">2. CS & Hacks</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/3-web-dev.html">3. Web Dev</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/4-experiences-reflections.html">4. Experiences & Reflections</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/6-misc.html">6. Misc</a></li>
+
+                                                <li><a href="/about-me">About Me</a></li>
+                        </ul>
+                </nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://blog.zijuny.dev/things-i-did-to-start-a-public-gnulinux-server-among-my-friends.html" rel="bookmark"
+           title="Permalink to Things I Did to Start a Public GNU/Linux Server Among My Friends">Things I Did to Start a Public GNU/Linux Server Among My Friends</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2023-11-29T22:10:16+08:00">
+                Date: Wed 29 November 2023
+        </abbr>
+        <br />
+        <abbr class="modified" title="2023-11-29T22:10:16+08:00">
+                Updated: Wed 29 November 2023
+        </abbr>
+
+        <!--         <address class="vcard author">
+                By                         <a class="url fn" href="https://blog.zijuny.dev/author/zijunmark-yang.html">Zijun(Mark) Yang</a>
+        </address>
+ -->
+        <p>In <a href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a>.</p>
+<p>Tags: <a href="https://blog.zijuny.dev/tag/fun-stuff.html">Fun Stuff</a>
+<a href="https://blog.zijuny.dev/tag/maintenance.html">Maintenance</a>
+</p>        
+</footer><!-- /.post-info -->      <h2>0. Create 2 users</h2>
+<p>An admin user and a public user <code>pub</code>.</p>
+<p>Since there's no malicious guys in my friends, I'm not preparing to create an account for each of them. Rather, they will be logged in to a same public account. It also enforces them to store only public content in this server, or they really want their "dark secrets" to be seen. It's just a Raspberry Pi 3B+ with 1GB of RAM and 16GB of storage. Not a lot of computer juice here.</p>
+<h2>1. Notice board and readme system</h2>
+<p>I heavily modified the <code>~/.bashrc</code> to do the following 2 things:</p>
+<ol>
+<li>Whenever a bash session is created, <code>~/.news</code> will be catted to print the news (modifications to the server or newly uploaded files).</li>
+<li>Whenever <code>cd</code> is called to a directory with a <code>README.txt</code> in it, the <code>README.txt</code> will be catted to print info about that directory.</li>
+</ol>
+<p>Trust me. Even they are my friends, I gets annoyed when they keep asking me the same question (like "wtf, <code>rsync pub@xx.xx.xx.xx:/path/to/dir/or/files /path/to/local/dir/</code>" does not sync <code>~/281p4/*</code> on the server to my disk). I put these things to the notice board and <code>README.txt</code>.</p>
+<h2>2. SSH auth protection</h2>
+<p>Since all of my friends are able to log in to <code>pub</code>, they can potentially modify <code>~/.ssh/authorized_keys</code>, which I don't want to happen.</p>
+<p>In the admin account, I add a start-up script which will start all custom scripts.</p>
+<p>One of the customized script copies a valid <code>authorized_keys</code> to <code>pub</code> every 1 min to secure that.</p>
+<h2>3. Source file cleaning</h2>
+<p>The purpose of this server is never to exchange project answers, aka source codes. A source file cleaning scripts runs every 3 mins to remove all source files by matching extensions. This will be bypassed if one simply change the file extension, but if they really want to exchange source, they can use other platforms and this server is definitely not the best option. The main purpose of this function is to take care of source files that are compiled and executed on the server, but are not removed in time.</p>
+<h2>4. oh-my-posh</h2>
+<p>That is a must have. In <code>.bashrc</code> I set it up so that a random theme is used every time a session starts.</p>
+<h2>5. System status monetization</h2>
+<p>A nginx server is created to host several webpages that display the system's status.  </p>
+<p>Status includes CPU load, CPU temperature, file tree under <code>~</code>, and login count from different people.</p>
+<p>The login count is achieved by parsing <code>/var/log/auth.log</code> and match SHA256 of every ssh keys to one in the <code>~/.ssh/authorized_keys</code>.</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>Social</h2>
+                        <ul>
+                                <li><a href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                                                type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                                <li><a href="https://github.com/zpatronus">Github (really? listing github in the social widget??)</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <!-- <address id="about" class="vcard body">
+                        Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes
+                        great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address> -->
+
+                <!-- <p>The theme is by <a rel="nofollow"
+                                href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing
+                                Magazine</a>, thanks!</p> -->
+                <p>Copyright by Zijun(Mark) Yang. Licensed under DOES NOT HAVE A LICENSE YET.</p>
+        </footer>
+        <!-- /#about -->
+        <!-- /#contentinfo -->
+
+        <!--  -->
+</body>
+
+</html>

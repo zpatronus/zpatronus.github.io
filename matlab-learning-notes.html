@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>Matlab Learning Notes</title>
+        <link rel="stylesheet" href="https://blog.zijuny.dev/theme/css/main.css" />
+        <link href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                type="application/atom+xml" rel="alternate" title="Zijun(Mark) Yang's Blog Atom Feed" />
+        <meta name="description" content="Docs: MATLAB Help Center Table Related How to filter a table theTable(theTable.VariableName == 0, :); returns a table that contains every row in..." />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://blog.zijuny.dev/">Zijun(Mark) Yang's Blog</a></h1>
+                <nav>
+                        <ul>
+                                <li><a href="/tags">Tags</a></li>
+
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a></li>
+                                        <li class="active" ><a
+                                                        href="https://blog.zijuny.dev/category/2-cs-hacks.html">2. CS & Hacks</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/3-web-dev.html">3. Web Dev</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/4-experiences-reflections.html">4. Experiences & Reflections</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/6-misc.html">6. Misc</a></li>
+
+                                                <li><a href="/about-me">About Me</a></li>
+                        </ul>
+                </nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://blog.zijuny.dev/matlab-learning-notes.html" rel="bookmark"
+           title="Permalink to Matlab Learning Notes">Matlab Learning Notes</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2022-04-27T13:34:59+08:00">
+                Date: Wed 27 April 2022
+        </abbr>
+        <br />
+        <abbr class="modified" title="2022-04-27T13:34:59+08:00">
+                Updated: Wed 27 April 2022
+        </abbr>
+
+        <!--         <address class="vcard author">
+                By                         <a class="url fn" href="https://blog.zijuny.dev/author/zijunmark-yang.html">Zijun(Mark) Yang</a>
+        </address>
+ -->
+        <p>In <a href="https://blog.zijuny.dev/category/2-cs-hacks.html">2. CS & Hacks</a>.</p>
+<p>Tags: <a href="https://blog.zijuny.dev/tag/notes.html">Notes</a>
+<a href="https://blog.zijuny.dev/tag/matlab.html">Matlab</a>
+</p>        
+</footer><!-- /.post-info -->      <p>Docs: <a href="https://ww2.mathworks.cn/help/?requestedDomain=en">MATLAB Help Center</a></p>
+<h2>Table Related</h2>
+<h3>How to filter a table</h3>
+<div class="highlight"><pre><span></span><code><span class="n">theTable</span><span class="p">(</span><span class="n">theTable</span><span class="p">.</span><span class="n">VariableName</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">:);</span>
+</code></pre></div>
+
+<p>returns a table that contains every row in <code>theTable</code> whose <code>VariableName == 0</code>.</p>
+<h3>Remove Rows from Table</h3>
+<p><a href="https://www.mathworks.com/help/matlab/matlab_prog/add-and-delete-table-rows.html">Docs</a></p>
+<p>This removes rows with row id 3,5,7 from the table.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">table</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">],:)=[];</span>
+</code></pre></div>
+
+<h2>Things Unique to MATLAB</h2>
+<h3>Cell Array</h3>
+<p><a href="https://ww2.mathworks.cn/help/matlab/cell-arrays.html">Docs</a></p>
+<p>A cell array is a data type with indexed data containers called cells, where each cell can contain any type of data.</p>
+<p>Use <code>A{1}</code> to access a cell.</p>
+<h3>Vectorization</h3>
+<p>Instead of write:</p>
+<div class="highlight"><pre><span></span><code><span class="n">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">input</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">);</span>
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="nb">size</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="nb">j</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="nb">size</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="w"> </span><span class="nb">j</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<span class="w">      </span><span class="n">a</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="w"> </span><span class="nb">j</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">sqrt</span><span class="p">(</span><span class="n">a</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="w"> </span><span class="nb">j</span><span class="p">));</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">  </span><span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p>Write: （use logic array as mask）</p>
+<div class="highlight"><pre><span></span><code><span class="n">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">input</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">);</span>
+<span class="n">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="n">a</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">sqrt</span><span class="p">(</span><span class="n">a</span><span class="p">(</span><span class="n">b</span><span class="p">));</span>
+</code></pre></div>
+
+<p>This is because logical array can serve as a mask for arithmetic operations.</p>
+<p>What if we want all the elements greater than 5 to be sqrt and the rest be sqr.</p>
+<p>Then write:</p>
+<div class="highlight"><pre><span></span><code><span class="n">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">input</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">);</span>
+<span class="n">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="n">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">~</span><span class="n">b</span><span class="p">;</span>
+<span class="n">a</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">sqrt</span><span class="p">(</span><span class="n">a</span><span class="p">(</span><span class="n">b</span><span class="p">));</span>
+<span class="n">a</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">.^</span><span class="mi">2</span><span class="p">;</span>
+<span class="nb">disp</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</code></pre></div>
+
+<h3>Function Handle (a unique class)</h3>
+<p>Docs: <a href="https://ww2.mathworks.cn/help/matlab/ref/function_handle.html?searchHighlight=function%20handle&amp;s_tid=srchtitle_function%20handle_2">function handle</a></p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">@(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">x</span>^<span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span>
+
+<span class="n">f</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">  </span><span class="nb">function_handle</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">value</span><span class="p">:</span>
+
+<span class="w">    </span><span class="p">@(</span><span class="n">x</span><span class="p">)</span><span class="n">x</span>^<span class="mi">2</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">    </span><span class="o">-</span><span class="mi">1</span>
+</code></pre></div>
+
+<h2>Add Fonts to MATLAB</h2>
+<p>Reference: <a href="https://ww2.mathworks.cn/matlabcentral/answers/514119-can-i-add-custom-fonts-to-my-matlab-desktop-in-preferences">Can I add custom fonts to my MATLAB Desktop in Preferences?</a></p>
+<p>Basically, copy <code>ttf</code> font files to <code>\matlabRoot\sys\java\jre\win64\jre\lib\fonts</code>, restart MATLAB, and choose the font in the MATLAB preferences.</p>
+<h2>Array Related</h2>
+<h3>Erasing a Column or Row</h3>
+<div class="highlight"><pre><span></span><code><span class="n">a</span><span class="p">(:,</span><span class="mi">3</span><span class="p">)=[];</span>
+</code></pre></div>
+
+<h3>Array Initialization</h3>
+<div class="highlight"><pre><span></span><code><span class="n">a</span><span class="p">=</span><span class="nb">zeros</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">a</span><span class="p">=</span><span class="nb">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">a</span><span class="p">=</span><span class="nb">ones</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">a</span><span class="p">=[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">];</span><span class="w"> </span><span class="c">%initial:end</span>
+<span class="n">a</span><span class="p">=[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">];</span><span class="w"> </span><span class="c">%initial:step:end</span>
+<span class="nb">disp</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</code></pre></div>
+
+<h3>[;] and [,] | Merge Arrays</h3>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">=[</span><span class="mi">3</span><span class="p">;</span><span class="mi">2</span><span class="p">;</span><span class="mi">6</span><span class="p">;</span><span class="mi">8</span><span class="p">]</span>
+
+<span class="n">x</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">     </span><span class="mi">3</span>
+<span class="w">     </span><span class="mi">2</span>
+<span class="w">     </span><span class="mi">6</span>
+<span class="w">     </span><span class="mi">8</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">=[</span><span class="mi">4</span><span class="p">;</span><span class="mi">1</span><span class="p">;</span><span class="mi">3</span><span class="p">;</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="n">y</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">     </span><span class="mi">4</span>
+<span class="w">     </span><span class="mi">1</span>
+<span class="w">     </span><span class="mi">3</span>
+<span class="w">     </span><span class="mi">5</span>
+
+<span class="c">% merge several arrays in a vertical way; use &#39;,&#39; to merge them in a horizontal way</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">=[</span><span class="n">y</span><span class="p">;</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
+
+<span class="n">y</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">     </span><span class="mi">4</span>
+<span class="w">     </span><span class="mi">1</span>
+<span class="w">     </span><span class="mi">3</span>
+<span class="w">     </span><span class="mi">5</span>
+<span class="w">    </span><span class="mi">19</span>
+</code></pre></div>
+
+<h3>( : , : ) | Array Indexing</h3>
+<div class="highlight"><pre><span></span><code><span class="c">% anyArrayNameYouLike(startRow:endRow,startColumn:endColumn)</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">,:)</span><span class="w">  </span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">     </span><span class="mi">4</span>
+<span class="w">     </span><span class="mi">1</span>
+<span class="w">     </span><span class="mi">3</span>
+<span class="w">     </span><span class="mi">5</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">=</span><span class="nb">ans</span>
+
+<span class="n">y</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">     </span><span class="mi">4</span>
+<span class="w">     </span><span class="mi">1</span>
+<span class="w">     </span><span class="mi">3</span>
+<span class="w">     </span><span class="mi">5</span>
+</code></pre></div>
+
+<h3>.^ .* ./ | Element-wise Calculations</h3>
+<div class="highlight"><pre><span></span><code><span class="c">% use &#39;.&#39; before calculation marks to perform element-wise calculations rather than matrix calculations</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">x</span><span class="o">.^</span><span class="n">y</span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">          </span><span class="mi">81</span>
+<span class="w">           </span><span class="mi">2</span>
+<span class="w">         </span><span class="mi">216</span>
+<span class="w">       </span><span class="mi">32768</span>
+</code></pre></div>
+
+<h3>' | Conjugate Transpose a Matrix</h3>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">x</span><span class="o">&#39;</span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">6</span><span class="w">     </span><span class="mi">8</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">w</span><span class="p">=</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="o">.*</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">w</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">    </span><span class="mi">72</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">x</span><span class="o">&#39;*</span><span class="n">y</span><span class="o">-</span><span class="n">w</span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">     </span><span class="mi">0</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">A</span><span class="p">=[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="n">A</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">5</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">B</span><span class="p">=[</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">]</span>
+
+<span class="n">B</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">6</span><span class="w">     </span><span class="mi">9</span>
+</code></pre></div>
+
+<p>If complex number is involved and you simply want to transpose a matrix without turning complex numbers into its conjugate complex number, use <code>.'</code> instead.</p>
+<h3>union(A,B) | Merge Multiple Arrays without Repetition</h3>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">union</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">5</span><span class="w">     </span><span class="mi">6</span><span class="w">     </span><span class="mi">9</span>
+</code></pre></div>
+
+<h2>Functions</h2>
+<h3>array2table | Convert homogeneous array to table</h3>
+<p><a href="https://ww2.mathworks.cn/help/matlab/ref/array2table.html">Docs</a></p>
+<h3>format | Set output display format</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">format</span><span class="w"> </span><span class="n">default</span>
+<span class="nb">format</span><span class="w"> </span><span class="n">rational</span>
+</code></pre></div>
+
+<h3>groupcounts() | Count group numbers satisfying certain conditions</h3>
+<p><a href="https://ww2.mathworks.cn/help/matlab/ref/double.groupcounts.html?s_tid=doc_ta">Docs</a></p>
+<h3>linspace() | Generate linearly spaced vector</h3>
+<div class="highlight"><pre><span></span><code><span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">linspace</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div>
+
+<p>generates n points. The spacing between the points is <span class="math">\((x2-x1)/(n-1)\)</span>.</p>
+<h3>find() | Find Index of Element in Array</h3>
+<p><a href="https://www.mathworks.com/matlabcentral/answers/365917-how-i-can-find-index-of-element-in-array">Reference</a></p>
+<div class="highlight"><pre><span></span><code><span class="n">a</span><span class="p">=[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="nb">find</span><span class="p">(</span><span class="n">a</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">2</span>
+</code></pre></div>
+
+<p>If you want to find index of string in a cell array, check out <a href="https://www.mathworks.com/matlabcentral/answers/84242-find-in-a-cell-array">this page</a></p>
+<h3>readtable() | Read Full Table from File</h3>
+<p><a href="https://ww2.mathworks.cn/help/matlab/ref/readtable.html?s_tid=doc_ta">Docs</a></p>
+<div class="highlight"><pre><span></span><code><span class="nb">table</span><span class="p">=</span><span class="nb">readtable</span><span class="p">(</span><span class="s">&#39;fileName&#39;</span><span class="p">,</span><span class="s">&#39;ReadVariableNames&#39;</span><span class="p">,</span><span class="nb">true</span><span class="p">);</span>
+</code></pre></div>
+
+<h3>log() | ln</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">log</span><span class="p">(</span><span class="n">e</span><span class="p">)=</span><span class="mi">1</span><span class="p">;</span>
+</code></pre></div>
+
+<h3>fopen() | Low Level Input Output File</h3>
+<p><a href="https://ww2.mathworks.cn/help/matlab/ref/fopen.html?s_tid=doc_ta">Docs</a></p>
+<p>Output: use function <code>fprintf</code>; use <code>feof</code> to determine whether reach the end of the file.</p>
+<p>Input: use function <code>fscanf</code>, <code>fgetl</code> or <code>fgets</code>.</p>
+<h3>readmatrix() | Read Matrix from File</h3>
+<p><a href="https://ww2.mathworks.cn/help/matlab/ref/readmatrix.html?s_tid=doc_ta">Docs</a></p>
+<div class="highlight"><pre><span></span><code><span class="nb">type</span><span class="w"> </span><span class="n">basic_matrix</span><span class="p">.</span><span class="n">txt</span>
+
+<span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span>
+<span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">3</span>
+<span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">10</span>
+<span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span>
+<span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">9</span>
+
+<span class="n">M</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readmatrix</span><span class="p">(</span><span class="s">&#39;basic_matrix.txt&#39;</span><span class="p">)</span>
+
+<span class="n">M</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">5</span>×<span class="mi">4</span>
+
+<span class="w">     </span><span class="mi">6</span><span class="w">     </span><span class="mi">8</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">1</span>
+<span class="w">     </span><span class="mi">5</span><span class="w">     </span><span class="mi">4</span><span class="w">     </span><span class="mi">7</span><span class="w">     </span><span class="mi">3</span>
+<span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">6</span><span class="w">     </span><span class="mi">7</span><span class="w">    </span><span class="mi">10</span>
+<span class="w">     </span><span class="mi">4</span><span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">8</span><span class="w">     </span><span class="mi">2</span>
+<span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">7</span><span class="w">     </span><span class="mi">5</span><span class="w">     </span><span class="mi">9</span>
+</code></pre></div>
+
+<h3>importdata() | Import Data from File</h3>
+<p><a href="https://ww2.mathworks.cn/help/matlab/ref/importdata.html?s_tid=doc_ta">Docs</a></p>
+<p>This function can intelligently load the file based on the extension name.</p>
+<div class="highlight"><pre><span></span><code><span class="n">A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">importdata</span><span class="p">(</span><span class="s">&#39;ngc6543a.jpg&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<h3>reverse() | Reverse String</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">reverse</span><span class="p">(</span><span class="s">&#39;123&#39;</span><span class="p">)=</span><span class="s">&#39;321&#39;</span>
+</code></pre></div>
+
+<h3>flip() | Flip Array</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">flip</span><span class="p">([</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="n">3</span><span class="w"> </span><span class="s">4])=[3</span><span class="w"> </span><span class="s">4</span><span class="p">;</span><span class="n">1</span><span class="w"> </span><span class="s">2]</span>
+</code></pre></div>
+
+<h3>fprintf() | Formatted Output</h3>
+<p><a href="https://ww2.mathworks.cn/help/matlab/ref/fprintf.html?s_tid=doc_ta">Docs</a>  </p>
+<p>Use <code>%%</code> to print <code>%</code></p>
+<p>This function can also output to file.</p>
+<h3>sort() | Sort</h3>
+<p><a href="https://ww2.mathworks.cn/help/matlab/ref/sort.html?searchHighlight=sort&amp;s_tid=srchtitle_sort_1">Docs</a></p>
+<p>By default, <code>sort</code> sorts the array from small to large.</p>
+<p>Use <code>sort(A,'descend')</code> to sort the array from large to small.</p>
+<h3>numel(A) | Get Row*Col of A</h3>
+<p><a href="https://ww2.mathworks.cn/help/matlab/ref/double.numel.html">Docs</a></p>
+<h3>subplot(n,m,p) | Plot Several Image Together</h3>
+<p><a href="https://ww2.mathworks.cn/help/matlab/ref/subplot.html?s_tid=doc_ta">Docs</a></p>
+<h3>reshape(A, sz1, sz2 ... szN) | Reshape Array</h3>
+<p><a href="https://ww2.mathworks.cn/help/matlab/ref/reshape.html?searchHighlight=reshape&amp;s_tid=srchtitle_reshape_1">Docs</a></p>
+<h3>fit(x,y,fitType) | Fit Curve or Surface to Data</h3>
+<p><a href="https://ww2.mathworks.cn/help/curvefit/fit.html?s_tid=doc_ta">Docs on fit()</a></p>
+<p><a href="https://ww2.mathworks.cn/help/curvefit/cfit.coeffvalues.html?searchHighlight=coefficientvalues&amp;s_tid=srchtitle_coefficientvalues_1">Docs on coeffvalues()</a></p>
+<div class="highlight"><pre><span></span><code><span class="n">x</span><span class="p">=[</span><span class="mi">1</span><span class="p">;</span><span class="mi">2</span><span class="p">;</span><span class="mi">3</span><span class="p">];</span>
+<span class="n">y</span><span class="p">=[</span><span class="mf">1.09</span><span class="p">;</span><span class="mf">2.2</span><span class="p">;</span><span class="mf">3.3</span><span class="p">];</span>
+<span class="n">sf</span><span class="p">=</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s">&#39;poly1&#39;</span><span class="p">);</span>
+<span class="nb">disp</span><span class="p">(</span><span class="n">sf</span><span class="p">);</span>
+<span class="nb">disp</span><span class="p">(</span><span class="n">coeffvalues</span><span class="p">(</span><span class="n">sf</span><span class="p">));</span>
+</code></pre></div>
+
+<p>Output:</p>
+<div class="highlight"><pre><span></span><code><span class="w">     </span><span class="n">Linear</span><span class="w"> </span><span class="s">model</span><span class="w"> </span><span class="s">Poly1:</span>
+<span class="w">     </span><span class="n">sf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">p1</span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p2</span>
+<span class="w">     </span><span class="n">Coefficients</span><span class="w"> </span><span class="p">(</span><span class="n">with</span><span class="w"> </span><span class="mi">95</span><span class="c">% confidence bounds):</span>
+<span class="w">       </span><span class="n">p1</span><span class="w"> </span><span class="p">=</span><span class="w">       </span><span class="mf">1.105</span><span class="w">  </span><span class="p">(</span><span class="mf">1.068</span><span class="p">,</span><span class="w"> </span><span class="mf">1.142</span><span class="p">)</span>
+<span class="w">       </span><span class="n">p2</span><span class="w"> </span><span class="p">=</span><span class="w">    </span><span class="o">-</span><span class="mf">0.01333</span><span class="w">  </span><span class="p">(</span><span class="o">-</span><span class="mf">0.09257</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0659</span><span class="p">)</span>
+<span class="w">    </span><span class="mf">1.1050</span><span class="w">   </span><span class="o">-</span><span class="mf">0.0133</span>
+</code></pre></div>
+
+<h3>isequal(A1,A2,A3,...,An) | Determine Array Equality</h3>
+<p>Simple to understand.</p>
+<p>To be noticed, <code>string</code> and <code>char</code> is also a type of array.</p>
+<h3>isa(variable,char) | Whether a Variable is a Certain Type</h3>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">=</span><span class="mi">1234</span>
+
+<span class="n">s</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">        </span><span class="mi">1234</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">isa</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="s">&#39;double&#39;</span><span class="p">)</span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">  </span><span class="nb">logical</span>
+
+<span class="w">   </span><span class="mi">1</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">isa</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="s">&#39;string&#39;</span><span class="p">)</span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">  </span><span class="nb">logical</span>
+
+<span class="w">   </span><span class="mi">0</span>
+</code></pre></div>
+
+<h3>class(variable) | Get Class/Type of a Variable</h3>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">=</span><span class="mi">1234</span>
+
+<span class="n">s</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">        </span><span class="mi">1234</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">class</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">    </span><span class="s">&#39;double&#39;</span>
+</code></pre></div>
+
+<h3>prod(array) | Product of an Array</h3>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">prod</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">    </span><span class="mi">24</span>
+</code></pre></div>
+
+<h3>primes(n) | Primes</h3>
+<div class="highlight"><pre><span></span><code><span class="n">p</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">primes</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span>
+<span class="c">%returns a row vector containing all the prime numbers less than or equal to n. The data type of p is the same as that of n.</span>
+</code></pre></div>
+
+<h3>strfind(str, substr) | Locate substr in str</h3>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;Find the starting indices of substrings in a character vector&#39;</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">strfind</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="s">&#39;in&#39;</span><span class="p">)</span>
+
+<span class="n">k</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">     </span><span class="mi">2</span><span class="w">    </span><span class="mi">15</span><span class="w">    </span><span class="mi">19</span><span class="w">    </span><span class="mi">36</span><span class="w">    </span><span class="mi">41</span>
+</code></pre></div>
+
+<h3>input(prompt, argument) | Input</h3>
+<div class="highlight"><pre><span></span><code><span class="n">someVariableName</span><span class="p">=</span><span class="nb">input</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+<span class="c">% where prompt is a string (can be empty) that pops up before user input</span>
+<span class="c">% If you want to input a string, use:</span>
+<span class="n">someStringVariableName</span><span class="p">=</span><span class="nb">input</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;s&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>disp(array) | Output</h3>
+<div class="highlight"><pre><span></span><code><span class="n">x</span><span class="p">=[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="nb">disp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>~ || &amp;&amp; | Logic Calculation</h3>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">~</span><span class="mi">1</span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">  </span><span class="nb">logical</span>
+
+<span class="w">   </span><span class="mi">0</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">  </span><span class="nb">logical</span>
+
+<span class="w">   </span><span class="mi">0</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">  </span><span class="nb">logical</span>
+
+<span class="w">   </span><span class="mi">1</span>
+</code></pre></div>
+
+<h3>mod(n, m) fix(n) | Take the Round and Mod</h3>
+<div class="highlight"><pre><span></span><code><span class="c">% mod</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">mod</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">     </span><span class="mi">1</span>
+
+<span class="c">% fix: towards 0</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">fix</span><span class="p">(</span><span class="mf">1.1</span><span class="p">)</span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">     </span><span class="mi">1</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">fix</span><span class="p">(</span><span class="o">-</span><span class="mf">1.1</span><span class="p">)</span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">    </span><span class="o">-</span><span class="mi">1</span>
+</code></pre></div>
+
+<h3>length(array) strlength(string) | The Length of an Array and a String</h3>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">=[</span><span class="mi">3</span><span class="p">;</span><span class="mi">2</span><span class="p">;</span><span class="mi">6</span><span class="p">;</span><span class="mi">8</span><span class="p">]</span>
+
+<span class="n">x</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">     </span><span class="mi">3</span>
+<span class="w">     </span><span class="mi">2</span>
+<span class="w">     </span><span class="mi">6</span>
+<span class="w">     </span><span class="mi">8</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">     </span><span class="mi">4</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">=</span><span class="s">&quot;This is a string&quot;</span>
+
+<span class="n">s</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">    </span><span class="s">&quot;This is a string&quot;</span>
+
+<span class="c">% Also, I find length() can do the job as well</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">strlength</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">    </span><span class="mi">16</span>
+
+<span class="c">% Use &#39;&#39; to wrap things that is not logically a string.</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">s</span><span class="p">=</span><span class="s">&#39;GCTA&#39;</span><span class="w"> </span><span class="c">% a DNA sequence</span>
+
+<span class="n">s</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">    </span><span class="s">&#39;GCTA&#39;</span>
+</code></pre></div>
+
+<h3>[min, max]=bounds(array) | Get Min and Max in an Array</h3>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">A</span>
+
+<span class="n">A</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">     </span><span class="mi">1</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">5</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">minA</span><span class="p">,</span><span class="n">maxA</span><span class="p">]=</span><span class="nb">bounds</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="n">minA</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">     </span><span class="mi">1</span>
+
+
+<span class="n">maxA</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">     </span><span class="mi">5</span>
+</code></pre></div>
+
+<h3>clc | Clear Screen</h3>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">clc</span>
+</code></pre></div>
+
+<h3>randi() | Get Random Int</h3>
+<p>Docs: <a href="https://ww2.mathworks.cn/help/matlab/ref/randi.html?searchHighlight=randi&amp;s_tid=srchtitle_randi_1">randi()</a></p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">randi</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">     </span><span class="mi">3</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="nb">randi</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">     </span><span class="mi">6</span><span class="w">     </span><span class="mi">2</span><span class="w">     </span><span class="mi">7</span><span class="w">     </span><span class="mi">3</span><span class="w">     </span><span class="mi">7</span>
+</code></pre></div>
+
+<h2>Plot Related</h2>
+<p>Docs: <a href="https://ww2.mathworks.cn/help/matlab/learn_matlab/plots.html">2-D and 3-D Plots</a></p>
+<div class="highlight"><pre><span></span><code><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="p">);</span>
+<span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">sin</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&quot;x&quot;</span><span class="p">)</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&quot;sin(x)&quot;</span><span class="p">)</span>
+<span class="nb">title</span><span class="p">(</span><span class="s">&quot;Plot of the Sine Function&quot;</span><span class="p">)</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s">&quot;r--&quot;</span><span class="p">)</span><span class="w"> </span><span class="c">% plot using red dashed line</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s">&quot;r:o&quot;</span><span class="p">)</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s">&quot;b:*&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Notice that the titles and labels that you defined for the first plot are no longer in the current figure window. By default, MATLAB clears the figure each time you call a plotting function, resetting the axes and other elements to prepare the new plot.</p>
+<p>To add plots to an existing figure, use <code>hold on</code>. Until you use <code>hold off</code> or close the window, all plots appear in the current figure window.</p>
+<div class="highlight"><pre><span></span><code><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="p">);</span>
+<span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">sin</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+<span class="nb">hold</span><span class="w"> </span><span class="n">on</span>
+
+<span class="n">y2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">cos</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y2</span><span class="p">,</span><span class="s">&quot;:&quot;</span><span class="p">)</span>
+<span class="nb">legend</span><span class="p">(</span><span class="s">&quot;sin&quot;</span><span class="p">,</span><span class="s">&quot;cos&quot;</span><span class="p">)</span>
+
+<span class="nb">hold</span><span class="w"> </span><span class="n">off</span>
+</code></pre></div>
+
+<h2>Scripts Related</h2>
+<p>Docs: <a href="https://ww2.mathworks.cn/help/matlab/learn_matlab/scripts.html">Programming and Scripts</a></p>
+<h3>struct | Similar to <code>struct</code> in <code>C</code></h3>
+<p><a href="https://ww2.mathworks.cn/help/matlab/ref/struct.html?s_tid=doc_ta">Docs</a></p>
+<div class="highlight"><pre><span></span><code><span class="n">s</span><span class="p">.</span><span class="n">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="n">s</span><span class="p">.</span><span class="n">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="s">&#39;A&#39;</span><span class="p">,</span><span class="s">&#39;B&#39;</span><span class="p">,</span><span class="s">&#39;C&#39;</span><span class="p">}</span>
+</code></pre></div>
+
+<p>or</p>
+<div class="highlight"><pre><span></span><code><span class="n">s</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">struct</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="s">&#39;Bob&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>Write Custom Functions</h3>
+<div class="highlight"><pre><span></span><code><span class="c">% y are outputs and x are input</span>
+<span class="k">function</span><span class="w"> </span>[y1,...,yN]<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">myfun</span><span class="p">(</span>x1,...,xM<span class="p">)</span>
+<span class="w">    </span><span class="c">% here scripts</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<h3>loop, if</h3>
+<div class="highlight"><pre><span></span><code><span class="n">N</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+<span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">3</span><span class="p">:</span><span class="n">N</span><span class="w">   </span><span class="c">% for loop</span>
+<span class="w">    </span><span class="n">f</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="nb">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="nb">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="k">end</span>
+<span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mf">0.3</span><span class="p">:</span><span class="mi">0</span>
+<span class="nb">disp</span><span class="p">(</span><span class="nb">i</span><span class="p">);</span>
+<span class="k">end</span>
+<span class="w">     </span><span class="mi">1</span>
+
+<span class="w">    </span><span class="mf">0.7000</span>
+
+<span class="w">    </span><span class="mf">0.4000</span>
+
+<span class="w">    </span><span class="mf">0.1000</span>
+
+<span class="c">% if elseif and else</span>
+<span class="n">num</span><span class="p">=</span><span class="nb">randi</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="k">if</span><span class="w"> </span><span class="n">num</span><span class="o">&lt;</span><span class="mi">34</span>
+<span class="w">  </span><span class="n">sz</span><span class="p">=</span><span class="s">&#39;low&#39;</span>
+<span class="k">elseif</span><span class="w"> </span><span class="n">num</span><span class="o">&lt;</span><span class="mi">67</span>
+<span class="w">  </span><span class="n">sz</span><span class="p">=</span><span class="s">&#39;medium&#39;</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="n">sz</span><span class="p">=</span><span class="s">&#39;high&#39;</span>
+<span class="k">end</span><span class="w"> </span><span class="c">% remember to add &#39;end&#39; at the end of if!!!!</span>
+
+<span class="n">n</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="n">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
+<span class="k">while</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="c">% while loop</span>
+<span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">f</span><span class="o">*</span><span class="n">n</span><span class="p">;</span>
+<span class="k">end</span>
+<span class="nb">disp</span><span class="p">([</span><span class="s">&#39;n! = &#39;</span><span class="w"> </span><span class="nb">num2str</span><span class="p">(</span><span class="n">f</span><span class="p">)])</span>
+</code></pre></div>
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>Social</h2>
+                        <ul>
+                                <li><a href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                                                type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                                <li><a href="https://github.com/zpatronus">Github (really? listing github in the social widget??)</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <!-- <address id="about" class="vcard body">
+                        Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes
+                        great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address> -->
+
+                <!-- <p>The theme is by <a rel="nofollow"
+                                href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing
+                                Magazine</a>, thanks!</p> -->
+                <p>Copyright by Zijun(Mark) Yang. Licensed under DOES NOT HAVE A LICENSE YET.</p>
+        </footer>
+        <!-- /#about -->
+        <!-- /#contentinfo -->
+
+        <!--  -->
+</body>
+
+</html>

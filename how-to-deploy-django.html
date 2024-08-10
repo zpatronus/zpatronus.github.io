@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>How to Deploy Django</title>
+        <link rel="stylesheet" href="https://blog.zijuny.dev/theme/css/main.css" />
+        <link href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                type="application/atom+xml" rel="alternate" title="Zijun(Mark) Yang's Blog Atom Feed" />
+        <meta name="description" content="Just follow the docs. That's it. However, I do find a few things wrong in the docs when I followed it. I rewrite those parts and add some..." />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://blog.zijuny.dev/">Zijun(Mark) Yang's Blog</a></h1>
+                <nav>
+                        <ul>
+                                <li><a href="/tags">Tags</a></li>
+
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/2-cs-hacks.html">2. CS & Hacks</a></li>
+                                        <li class="active" ><a
+                                                        href="https://blog.zijuny.dev/category/3-web-dev.html">3. Web Dev</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/4-experiences-reflections.html">4. Experiences & Reflections</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/6-misc.html">6. Misc</a></li>
+
+                                                <li><a href="/about-me">About Me</a></li>
+                        </ul>
+                </nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://blog.zijuny.dev/how-to-deploy-django.html" rel="bookmark"
+           title="Permalink to How to Deploy Django">How to Deploy Django</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2022-04-27T12:20:43+08:00">
+                Date: Wed 27 April 2022
+        </abbr>
+        <br />
+        <abbr class="modified" title="2022-04-27T12:20:43+08:00">
+                Updated: Wed 27 April 2022
+        </abbr>
+
+        <!--         <address class="vcard author">
+                By                         <a class="url fn" href="https://blog.zijuny.dev/author/zijunmark-yang.html">Zijun(Mark) Yang</a>
+        </address>
+ -->
+        <p>In <a href="https://blog.zijuny.dev/category/3-web-dev.html">3. Web Dev</a>.</p>
+<p>Tags: <a href="https://blog.zijuny.dev/tag/web-dev.html">Web Dev</a>
+<a href="https://blog.zijuny.dev/tag/backend.html">Backend</a>
+<a href="https://blog.zijuny.dev/tag/django.html">Django</a>
+<a href="https://blog.zijuny.dev/tag/tutorial.html">Tutorial</a>
+<a href="https://blog.zijuny.dev/tag/nginx.html">Nginx</a>
+</p>        
+</footer><!-- /.post-info -->      <p>Just follow the <a href="https://uwsgi-docs.readthedocs.io/en/latest/tutorials/Django_and_nginx.html">docs</a>. That's it. However, I do find a few things wrong in the docs when I followed it. I rewrite those parts and add some comments.</p>
+<h2>Some notes about this tutorial</h2>
+<p>Note</p>
+<p>This is a tutorial. It is not intended to provide a reference guide, never mind an exhaustive reference, to the subject of deployment.</p>
+<p>nginx and uWSGI are good choices for Django deployment, but they are not the only ones, or the 'official' ones. There are excellent alternatives to both, and you are encouraged to investigate them.</p>
+<p>The way we deploy Django here is a good way, but it is not the only way; for some purposes it is probably not even the best way.</p>
+<p>It is however a reliable and easy way, and the material covered here will introduce you to concepts and procedures you will need to be familiar with whatever software you use for deploying Django. By providing you with a working setup, and rehearsing the steps you must take to get there, it will offer you a basis for exploring other ways to achieve this.</p>
+<p>Note</p>
+<p>This tutorial makes some assumptions about the system you are using.</p>
+<p>It is assumed that you are using a Unix-like system, and that it features an aptitude-like package manager. However if you need to ask questions like "What's the equivalent of aptitude on Mac OS X?", you'll be able to find that kind of help fairly easily.</p>
+<p>While this tutorial assumes Django 1.4 or later, which will automatically create a wsgi module in your new project, the instructions will work with earlier versions. You will though need to obtain that Django wsgi module yourself, and you may find that the Django project directory structure is slightly different.</p>
+<h2>Concept</h2>
+<p>A web server faces the outside world. It can serve files (HTML, images, CSS, etc) directly from the file system. However, it can't talk directly to Django applications; it needs something that will run the application, feed it requests from web clients (such as browsers) and return responses.</p>
+<p>A Web Server Gateway Interface - WSGI - does this job. WSGI is a Python standard.</p>
+<p>uWSGI is a WSGI implementation. In this tutorial we will set up uWSGI so that it creates a Unix socket, and serves responses to the web server via the uwsgi protocol. At the end, our complete stack of components will look like this:</p>
+<div class="highlight"><pre><span></span><code>the web client &lt;-&gt; the web server &lt;-&gt; the socket &lt;-&gt; uwsgi &lt;-&gt; Django
+</code></pre></div>
+
+<h2>Before you start setting up uWSGI</h2>
+<h3>virtual env</h3>
+<p>Make sure you are in a virtualenv for the software we need to install (we will describe how to install a system-wide uwsgi later):</p>
+<div class="highlight"><pre><span></span><code>virtualenv<span class="w"> </span>uwsgi-tutorial
+<span class="nb">cd</span><span class="w"> </span>uwsgi-tutorial
+<span class="nb">source</span><span class="w"> </span>bin/activate
+</code></pre></div>
+
+<h3>Django</h3>
+<p>Install Django into your virtualenv, create a new project, and <code>cd</code> into the project:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>Django
+django-admin.py<span class="w"> </span>startproject<span class="w"> </span>mysite
+<span class="nb">cd</span><span class="w"> </span>mysite
+</code></pre></div>
+
+<h3>About the domain and port</h3>
+<p>In this tutorial we will call your domain <code>example.com</code>. Substitute your own FQDN or IP address.</p>
+<p>Throughout, we'll be using port 8000 for the web server to publish on, just like the Django runserver does by default. You can use whatever port you want of course, but I have chosen this one so it doesn't conflict with anything a web server might be doing already.</p>
+<h2>Basic uWSGI installation and configuration</h2>
+<h3>Install uWSGI into your virtualenv</h3>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>uwsgi
+</code></pre></div>
+
+<p>Of course there are other ways to install uWSGI, but this one is as good as any. Remember that you will need to have Python development packages installed. In the case of Debian, or Debian-derived systems such as Ubuntu, what you need to have installed is <code>pythonX.Y-dev</code>, where X.Y is your version of Python.</p>
+<h3>Basic test</h3>
+<p>Create a file called <code>test.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># test.py</span>
+<span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+    <span class="n">start_response</span><span class="p">(</span><span class="s1">&#39;200 OK&#39;</span><span class="p">,</span> <span class="p">[(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span><span class="s1">&#39;text/html&#39;</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="p">[</span><span class="sa">b</span><span class="s2">&quot;Hello World&quot;</span><span class="p">]</span> <span class="c1"># python3</span>
+    <span class="c1">#return [&quot;Hello World&quot;] # python2</span>
+</code></pre></div>
+
+<p>Note</p>
+<p>Take into account that Python 3 requires <code>bytes()</code>.</p>
+<p>Run uWSGI:</p>
+<div class="highlight"><pre><span></span><code>uwsgi<span class="w"> </span>--http<span class="w"> </span>:8000<span class="w"> </span>--wsgi-file<span class="w"> </span>test.py
+</code></pre></div>
+
+<p>The options mean:</p>
+<ul>
+<li><code>http :8000</code>: use protocol http, port 8000</li>
+<li><code>wsgi-file test.py</code>: load the specified file, test.py</li>
+</ul>
+<p>This should serve a 'hello world' message directly to the browser on port 8000. Visit: <code>http://example.com:8000</code> to check. If so, it means the following stack of components works:</p>
+<div class="highlight"><pre><span></span><code>the web client &lt;-&gt; uWSGI &lt;-&gt; Python
+</code></pre></div>
+
+<h3>Test your Django project</h3>
+<p>Now we want uWSGI to do the same thing, but to run a Django site instead of the <code>test.py</code> module.</p>
+<p>If you haven't already done so, make sure that your <code>mysite</code> project actually works:</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>manage.py<span class="w"> </span>runserver<span class="w"> </span><span class="m">0</span>.0.0.0:8000
+</code></pre></div>
+
+<p>And if that works, run it using uWSGI:</p>
+<div class="highlight"><pre><span></span><code>uwsgi<span class="w"> </span>--http<span class="w"> </span>:8000<span class="w"> </span>--module<span class="w"> </span>mysite.wsgi
+</code></pre></div>
+
+<ul>
+<li><code>module mysite.wsgi</code>: load the specificied wsgi module</li>
+</ul>
+<p>Point your browser at the server; if the site appears, it means uWSGI is able to serve your Django application from your virtualenv, and this stack operates correctly:</p>
+<div class="highlight"><pre><span></span><code>the web client &lt;-&gt; uWSGI &lt;-&gt; Django
+</code></pre></div>
+
+<p>Now normally we won't have the browser speaking directly to uWSGI. That's a job for the webserver, which will act as a go-between.</p>
+<h2>Basic nginx</h2>
+<h3>Install nginx</h3>
+<p>To simple, I'll skip this part.</p>
+<p>Use <code>sudo /etc/init.d/nginx start</code> to start nginx and use <code>sudo nginx -s reload</code> to reload configurations.</p>
+<h3>Configure nginx for your site</h3>
+<p>You will need the <code>uwsgi_params</code> file, which is available in the <code>nginx</code> directory of the uWSGI distribution, or from <a href="https://github.com/nginx/nginx/blob/master/conf/uwsgi_params">https://github.com/nginx/nginx/blob/master/conf/uwsgi_params</a></p>
+<p>Copy it into your project directory. In a moment we will tell nginx to refer to it.</p>
+<p>Now create a file called mysite_nginx.conf in the /etc/nginx/sites-available/ directory, and put this in it:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># mysite_nginx.conf</span>
+
+<span class="c1"># the upstream component nginx needs to connect to</span>
+<span class="n">upstream</span> <span class="n">django</span> <span class="p">{</span>
+    <span class="c1"># server unix:///path/to/your/mysite/mysite.sock; # for a file socket</span>
+    <span class="n">server</span> <span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">8001</span><span class="p">;</span> <span class="c1"># for a web port socket (we&#39;ll use this first)</span>
+<span class="p">}</span>
+
+<span class="c1"># configuration of the server</span>
+<span class="n">server</span> <span class="p">{</span>
+    <span class="c1"># the port your site will be served on</span>
+    <span class="n">listen</span>      <span class="mi">8000</span><span class="p">;</span>
+    <span class="c1"># the domain name it will serve for</span>
+    <span class="n">server_name</span> <span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="p">;</span> <span class="c1"># substitute your machine&#39;s IP address or FQDN</span>
+    <span class="n">charset</span>     <span class="n">utf</span><span class="o">-</span><span class="mi">8</span><span class="p">;</span>
+
+    <span class="c1"># max upload size</span>
+    <span class="n">client_max_body_size</span> <span class="mi">75</span><span class="n">M</span><span class="p">;</span>   <span class="c1"># adjust to taste</span>
+
+    <span class="c1"># Django media</span>
+    <span class="n">location</span> <span class="o">/</span><span class="n">media</span>  <span class="p">{</span>
+        <span class="n">alias</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">your</span><span class="o">/</span><span class="n">mysite</span><span class="o">/</span><span class="n">media</span><span class="p">;</span>  <span class="c1"># your Django project&#39;s media files - amend as required</span>
+    <span class="p">}</span>
+
+    <span class="n">location</span> <span class="o">/</span><span class="n">static</span> <span class="p">{</span>
+        <span class="n">alias</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">your</span><span class="o">/</span><span class="n">mysite</span><span class="o">/</span><span class="n">static</span><span class="p">;</span> <span class="c1"># your Django project&#39;s static files - amend as required</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Finally, send all non-media requests to the Django server.</span>
+    <span class="n">location</span> <span class="o">/</span> <span class="p">{</span>
+        <span class="n">uwsgi_pass</span>  <span class="n">django</span><span class="p">;</span>
+        <span class="n">include</span>     <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">your</span><span class="o">/</span><span class="n">mysite</span><span class="o">/</span><span class="n">uwsgi_params</span><span class="p">;</span> <span class="c1"># the uwsgi_params file you installed</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>This conf file tells nginx to serve up media and static files from the filesystem, as well as handle requests that require Django's intervention. For a large deployment it is considered good practice to let one server handle static/media files, and another handle Django applications, but for now, this will do just fine.</p>
+<p>Symlink to this file from /etc/nginx/sites-enabled so nginx can see it:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>ln<span class="w"> </span>-s<span class="w"> </span>/etc/nginx/sites-available/mysite_nginx.conf<span class="w"> </span>/etc/nginx/sites-enabled/
+</code></pre></div>
+
+<h3>Deploying static files</h3>
+<p>Before running nginx, you have to collect all Django static files in the static folder. First of all you have to edit mysite/settings.py adding:</p>
+<div class="highlight"><pre><span></span><code><span class="n">STATIC_ROOT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">,</span> <span class="s2">&quot;static/&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>and then run</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>manage.py<span class="w"> </span>collectstatic
+</code></pre></div>
+
+<h3>Basic nginx test</h3>
+<p>Restart nginx:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>/etc/init.d/nginx<span class="w"> </span>restart
+</code></pre></div>
+
+<p>To check that media files are being served correctly, add an image called <code>media.png</code> to the <code>/path/to/your/project/project/media</code> directory, then visit <a href="http://example.com:8000/media/media.png">http://example.com:8000/media/media.png</a> - if this works, you'll know at least that nginx is serving files correctly.</p>
+<p>It is worth not just restarting nginx, but actually stopping and then starting it again, which will inform you if there is a problem, and where it is.</p>
+<h2>nginx and uWSGI and test.py</h2>
+<p>Let's get nginx to speak to the "hello world" <code>test.py</code> application.</p>
+<div class="highlight"><pre><span></span><code>uwsgi<span class="w"> </span>--socket<span class="w"> </span>:8001<span class="w"> </span>--wsgi-file<span class="w"> </span>test.py
+</code></pre></div>
+
+<p>This is nearly the same as before, except this time one of the options is different:</p>
+<ul>
+<li><code>socket :8001</code>: use protocol uwsgi, port 8001</li>
+</ul>
+<p>nginx meanwhile has been configured to communicate with uWSGI on that port, and with the outside world on port 8000. Visit:</p>
+<p><a href="http://example.com:8000/">http://example.com:8000/</a></p>
+<p>to check. And this is our stack:</p>
+<div class="highlight"><pre><span></span><code>the web client &lt;-&gt; the web server &lt;-&gt; the socket &lt;-&gt; uWSGI &lt;-&gt; Python
+</code></pre></div>
+
+<p>Meanwhile, you can try to have a look at the uwsgi output at <a href="http://example.com:8001">http://example.com:8001</a> - but quite probably, it won't work because your browser speaks http, not uWSGI, though you should see output from uWSGI in your terminal.</p>
+<h2>Using Unix sockets instead of ports</h2>
+<p>So far we have used a TCP port socket, because it's simpler, but in fact it's better to use Unix sockets than ports - there's less overhead.</p>
+<p>Edit <code>mysite_nginx.conf</code>, changing it to match:</p>
+<div class="highlight"><pre><span></span><code><span class="n">server</span> <span class="n">unix</span><span class="p">:</span><span class="o">///</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">your</span><span class="o">/</span><span class="n">mysite</span><span class="o">/</span><span class="n">mysite</span><span class="o">.</span><span class="n">sock</span><span class="p">;</span> <span class="c1"># for a file socket</span>
+<span class="c1"># server 127.0.0.1:8001; # for a web port socket (we&#39;ll use this first)</span>
+</code></pre></div>
+
+<p>and restart nginx.</p>
+<p>Run uWSGI again:</p>
+<div class="highlight"><pre><span></span><code>uwsgi<span class="w"> </span>--socket<span class="w"> </span>mysite.sock<span class="w"> </span>--wsgi-file<span class="w"> </span>test.py
+</code></pre></div>
+
+<p>This time the <code>socket</code> option tells uWSGI which file to use.</p>
+<p>Try <a href="http://example.com:8000/">http://example.com:8000/</a> in the browser.</p>
+<h3>If that doesn't work</h3>
+<p>Check your nginx error log(/var/log/nginx/error.log). If you see something like:</p>
+<div class="highlight"><pre><span></span><code>connect() to unix:///path/to/your/mysite/mysite.sock failed (13: Permission
+denied)
+</code></pre></div>
+
+<p>then probably you need to manage the permissions on the socket so that nginx is allowed to use it.</p>
+<p>Try:</p>
+<div class="highlight"><pre><span></span><code>uwsgi<span class="w"> </span>--socket<span class="w"> </span>mysite.sock<span class="w"> </span>--wsgi-file<span class="w"> </span>test.py<span class="w"> </span>--chmod-socket<span class="o">=</span><span class="m">666</span><span class="w"> </span><span class="c1"># (very permissive)</span>
+</code></pre></div>
+
+<p>↑This works for me and ↓this does not</p>
+<p>or:</p>
+<div class="highlight"><pre><span></span><code>uwsgi<span class="w"> </span>--socket<span class="w"> </span>mysite.sock<span class="w"> </span>--wsgi-file<span class="w"> </span>test.py<span class="w"> </span>--chmod-socket<span class="o">=</span><span class="m">664</span><span class="w"> </span><span class="c1"># (more sensible)</span>
+</code></pre></div>
+
+<p>You may also have to add your user to nginx's group (which is probably www-data), or vice-versa, so that nginx can read and write to your socket properly.</p>
+<p>It's worth keeping the output of the nginx log running in a terminal window so you can easily refer to it while troubleshooting.</p>
+<h2>Running the Django application with uwsgi and nginx</h2>
+<p>Let's run our Django application:</p>
+<div class="highlight"><pre><span></span><code>uwsgi<span class="w"> </span>--socket<span class="w"> </span>mysite.sock<span class="w"> </span>--module<span class="w"> </span>mysite.wsgi<span class="w"> </span>--chmod-socket<span class="o">=</span><span class="m">666</span>
+</code></pre></div>
+
+<p>Note that in the original docs, this command is</p>
+<div class="highlight"><pre><span></span><code>uwsgi<span class="w"> </span>--socket<span class="w"> </span>mysite.sock<span class="w"> </span>--module<span class="w"> </span>mysite.wsgi<span class="w"> </span>--chmod-socket<span class="o">=</span><span class="m">664</span>
+</code></pre></div>
+
+<p>but it does not work for me.</p>
+<p>Now uWSGI and nginx should be serving up not just a "Hello World" module, but your Django project.</p>
+<h2>Now uWSGI and nginx should be serving up not just a "Hello World" module, but your Django project</h2>
+<p>We can put the same options that we used with uWSGI into a file, and then ask uWSGI to run with that file. It makes it easier to manage configurations.</p>
+<p>Create a file called <code>mysite_uwsgi.ini</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># mysite_uwsgi.ini file</span>
+<span class="p">[</span><span class="n">uwsgi</span><span class="p">]</span>
+
+<span class="c1"># Django-related settings</span>
+<span class="c1"># the base directory (full path)</span>
+<span class="n">chdir</span>           <span class="o">=</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">your</span><span class="o">/</span><span class="n">project</span>
+<span class="c1"># Django&#39;s wsgi file</span>
+<span class="n">module</span>          <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">wsgi</span>
+<span class="c1"># the virtualenv (full path)</span>
+<span class="n">home</span>            <span class="o">=</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">virtualenv</span>
+
+<span class="c1"># process-related settings</span>
+<span class="c1"># master</span>
+<span class="n">master</span>          <span class="o">=</span> <span class="n">true</span>
+<span class="c1"># maximum number of worker processes</span>
+<span class="n">processes</span>       <span class="o">=</span> <span class="mi">10</span>
+<span class="c1"># the socket (use the full path to be safe</span>
+<span class="n">socket</span>          <span class="o">=</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">your</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">mysite</span><span class="o">.</span><span class="n">sock</span>
+<span class="c1"># ... with appropriate permissions - may be needed</span>
+<span class="c1"># chmod-socket    = 664</span>
+<span class="c1"># clear environment on exit</span>
+<span class="n">vacuum</span>          <span class="o">=</span> <span class="n">true</span>
+</code></pre></div>
+
+<p>And run uwsgi using this file:</p>
+<div class="highlight"><pre><span></span><code>uwsgi<span class="w"> </span>--ini<span class="w"> </span>mysite_uwsgi.ini<span class="w"> </span><span class="c1"># the --ini option is used to specify a file</span>
+</code></pre></div>
+
+<p>Once again, test that the Django site works as expected.</p>
+<h2>Install uWSGI system-wide</h2>
+<p>So far, uWSGI is only installed in our virtualenv; we'll need it installed system-wide for deployment purposes.</p>
+<p>Deactivate your virtualenv using command: <code>deactivate</code></p>
+<p>and install uWSGI system-wide:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>uwsgi
+
+<span class="c1"># Or install LTS (long term support).</span>
+pip<span class="w"> </span>install<span class="w"> </span>https://projects.unbit.it/downloads/uwsgi-lts.tar.gz
+</code></pre></div>
+
+<p>The uWSGI wiki describes several installation procedures. Before installing uWSGI system-wide, it's worth considering which version to choose and the most appropriate way of installing it.</p>
+<p>Check again that you can still run uWSGI just like you did before:</p>
+<div class="highlight"><pre><span></span><code>uwsgi<span class="w"> </span>--ini<span class="w"> </span>mysite_uwsgi.ini<span class="w"> </span><span class="c1"># the --ini option is used to specify a file</span>
+</code></pre></div>
+
+<h2>Emperor mode</h2>
+<p>uWSGI can run in 'emperor' mode. In this mode it keeps an eye on a directory of uWSGI config files, and will spawn instances ('vassals') for each one it finds.</p>
+<p>Whenever a config file is amended, the emperor will automatically restart the vassal.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># create a directory for the vassals</span>
+sudo<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/uwsgi/vassals
+<span class="c1"># symlink from the default config directory to your config file</span>
+sudo<span class="w"> </span>ln<span class="w"> </span>-s<span class="w"> </span>/path/to/your/mysite/mysite_uwsgi.ini<span class="w"> </span>/etc/uwsgi/vassals/
+<span class="c1"># run the emperor</span>
+uwsgi<span class="w"> </span>--emperor<span class="w"> </span>/etc/uwsgi/vassals<span class="w"> </span>--uid<span class="w"> </span>www-data<span class="w"> </span>--gid<span class="w"> </span>www-data
+</code></pre></div>
+
+<p>You may need to run uWSGI with sudo (I need not)</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>uwsgi<span class="w"> </span>--emperor<span class="w"> </span>/etc/uwsgi/vassals<span class="w"> </span>--uid<span class="w"> </span>www-data<span class="w"> </span>--gid<span class="w"> </span>www-data
+</code></pre></div>
+
+<p>The options mean:</p>
+<ul>
+<li><code>emperor</code>: where to look for vassals (config files)</li>
+<li><code>uid</code>: the user id of the process once it's started</li>
+<li><code>gid</code>: the group id of the process once it's started</li>
+</ul>
+<p>Check the site; it should be running.</p>
+<h2>Check the site; it should be running</h2>
+<p>The last step is to make it all happen automatically at system startup time.</p>
+<p>For many systems, the easiest (if not the best) way to do this is to use the <code>rc.local</code> file.</p>
+<p>Edit <code>/etc/rc.local</code> and add:</p>
+<div class="highlight"><pre><span></span><code>/usr/local/bin/uwsgi<span class="w"> </span>--emperor<span class="w"> </span>/etc/uwsgi/vassals<span class="w"> </span>--uid<span class="w"> </span>www-data<span class="w"> </span>--gid<span class="w"> </span>www-data<span class="w"> </span>--daemonize<span class="w"> </span>/var/log/uwsgi-emperor.log
+</code></pre></div>
+
+<p>before the line <code>exit 0</code>. <strong>(Important)</strong></p>
+<p>And that should be it!</p>
+<h2>Further configuration</h2>
+<p>It is important to understand that this has been a tutorial, to get you started. You do need to read the nginx and uWSGI documentation, and study the options available before deployment in a production environment.</p>
+<p>Both nginx and uWSGI benefit from friendly communities, who are able to offer invaluable advice about configuration and usage.</p>
+<h3>nginx</h3>
+<p>It is important to understand that this has been a tutorial, to get you started. You do need to read the nginx and uWSGI documentation, and study the options available before deployment in a production environment.</p>
+<p>Both nginx and uWSGI benefit from friendly communities, who are able to offer invaluable advice about configuration and usage.</p>
+<h3>uWSGI</h3>
+<p>It is important to understand that this has been a tutorial, to get you started. You do need to read the nginx and uWSGI documentation, and study the options available before deployment in a production environment.</p>
+<p>Both nginx and uWSGI benefit from friendly communities, who are able to offer invaluable advice about configuration and usage.</p>
+<div class="highlight"><pre><span></span><code><span class="n">env</span> <span class="o">=</span> <span class="n">DJANGO_SETTINGS_MODULE</span><span class="o">=</span><span class="n">mysite</span><span class="o">.</span><span class="n">settings</span> <span class="c1"># set an environment variable</span>
+<span class="n">safe</span><span class="o">-</span><span class="n">pidfile</span> <span class="o">=</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">project</span><span class="o">-</span><span class="n">master</span><span class="o">.</span><span class="n">pid</span> <span class="c1"># create a pidfile</span>
+<span class="n">harakiri</span> <span class="o">=</span> <span class="mi">20</span> <span class="c1"># respawn processes taking more than 20 seconds</span>
+<span class="n">limit</span><span class="o">-</span><span class="k">as</span> <span class="o">=</span> <span class="mi">128</span> <span class="c1"># limit the project to 128 MB</span>
+<span class="nb">max</span><span class="o">-</span><span class="n">requests</span> <span class="o">=</span> <span class="mi">5000</span> <span class="c1"># respawn processes after serving 5000 requests</span>
+<span class="n">daemonize</span> <span class="o">=</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">uwsgi</span><span class="o">/</span><span class="n">yourproject</span><span class="o">.</span><span class="n">log</span> <span class="c1"># background the process &amp; log</span>
+</code></pre></div>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>Social</h2>
+                        <ul>
+                                <li><a href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                                                type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                                <li><a href="https://github.com/zpatronus">Github (really? listing github in the social widget??)</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <!-- <address id="about" class="vcard body">
+                        Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes
+                        great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address> -->
+
+                <!-- <p>The theme is by <a rel="nofollow"
+                                href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing
+                                Magazine</a>, thanks!</p> -->
+                <p>Copyright by Zijun(Mark) Yang. Licensed under DOES NOT HAVE A LICENSE YET.</p>
+        </footer>
+        <!-- /#about -->
+        <!-- /#contentinfo -->
+
+        <!--  -->
+</body>
+
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>Tank War Game with CLI</title>
+        <link rel="stylesheet" href="https://blog.zijuny.dev/theme/css/main.css" />
+        <link href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                type="application/atom+xml" rel="alternate" title="Zijun(Mark) Yang's Blog Atom Feed" />
+        <meta name="description" content="Github Repo The repo is temporarily set to private to prevent potential violation of the Honor Code. A simple tank war game with CLI that supports..." />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://blog.zijuny.dev/">Zijun(Mark) Yang's Blog</a></h1>
+                <nav>
+                        <ul>
+                                <li><a href="/tags">Tags</a></li>
+
+                                        <li class="active" ><a
+                                                        href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/2-cs-hacks.html">2. CS & Hacks</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/3-web-dev.html">3. Web Dev</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/4-experiences-reflections.html">4. Experiences & Reflections</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/6-misc.html">6. Misc</a></li>
+
+                                                <li><a href="/about-me">About Me</a></li>
+                        </ul>
+                </nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://blog.zijuny.dev/tank-war-game-with-cli.html" rel="bookmark"
+           title="Permalink to Tank War Game with CLI">Tank War Game with CLI</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2022-08-03T15:43:09+08:00">
+                Date: Wed 03 August 2022
+        </abbr>
+        <br />
+        <abbr class="modified" title="2022-08-03T15:43:09+08:00">
+                Updated: Wed 03 August 2022
+        </abbr>
+
+        <!--         <address class="vcard author">
+                By                         <a class="url fn" href="https://blog.zijuny.dev/author/zijunmark-yang.html">Zijun(Mark) Yang</a>
+        </address>
+ -->
+        <p>In <a href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a>.</p>
+<p>Tags: <a href="https://blog.zijuny.dev/tag/project.html">Project</a>
+<a href="https://blog.zijuny.dev/tag/fun-stuff.html">Fun Stuff</a>
+<a href="https://blog.zijuny.dev/tag/c-c.html">C &amp; C++</a>
+</p>        
+</footer><!-- /.post-info -->      <p><a href="https://github.com/zijunhz/tank-war-game">Github Repo</a></p>
+<p>The repo is temporarily set to private to prevent potential violation of the Honor Code.</p>
+<p>A simple tank war game with CLI that supports PVP, PVE and DEMO.</p>
+<h2>Compile the program</h2>
+<p>To compile it, you need to install:</p>
+<ul>
+<li><code>g++</code>, a cpp compiler. Remember to add it to PATH if you are using Windows.</li>
+<li><code>CMake</code>, a build process manager.</li>
+<li><code>GNU Make</code>, a tool which controls the generation of executables and other non-source files of a program from the program's source files.</li>
+</ul>
+<p>or you can use IDEs such as <code>CLion</code>.</p>
+<h3>The recommended way</h3>
+<p>The recommended way of compiling it (also the way I compile it) is with the help of a plug-in in <code>VSCode</code> called <code>CMake Tools</code>.</p>
+<p>If you open the project folder in <code>VSCode</code> and you have successfully install <code>g++</code>, <code>CMake</code> and <code>CMake Tools</code>, you can find a <code>build</code> button in the bottom bar. By clicking it, the executable will be compiled under <code>./build/tankwar.exe</code>.</p>
+<h3>Other ways</h3>
+<p>You may refer to <a href="https://cmake.org/cmake/help/latest/manual/cmake.1.html">docs for CMake command line</a> to checkout how to compile it with command line (it should be <code>cmake -b build</code>, <code>cd build</code> and <code>make</code>, I believe).</p>
+<p>Or, you may refer to <a href="https://www.jetbrains.com/help/clion/quick-cmake-tutorial.html">docs for CMake in CLion</a> to checkout how to compile it in <code>CLion</code>.</p>
+<h2>Run the program</h2>
+<p>This is a command line game so you can run it in terminal.</p>
+<p>I'll take how it can be run in <code>Linux Mint</code> as an example.</p>
+<p>After generate the executable <code>tankwar</code>, type <code>./tankwar</code> in the terminal to enter the default mode which is PVP and has the default life of 5 and default log file <code>tankwar.log</code>.</p>
+<p>You can type <code>./tankwar -h</code> to check the help page of the game and learn how to have access to other mode and how to change the life and log file.</p>
+<p>The game-play instruction is built into the game itself and you can see it during the game.</p>
+<p>The game's interface has colored texts so you need to run it in a supported terminal. In Windows, for example, you need to run it in <code>Windows Terminal</code> or the terminal in <code>VSCode</code>.</p>
+<h2>Layer of the program</h2>
+<p>The program consists of 5 layers listed from low level to high level:</p>
+<ul>
+<li><code>Object</code> layer. It includes every player, bullet and the whole game. It is responsible for some basic tasks like moving a tank or a bullet or judge collision. This part of the program is primarily in <code>gameProcess.cpp</code>.</li>
+<li><code>Game processing</code> layer. It includes the logic of the game. By utilizing the <code>object</code> layer, it is responsible for how the game goes on, such as processing one turn and printing the result. This part of the program is primarily in <code>gameProcess.cpp</code>.</li>
+<li><code>Input</code> layer. The <code>game processing</code> layer needs input actions to process one turn, and to the <code>game processing</code> layer, human input and AI input are of no difference. The <code>input</code> layer gathers input actions from human and/or AI based on game mode and passes the information to the <code>game processing</code> layer. This part of the program is primarily in <code>gameControl.cpp</code>.</li>
+<li><code>AI</code> layer. This layer takes in a game status and returns the best action for a particular player. This part of the program is primarily in <code>tankai.cpp</code>.</li>
+<li><code>Global control</code> layer. This layer handles the command line arguments and organizes the whole program. This part of the program is primarily in <code>gameControl.cpp</code> and <code>tankwar.cpp</code>.</li>
+</ul>
+<h2>Objects</h2>
+<p>Three objects are defined in the game's program.</p>
+<h3><code>Bullet</code></h3>
+<p>It contains all the information of one bullet, including its coordinates and direction.</p>
+<p>The method <code>init</code> is used to initialize a bullet.</p>
+<p>You can find its declaration in <code>gameProcess.h</code>.</p>
+<h3><code>Player</code></h3>
+<p>It contains all the information of one player, including its coordinates, direction and life.</p>
+<p>The method:</p>
+<p><code>turn</code> is used to turn the player in place;</p>
+<p><code>move</code> is used to move the player straight forward;</p>
+<p><code>init</code> is used to initialize the playher.</p>
+<p>You can find its declaration in <code>gameProcess.h</code>.</p>
+<h3><code>Game</code></h3>
+<p>It contains all the information of a game status, including two players and all the bullets.</p>
+<p>The number of methods of this class is too large, but you can check out comments in <code>gameProcess.h</code> to see what each method do.</p>
+<p>You can find the declaration of <code>Game</code> in <code>gameProcess.h</code>.</p>
+<h2>I/O format</h2>
+<p>The I/O format of this tank war game has three features to improve user experience.</p>
+<p><img alt="Screen shot of the game" src="https://s1.ax1x.com/2022/08/06/vnL8YT.png"></p>
+<ol>
+<li>The map is colored. Players are painted with red and cyan and the boundary is painted yellow. This greatly reduces the difficulty of recognizing the location of the tanks and the boundary.</li>
+<li>The directions of the bullets and tanks are presented by arrows. This is also a great improvement in user experience because now the directions are clearly shown.</li>
+<li>All kinds of inputs in the game (except command line argument) are considered, i.e. if the input is not valid, the program won't crash. Instead, it will provide you with a notification and let you input again. I am fully aware the pain when you are about to win but crash the game just because you accidentally type <code>-</code> instead of <code>0</code>.</li>
+</ol>
+<h2>AI</h2>
+<p>The strategy of the AI is quite conservative for it assume its opponent is cleaver enough.</p>
+<p>Every turn, AI can take one action and so does its opponent. The AI will take the action that the minimal <code>scores</code> when its opponent takes one action is the highest.</p>
+<p><code>score</code> is measured by a quite complex algorithm involving searching tree. It evaluates whether an action will lead to the end of the game, cause damage and result in a either good or bad situation.</p>
+<p>Also, it's often boring to see two tanks with the same life collide with each other resulting in a draw. So I also add some deduction in score for this kind of behavior. But the AI won't stay away from its component because of another evaluation standard that rewards aggressive behavior.</p>
+<p>The overall result that I can never win it shows that the AI is quite powerful.</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>Social</h2>
+                        <ul>
+                                <li><a href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                                                type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                                <li><a href="https://github.com/zpatronus">Github (really? listing github in the social widget??)</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <!-- <address id="about" class="vcard body">
+                        Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes
+                        great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address> -->
+
+                <!-- <p>The theme is by <a rel="nofollow"
+                                href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing
+                                Magazine</a>, thanks!</p> -->
+                <p>Copyright by Zijun(Mark) Yang. Licensed under DOES NOT HAVE A LICENSE YET.</p>
+        </footer>
+        <!-- /#about -->
+        <!-- /#contentinfo -->
+
+        <!--  -->
+</body>
+
+</html>

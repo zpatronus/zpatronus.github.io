@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>Tech Life Hacks</title>
+        <link rel="stylesheet" href="https://blog.zijuny.dev/theme/css/main.css" />
+        <link href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                type="application/atom+xml" rel="alternate" title="Zijun(Mark) Yang's Blog Atom Feed" />
+        <meta name="description" content="Port Forwarding Using SSH Sometimes we are faced with the following situation: graph LR A(Computer A)-->|SSH|B(Server A 192.168.1.3) B-->|has..." />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://blog.zijuny.dev/">Zijun(Mark) Yang's Blog</a></h1>
+                <nav>
+                        <ul>
+                                <li><a href="/tags">Tags</a></li>
+
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a></li>
+                                        <li class="active" ><a
+                                                        href="https://blog.zijuny.dev/category/2-cs-hacks.html">2. CS & Hacks</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/3-web-dev.html">3. Web Dev</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/4-experiences-reflections.html">4. Experiences & Reflections</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/6-misc.html">6. Misc</a></li>
+
+                                                <li><a href="/about-me">About Me</a></li>
+                        </ul>
+                </nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://blog.zijuny.dev/tech-life-hacks.html" rel="bookmark"
+           title="Permalink to Tech Life Hacks">Tech Life Hacks</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2022-05-10T21:25:09+08:00">
+                Date: Tue 10 May 2022
+        </abbr>
+        <br />
+        <abbr class="modified" title="2022-05-10T21:25:09+08:00">
+                Updated: Tue 10 May 2022
+        </abbr>
+
+        <!--         <address class="vcard author">
+                By                         <a class="url fn" href="https://blog.zijuny.dev/author/zijunmark-yang.html">Zijun(Mark) Yang</a>
+        </address>
+ -->
+        <p>In <a href="https://blog.zijuny.dev/category/2-cs-hacks.html">2. CS & Hacks</a>.</p>
+<p>Tags: <a href="https://blog.zijuny.dev/tag/notes.html">Notes</a>
+</p>        
+</footer><!-- /.post-info -->      <h2>Port Forwarding Using SSH</h2>
+<p>Sometimes we are faced with the following situation:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">graph</span><span class="w"> </span><span class="n">LR</span>
+<span class="w">  </span><span class="n">A</span><span class="p">(</span><span class="n">Computer</span><span class="w"> </span><span class="n">A</span><span class="p">)</span><span class="o">--&gt;|</span><span class="n">SSH</span><span class="o">|</span><span class="n">B</span><span class="p">(</span><span class="n">Server</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="mf">192.168.1.3</span><span class="p">)</span>
+<span class="w">  </span><span class="n">B</span><span class="o">--&gt;|</span><span class="n">has</span><span class="w"> </span><span class="n">access</span><span class="w"> </span><span class="n">via</span><span class="w"> </span><span class="mf">192.168.1.2</span><span class="o">:</span><span class="mi">80</span><span class="o">|</span><span class="n">C</span><span class="p">(</span><span class="n">Server</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="mf">192.168.1.2</span><span class="p">)</span>
+<span class="w">  </span><span class="n">A</span><span class="o">--&gt;|</span><span class="n">does</span><span class="w"> </span><span class="kr">not</span><span class="w"> </span><span class="n">have</span><span class="w"> </span><span class="n">access</span><span class="o">|</span><span class="n">C</span>
+</code></pre></div>
+
+<p><code>Computer A</code> is the computer that we can operate on, and through SSH, we can access <code>Server A</code>. <code>Server A</code> has access to <code>Server B</code> by a GUI web server running on <code>Server B</code> 's port 80. Theoretically we can have access to <code>Server B</code>, but since SSH does not a GUI, its's difficult to do so.</p>
+<p>The ideal way of tacking this situation is somehow forwarding the 80 port on <code>Server B</code> to a port on our local computer. By doing so, we can have access to <code>Server B</code> by visiting the URL in our browser as if we are operating <code>Server A</code>.</p>
+<p>SSH provides a function called <code>port forwarding</code> to do the exact job.</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-L<span class="w"> </span><span class="m">3311</span>:192.168.1.2:80<span class="w"> </span>user@192.168.1.3
+</code></pre></div>
+
+<p>This command forward the port at <code>192.168.1.2:80</code> to <code>localhost:3311</code>.</p>
+<h2>Life Saver When Fixing Someone's Internet</h2>
+<h3>How to get MAC address?</h3>
+<p>Method 1. On Windows, open terminal and type in <code>getmac -V</code></p>
+<p>Method 2. On Windows, open terminal and type in <code>ipconfig -all</code>, this command can also give out the DNS server being used.</p>
+<p>Method 3. On Windows11 <strong>only</strong>, right click the network button on the button right corner and select <code>Network and Internet settings</code>, then click the network adapter you want to check MAC address for and it will show all the information.</p>
+<h2>Deal with Windows11 Start Menu Search Not Working</h2>
+<p>Use <code>Task Manager</code> to restart <code>Windows Explorer</code>.</p>
+<h2>PowerToys | Powerful Windows Toolbox</h2>
+<p>Find it in Microsoft Store.</p>
+<h2>Win + Number | Open Taskbar Apps</h2>
+<p>e.g. <code>Win+1</code></p>
+<h2>Ctrl+D | Detach from Something</h2>
+<p>Using this shortcut keys, users can detach from various things. Such as:</p>
+<ul>
+<li><code>ssh</code> connection, basically replacing the command <code>exit</code></li>
+<li><code>screen</code> in linux. Though <code>Ctrl+D</code> is not enough, you should use <code>Ctrl+A+D</code></li>
+</ul>
+<h2>Oh My Posh | A Theme Engine for Any Shell</h2>
+<p><a href="https://ohmyposh.dev/docs">Docs</a></p>
+<p>Jump to the <code>Installation</code> part and do according to the docs based on your OS.</p>
+<p>Then, read the <code>Prompt</code> part and setup the terminal profile.</p>
+<p>Restart the terminal and you should be ready to enjoy the beautiful terminal.</p>
+<p>Personally, I use theme <code>atomic</code> on my Windows machine and <code>thecyberden</code> on my linux servers.</p>
+<p>Also, Nerd Fonts are recommended. Check out <a href="https://www.nerdfonts.com/font-downloads">this site</a> to install them.</p>
+<p>Personally, I use <code>FuraCode Nerd Font Retina</code> in any editor and <code>FiraCode Nerd Font Retina</code> in any terminal. This is because <code>FuraCode</code> is thinner than <code>FiraCode</code> and thus can make the code looks compact while <code>FiraCode</code> has better Nerd Pattern display.</p>
+<h2>Transfer SSH keys to a New Computer (Windows)</h2>
+<p>If you purchased a new computer and still want to use the ssh keys on the old computer to log in to your server. Just copy the <code>.ssh</code> folder under <code>C:\User\yourUserName</code> in the old computer to the exact path in the new computer. Simple.</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>Social</h2>
+                        <ul>
+                                <li><a href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                                                type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                                <li><a href="https://github.com/zpatronus">Github (really? listing github in the social widget??)</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <!-- <address id="about" class="vcard body">
+                        Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes
+                        great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address> -->
+
+                <!-- <p>The theme is by <a rel="nofollow"
+                                href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing
+                                Magazine</a>, thanks!</p> -->
+                <p>Copyright by Zijun(Mark) Yang. Licensed under DOES NOT HAVE A LICENSE YET.</p>
+        </footer>
+        <!-- /#about -->
+        <!-- /#contentinfo -->
+
+        <!--  -->
+</body>
+
+</html>

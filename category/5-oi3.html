@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>Zijun(Mark) Yang's Blog - 5. OI</title>
+        <link rel="stylesheet" href="https://blog.zijuny.dev/theme/css/main.css" />
+        <link href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                type="application/atom+xml" rel="alternate" title="Zijun(Mark) Yang's Blog Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://blog.zijuny.dev/">Zijun(Mark) Yang's Blog</a></h1>
+                <nav>
+                        <ul>
+                                <li><a href="/tags">Tags</a></li>
+
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/2-cs-hacks.html">2. CS & Hacks</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/3-web-dev.html">3. Web Dev</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/4-experiences-reflections.html">4. Experiences & Reflections</a></li>
+                                        <li class="active" ><a
+                                                        href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/6-misc.html">6. Misc</a></li>
+
+                                                <li><a href="/about-me">About Me</a></li>
+                        </ul>
+                </nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+    <ol id="posts-list" class="hfeed">
+        <li>
+            <article class="hentry">
+                <header>
+                    <h1>
+                        <a href="https://blog.zijuny.dev/luogup3718-ahoi2017chu-zhong-zu-alter.html" rel="bookmark"
+                            title="Permalink to 'luoguP3718 [AHOI2017初中组]alter'">'luoguP3718 [AHOI2017初中组]alter'</a>
+                    </h1>
+                </header>
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-10-29T13:23:53+08:00">
+                Date: Mon 29 October 2018
+        </abbr>
+        <br />
+        <abbr class="modified" title="2018-10-29T13:23:53+08:00">
+                Updated: Mon 29 October 2018
+        </abbr>
+
+        <!--         <address class="vcard author">
+                By                         <a class="url fn" href="https://blog.zijuny.dev/author/zijunmark-yang.html">Zijun(Mark) Yang</a>
+        </address>
+ -->
+        <p>In <a href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a>.</p>
+<p>Tags: <a href="https://blog.zijuny.dev/tag/oi.html">OI</a>
+</p>        
+</footer><!-- /.post-info -->                    <p><a href="https://www.luogu.org/problemnew/show/P3718">题目</a></p>
+<hr>
+<p>需要特判ans=1</p>
+<p>check函数要考虑</p>
+<div class="highlight"><pre><span></span><code><span class="mf">7</span><span class="w"> </span><span class="mf">1</span>
+<span class="n">NNFFFNN</span>
+</code></pre></div>
+
+<p>这种数据</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
+<span class="cp">#define ll long long</span>
+<span class="cp">#define N 100010</span>
+<span class="cp">#define fsb(a,b,c) for(int a=b;a&lt;=c;a++)</span>
+<span class="cp">#define fbs(a,b,c) for(int a=b;a&gt;=c …</span></code></pre></div>
+                    <a class="readmore" href="https://blog.zijuny.dev/luogup3718-ahoi2017chu-zhong-zu-alter.html">Read more</a>
+                </div>
+                <!-- /.entry-content -->
+            </article>
+        </li>
+        <li>
+            <article class="hentry">
+                <header>
+                    <h1>
+                        <a href="https://blog.zijuny.dev/luogup2439-sdoi2005jie-ti-jiao-shi-she-bei-li-yong.html" rel="bookmark"
+                            title="Permalink to luoguP2439 [SDOI2005]阶梯教室设备利用">luoguP2439 [SDOI2005]阶梯教室设备利用</a>
+                    </h1>
+                </header>
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-10-28T20:29:22+08:00">
+                Date: Sun 28 October 2018
+        </abbr>
+        <br />
+        <abbr class="modified" title="2018-10-28T20:29:22+08:00">
+                Updated: Sun 28 October 2018
+        </abbr>
+
+        <!--         <address class="vcard author">
+                By                         <a class="url fn" href="https://blog.zijuny.dev/author/zijunmark-yang.html">Zijun(Mark) Yang</a>
+        </address>
+ -->
+        <p>In <a href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a>.</p>
+<p>Tags: <a href="https://blog.zijuny.dev/tag/oi.html">OI</a>
+</p>        
+</footer><!-- /.post-info -->                    <p><a href="https://www.luogu.org/problemnew/show/P2439">题目</a></p>
+<hr>
+<h2>O(k+nlogn)</h2>
+<p>f[i]表示0..i的区间的最大演讲时间。</p>
+<p>f[i]要么不演讲从f[i-1]转移 要么演讲，从f[i-a[j].s]转移（a[j].e==i）</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
+<span class="cp">#define M 30010</span>
+<span class="cp">#define N 10010</span>
+<span class="cp">#define max …</span></code></pre></div>
+                    <a class="readmore" href="https://blog.zijuny.dev/luogup2439-sdoi2005jie-ti-jiao-shi-she-bei-li-yong.html">Read more</a>
+                </div>
+                <!-- /.entry-content -->
+            </article>
+        </li>
+        <li>
+            <article class="hentry">
+                <header>
+                    <h1>
+                        <a href="https://blog.zijuny.dev/luogup2327-scoi2005sao-lei.html" rel="bookmark"
+                            title="Permalink to luoguP2327 [SCOI2005]扫雷">luoguP2327 [SCOI2005]扫雷</a>
+                    </h1>
+                </header>
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-10-28T19:45:54+08:00">
+                Date: Sun 28 October 2018
+        </abbr>
+        <br />
+        <abbr class="modified" title="2018-10-28T19:45:54+08:00">
+                Updated: Sun 28 October 2018
+        </abbr>
+
+        <!--         <address class="vcard author">
+                By                         <a class="url fn" href="https://blog.zijuny.dev/author/zijunmark-yang.html">Zijun(Mark) Yang</a>
+        </address>
+ -->
+        <p>In <a href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a>.</p>
+<p>Tags: <a href="https://blog.zijuny.dev/tag/oi.html">OI</a>
+</p>        
+</footer><!-- /.post-info -->                    <p><a href="https://www.luogu.org/problemnew/show/P2327">题目</a></p>
+<p>x,y=1:放 0:不放</p>
+<p>calc(p,x,y)计算第p个位置为x 第p+1个位置为y的方案数</p>
+<p>显然第p-1个位置需要为a[p]-x-y才能满足第p个位置</p>
+<p>可见答案只可能是0/1/2</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
+<span class="cp">#define ll long long</span>
+<span class="cp">#define N 10010</span>
+<span class="cp">#define fsb …</span></code></pre></div>
+                    <a class="readmore" href="https://blog.zijuny.dev/luogup2327-scoi2005sao-lei.html">Read more</a>
+                </div>
+                <!-- /.entry-content -->
+            </article>
+        </li>
+    </ol>
+    <!-- /#posts-list -->
+<nav>
+  <ul>
+        <li><a href="https://blog.zijuny.dev/category/5-oi.html">&Lang;</a></li>
+        <li><a href="https://blog.zijuny.dev/category/5-oi2.html">&lang;</a></li>
+    <li>Page 3 / 3</li>
+  </ul>
+</nav>
+</section>
+<!-- /#content -->
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>Social</h2>
+                        <ul>
+                                <li><a href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                                                type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                                <li><a href="https://github.com/zpatronus">Github (really? listing github in the social widget??)</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <!-- <address id="about" class="vcard body">
+                        Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes
+                        great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address> -->
+
+                <!-- <p>The theme is by <a rel="nofollow"
+                                href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing
+                                Magazine</a>, thanks!</p> -->
+                <p>Copyright by Zijun(Mark) Yang. Licensed under DOES NOT HAVE A LICENSE YET.</p>
+        </footer>
+        <!-- /#about -->
+        <!-- /#contentinfo -->
+
+        <!--  -->
+</body>
+
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>luoguP2845 [USACO15DEC]Switching on the Lights 开关灯</title>
+        <link rel="stylesheet" href="https://blog.zijuny.dev/theme/css/main.css" />
+        <link href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                type="application/atom+xml" rel="alternate" title="Zijun(Mark) Yang's Blog Atom Feed" />
+        <meta name="description" content="题目 函数1：用于点亮(x,y)能开的灯，假设能开(xx,yy)，将(xx,yy)交至函数2 函数2：判断(x,y)是否能被走到（即4个方向有被访问到的点相邻），如果能，将(x,y …" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://blog.zijuny.dev/">Zijun(Mark) Yang's Blog</a></h1>
+                <nav>
+                        <ul>
+                                <li><a href="/tags">Tags</a></li>
+
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/2-cs-hacks.html">2. CS & Hacks</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/3-web-dev.html">3. Web Dev</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/4-experiences-reflections.html">4. Experiences & Reflections</a></li>
+                                        <li class="active" ><a
+                                                        href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/6-misc.html">6. Misc</a></li>
+
+                                                <li><a href="/about-me">About Me</a></li>
+                        </ul>
+                </nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://blog.zijuny.dev/luogup2845-usaco15decswitching-on-the-lights-kai-guan-deng.html" rel="bookmark"
+           title="Permalink to luoguP2845 [USACO15DEC]Switching on the Lights 开关灯">luoguP2845 [USACO15DEC]Switching on the Lights 开关灯</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-11-05T19:02:08+08:00">
+                Date: Mon 05 November 2018
+        </abbr>
+        <br />
+        <abbr class="modified" title="2018-11-05T19:02:08+08:00">
+                Updated: Mon 05 November 2018
+        </abbr>
+
+        <!--         <address class="vcard author">
+                By                         <a class="url fn" href="https://blog.zijuny.dev/author/zijunmark-yang.html">Zijun(Mark) Yang</a>
+        </address>
+ -->
+        <p>In <a href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a>.</p>
+<p>Tags: <a href="https://blog.zijuny.dev/tag/oi.html">OI</a>
+</p>        
+</footer><!-- /.post-info -->      <p><a href="https://www.luogu.org/problemnew/show/P2845">题目</a></p>
+<hr>
+<p>函数1：用于点亮(x,y)能开的灯，假设能开(xx,yy)，将(xx,yy)交至函数2</p>
+<p>函数2：判断(x,y)是否能被<em>走到</em>（即4个方向有被访问到的点相邻），如果能，将(x,y)交至函数1，遍历(x,y)的4个方向，如果有亮着灯但没有被访问的点(xx,yy)，将(xx,yy)交至函数2</p>
+<p>主程序：(1,1) --&gt; 函数1</p>
+<hr>
+<h5>code</h5>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
+<span class="cp">#define N 110</span>
+<span class="cp">#define M 200010</span>
+<span class="cp">#define mem(a,b) memset(a,b,sizeof(a))</span>
+<span class="cp">#define fsb(a,b,c) for(int a=b;a&lt;=(c);a++)</span>
+<span class="cp">#define fbs(a,b,c) for(int a=b;a&gt;=(c);a--)</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">edge</span><span class="p">{</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">nt</span><span class="p">;</span>
+<span class="p">}</span><span class="n">a</span><span class="p">[</span><span class="n">M</span><span class="p">];</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">cnt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">head</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="n">N</span><span class="p">],</span><span class="n">li</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="n">N</span><span class="p">],</span><span class="n">vi</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="n">N</span><span class="p">],</span><span class="n">ans</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">dx</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">-1</span><span class="p">},</span><span class="n">dy</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">-1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">};</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">qw</span><span class="o">&gt;</span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">rll</span><span class="p">(</span><span class="n">qw</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">){</span>
+<span class="w"> </span><span class="n">qw</span><span class="w"> </span><span class="n">f</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">isdigit</span><span class="p">(</span><span class="n">c</span><span class="p">))</span><span class="n">f</span><span class="o">=</span><span class="n">c</span><span class="o">==</span><span class="sc">&#39;-&#39;</span><span class="o">?</span><span class="mi">-1</span><span class="o">:</span><span class="n">f</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="k">while</span><span class="p">(</span><span class="n">isdigit</span><span class="p">(</span><span class="n">c</span><span class="p">))</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="n">c</span><span class="o">-</span><span class="sc">&#39;0&#39;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">getchar</span><span class="p">();</span>
+<span class="w"> </span><span class="n">x</span><span class="o">*=</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">xx</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">yy</span><span class="p">){</span>
+<span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="o">++</span><span class="n">cnt</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">edge</span><span class="p">){</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]};</span><span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span><span class="o">=</span><span class="n">cnt</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">dfs</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+<span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">dfs2</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">){</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">flag</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="w"> </span><span class="n">fsb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="k">if</span><span class="p">(</span><span class="n">vi</span><span class="p">[</span><span class="n">x</span><span class="o">+</span><span class="n">dx</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="n">y</span><span class="o">+</span><span class="n">dy</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span><span class="n">flag</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">flag</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="k">return</span><span class="p">;</span>
+<span class="w"> </span><span class="n">vi</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="w"> </span><span class="n">dfs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+<span class="w"> </span><span class="n">fsb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">){</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">xx</span><span class="o">=</span><span class="n">x</span><span class="o">+</span><span class="n">dx</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">yy</span><span class="o">=</span><span class="n">y</span><span class="o">+</span><span class="n">dy</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">  </span><span class="k">if</span><span class="p">((</span><span class="o">!</span><span class="n">vi</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">])</span><span class="o">&amp;&amp;</span><span class="p">(</span><span class="n">li</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]))</span><span class="n">dfs2</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">);</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">dfs</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">){</span>
+<span class="c1">// printf(&quot;%10d %d\n&quot;,x,y);</span>
+<span class="w"> </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">t</span><span class="o">=</span><span class="n">head</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">];</span><span class="n">t</span><span class="o">!=</span><span class="mi">-1</span><span class="p">;</span><span class="n">t</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="n">t</span><span class="p">].</span><span class="n">nt</span><span class="p">){</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">xx</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="n">t</span><span class="p">].</span><span class="n">x</span><span class="p">,</span><span class="n">yy</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="n">t</span><span class="p">].</span><span class="n">y</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">li</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">])</span><span class="k">continue</span><span class="p">;</span>
+<span class="w">  </span><span class="n">li</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">ans</span><span class="o">++</span><span class="p">;</span><span class="n">dfs2</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">);</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+<span class="c1">// freopen(&quot;2845_1.in&quot;,&quot;r&quot;,stdin);</span>
+<span class="w"> </span><span class="n">rll</span><span class="p">(</span><span class="n">n</span><span class="p">);</span><span class="n">rll</span><span class="p">(</span><span class="n">m</span><span class="p">);</span><span class="n">mem</span><span class="p">(</span><span class="n">head</span><span class="p">,</span><span class="mi">255</span><span class="p">);</span>
+<span class="w"> </span><span class="n">fsb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="p">){</span>
+<span class="w">  </span><span class="n">rll</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="n">rll</span><span class="p">(</span><span class="n">y</span><span class="p">);</span><span class="n">rll</span><span class="p">(</span><span class="n">xx</span><span class="p">);</span><span class="n">rll</span><span class="p">(</span><span class="n">yy</span><span class="p">);</span>
+<span class="w">  </span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">);</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="n">mem</span><span class="p">(</span><span class="n">li</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span><span class="n">mem</span><span class="p">(</span><span class="n">vi</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span><span class="n">li</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">vi</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="w"> </span><span class="n">dfs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>注意：答案问的是开灯数而非访问数。</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>Social</h2>
+                        <ul>
+                                <li><a href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                                                type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                                <li><a href="https://github.com/zpatronus">Github (really? listing github in the social widget??)</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <!-- <address id="about" class="vcard body">
+                        Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes
+                        great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address> -->
+
+                <!-- <p>The theme is by <a rel="nofollow"
+                                href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing
+                                Magazine</a>, thanks!</p> -->
+                <p>Copyright by Zijun(Mark) Yang. Licensed under DOES NOT HAVE A LICENSE YET.</p>
+        </footer>
+        <!-- /#about -->
+        <!-- /#contentinfo -->
+
+        <!--  -->
+</body>
+
+</html>

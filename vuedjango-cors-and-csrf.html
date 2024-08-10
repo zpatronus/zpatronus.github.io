@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>Vue+Django CORS and CSRF</title>
+        <link rel="stylesheet" href="https://blog.zijuny.dev/theme/css/main.css" />
+        <link href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                type="application/atom+xml" rel="alternate" title="Zijun(Mark) Yang's Blog Atom Feed" />
+        <meta name="description" content="Backend (Django) Part Docs: django-cors-headers, django core settings According to django-cors-headers, use: python -m pip install..." />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://blog.zijuny.dev/">Zijun(Mark) Yang's Blog</a></h1>
+                <nav>
+                        <ul>
+                                <li><a href="/tags">Tags</a></li>
+
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/2-cs-hacks.html">2. CS & Hacks</a></li>
+                                        <li class="active" ><a
+                                                        href="https://blog.zijuny.dev/category/3-web-dev.html">3. Web Dev</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/4-experiences-reflections.html">4. Experiences & Reflections</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/6-misc.html">6. Misc</a></li>
+
+                                                <li><a href="/about-me">About Me</a></li>
+                        </ul>
+                </nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://blog.zijuny.dev/vuedjango-cors-and-csrf.html" rel="bookmark"
+           title="Permalink to Vue+Django CORS and CSRF">Vue+Django CORS and CSRF</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2022-04-27T12:15:38+08:00">
+                Date: Wed 27 April 2022
+        </abbr>
+        <br />
+        <abbr class="modified" title="2022-04-27T12:15:38+08:00">
+                Updated: Wed 27 April 2022
+        </abbr>
+
+        <!--         <address class="vcard author">
+                By                         <a class="url fn" href="https://blog.zijuny.dev/author/zijunmark-yang.html">Zijun(Mark) Yang</a>
+        </address>
+ -->
+        <p>In <a href="https://blog.zijuny.dev/category/3-web-dev.html">3. Web Dev</a>.</p>
+<p>Tags: <a href="https://blog.zijuny.dev/tag/django.html">Django</a>
+<a href="https://blog.zijuny.dev/tag/vue.html">Vue</a>
+<a href="https://blog.zijuny.dev/tag/web-dev.html">Web Dev</a>
+<a href="https://blog.zijuny.dev/tag/frontend.html">Frontend</a>
+<a href="https://blog.zijuny.dev/tag/backend.html">Backend</a>
+<a href="https://blog.zijuny.dev/tag/tutorial.html">Tutorial</a>
+</p>        
+</footer><!-- /.post-info -->      <h2>Backend (Django) Part</h2>
+<p>Docs: <a href="https://pypi.org/project/django-cors-headers/">django-cors-headers</a>, <a href="https://docs.djangoproject.com/en/4.0/ref/settings/#csrf-cookie-secure">django core settings</a></p>
+<p>According to <a href="https://pypi.org/project/django-cors-headers/">django-cors-headers</a>, use:</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>django-cors-headers
+</code></pre></div>
+
+<p>to install <code>django-cors-headers</code> and add it to installed apps in <code>settings.py</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="o">...</span><span class="p">,</span>
+    <span class="s2">&quot;corsheaders&quot;</span><span class="p">,</span>
+    <span class="o">...</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<p>Add a middleware class to listen in on responses. The order of middlewares is <strong>important</strong>:</p>
+<p><code>CorsMiddleware</code> should be placed as high as possible, especially before any middleware that can generate responses such as Django’s <code>CommonMiddleware</code> or Whitenoise’s <code>WhiteNoiseMiddleware</code>. If it is not before, it will not be able to add the CORS headers to these responses.</p>
+<p>Also if you are using <code>CORS_REPLACE_HTTPS_REFERER</code> it should be placed before Django’s <code>CsrfViewMiddleware</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">MIDDLEWARE</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="o">...</span><span class="p">,</span>
+    <span class="s2">&quot;corsheaders.middleware.CorsMiddleware&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;django.middleware.common.CommonMiddleware&quot;</span><span class="p">,</span>
+    <span class="o">...</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<p>Assume frontend is functioning on <code>frontend.com</code>.</p>
+<p>Add:</p>
+<div class="highlight"><pre><span></span><code><span class="n">CORS_ALLOWED_ORIGINS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;frontend.com&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">CORS_ALLOW_METHODS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;DELETE&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;GET&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;OPTIONS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PATCH&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;POST&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PUT&quot;</span><span class="p">,</span>
+    <span class="c1">#enable whatever method needed</span>
+<span class="p">]</span>
+
+<span class="n">CSRF_TRUSTED_ORIGINS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;frontend.com&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">CORS_ALLOW_CREDENTIALS</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">CSRF_COOKIE_SECURE</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">CSRF_COOKIE_SAMESITE</span> <span class="o">=</span> <span class="s1">&#39;None&#39;</span>
+</code></pre></div>
+
+<h2>Frontend (Vue) Part</h2>
+<p>Docs: <a href="https://axios-http.com/docs/req_config">Axios Request Config</a></p>
+<p>We need to get CSRF token contained in cookie from backend.</p>
+<p>In <code>urls.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_csrf_token</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">csrf_token</span> <span class="o">=</span> <span class="n">get_token</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="n">csrf_token</span><span class="p">})</span>
+
+<span class="n">urlpatterns</span><span class="o">=</span><span class="p">[</span>
+    <span class="o">...</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;get_csrf_token/&#39;</span><span class="p">,</span> <span class="n">get_csrf_token</span><span class="p">),</span>
+    <span class="o">...</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<p>Assume the backend is functioning on <code>backend.com</code>. In <code>whateverName.vue</code>, add:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">//django use cookies to varify csrf</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">VueCookies</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;vue-cookies&#39;</span>
+<span class="nx">Vue</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">VueCookies</span><span class="p">)</span>
+<span class="c1">//`withCredentials` indicates whether or not cross-site Access-Control requests should be made using credentials</span>
+<span class="nx">axios</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">withCredentials</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">data</span><span class="p">(){</span>
+<span class="w">        </span><span class="k">return</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">token</span><span class="o">:</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">methods</span><span class="o">:</span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//get token function</span>
+<span class="w">        </span><span class="nx">gettoken</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">axios</span><span class="p">({</span>
+<span class="w">                </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;get&#39;</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">url</span><span class="o">:</span><span class="w"> </span><span class="sb">`http://backend.com/get_csrf_token/`</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">withCredentials</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">            </span><span class="p">})</span>
+<span class="w">                </span><span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">this</span><span class="p">.</span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">token</span>
+<span class="w">                </span><span class="p">})</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="c1">//POST</span>
+<span class="w">        </span><span class="nx">tryPOST</span><span class="p">(){</span>
+<span class="w">            </span><span class="nx">axios</span><span class="p">({</span>
+<span class="w">                </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="s1">&#39;X-CSRFToken&#39;</span><span class="o">:</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">token</span><span class="p">,</span>
+<span class="w">                    </span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nx">withCredentials</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">url</span><span class="o">:</span><span class="w"> </span><span class="sb">`http://backend.com/whateverURL`</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;post&#39;</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="s1">&#39;data1&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;data2&#39;</span><span class="p">,</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">})</span>
+<span class="w">                </span><span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span>
+<span class="w">                </span><span class="p">})</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">mounted</span><span class="o">:</span><span class="p">()=&gt;{</span>
+<span class="w">        </span><span class="c1">//get token when page loads</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">gettoken</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>Social</h2>
+                        <ul>
+                                <li><a href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                                                type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                                <li><a href="https://github.com/zpatronus">Github (really? listing github in the social widget??)</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <!-- <address id="about" class="vcard body">
+                        Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes
+                        great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address> -->
+
+                <!-- <p>The theme is by <a rel="nofollow"
+                                href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing
+                                Magazine</a>, thanks!</p> -->
+                <p>Copyright by Zijun(Mark) Yang. Licensed under DOES NOT HAVE A LICENSE YET.</p>
+        </footer>
+        <!-- /#about -->
+        <!-- /#contentinfo -->
+
+        <!--  -->
+</body>
+
+</html>

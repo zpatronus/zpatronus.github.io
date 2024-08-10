@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>VSCode Using Notes</title>
+        <link rel="stylesheet" href="https://blog.zijuny.dev/theme/css/main.css" />
+        <link href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                type="application/atom+xml" rel="alternate" title="Zijun(Mark) Yang's Blog Atom Feed" />
+        <meta name="description" content="How to add "Program Files" in VS Code settings Use "C:\Program Files\..." or C:\"Program Files"\... How to write MATLAB scripts in VSCode However,..." />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://blog.zijuny.dev/">Zijun(Mark) Yang's Blog</a></h1>
+                <nav>
+                        <ul>
+                                <li><a href="/tags">Tags</a></li>
+
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/1-projects.html">1. Projects</a></li>
+                                        <li class="active" ><a
+                                                        href="https://blog.zijuny.dev/category/2-cs-hacks.html">2. CS & Hacks</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/3-web-dev.html">3. Web Dev</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/4-experiences-reflections.html">4. Experiences & Reflections</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/5-oi.html">5. OI</a></li>
+                                        <li><a
+                                                        href="https://blog.zijuny.dev/category/6-misc.html">6. Misc</a></li>
+
+                                                <li><a href="/about-me">About Me</a></li>
+                        </ul>
+                </nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://blog.zijuny.dev/vscode-using-notes.html" rel="bookmark"
+           title="Permalink to VSCode Using Notes">VSCode Using Notes</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2022-04-28T18:46:43+08:00">
+                Date: Thu 28 April 2022
+        </abbr>
+        <br />
+        <abbr class="modified" title="2022-04-28T18:46:43+08:00">
+                Updated: Thu 28 April 2022
+        </abbr>
+
+        <!--         <address class="vcard author">
+                By                         <a class="url fn" href="https://blog.zijuny.dev/author/zijunmark-yang.html">Zijun(Mark) Yang</a>
+        </address>
+ -->
+        <p>In <a href="https://blog.zijuny.dev/category/2-cs-hacks.html">2. CS & Hacks</a>.</p>
+<p>Tags: <a href="https://blog.zijuny.dev/tag/notes.html">Notes</a>
+<a href="https://blog.zijuny.dev/tag/software-using.html">Software Using</a>
+</p>        
+</footer><!-- /.post-info -->      <h2>How to add "Program Files" in VS Code settings</h2>
+<p>Use <code>"C:\Program Files\..."</code> or <code>C:\"Program Files"\...</code></p>
+<h2>How to write MATLAB scripts in VSCode</h2>
+<p>However, I find it not a good idea. The terminal crashes from time to time and <code>Workspace</code> in MATLAB cannot be integrated into vscode.</p>
+<p>The main reason I want to use vscode to write MATLAB scripts is darkmode and suggestions. By changing the color profile and enabling autocompletion in MATLAB preferences, I can get a similar result.</p>
+<h3>Install Extensions</h3>
+<div class="highlight"><pre><span></span><code><span class="n">Matlab</span> <span class="c1"># highlighting, suggestions, error messages</span>
+<span class="c1"># You need to set matlab path and mlint path in the extension settings page.</span>
+
+<span class="n">matlab</span><span class="o">-</span><span class="n">formatter</span> <span class="c1"># format things</span>
+<span class="c1"># You need to set Python path in the extension settings page. </span>
+
+<span class="n">Matlab</span> <span class="n">Interactive</span> <span class="n">Terminal</span> <span class="c1"># use vscode terminal instead of matlab IDE</span>
+<span class="c1"># You need to set Python path in the extension settings page.</span>
+<span class="c1"># If you enable this extension, do not enable another extension &#39;matlab-code-run&#39;</span>
+
+<span class="n">Matlab</span> <span class="n">Snippets</span> <span class="c1"># more advanced suggestions </span>
+
+<span class="n">Matlab</span> <span class="n">Code</span> <span class="n">Run</span> <span class="c1"># run matlab using ctrl+shift+p and choose &#39;run current matlab script or open a matlab terminal&#39;</span>
+</code></pre></div>
+
+<h3>Install MATLAB API for Python</h3>
+<p>The extension <code>Matlab Interactive Terminal</code> is based on matlab api for python. Follow <a href="https://ww2.mathworks.cn/help/matlab/matlab_external/install-the-matlab-engine-for-python.html">this doc</a> to install matlab api for python.</p>
+<p>In Windows, <code>cd matlabRootPath\extern\engines\python</code>, then <code>python setup.py install</code>.  </p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>Social</h2>
+                        <ul>
+                                <li><a href="https://blog.zijuny.dev/feeds/all.atom.xml"
+                                                type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                                <li><a href="https://github.com/zpatronus">Github (really? listing github in the social widget??)</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <!-- <address id="about" class="vcard body">
+                        Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes
+                        great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address> -->
+
+                <!-- <p>The theme is by <a rel="nofollow"
+                                href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing
+                                Magazine</a>, thanks!</p> -->
+                <p>Copyright by Zijun(Mark) Yang. Licensed under DOES NOT HAVE A LICENSE YET.</p>
+        </footer>
+        <!-- /#about -->
+        <!-- /#contentinfo -->
+
+        <!--  -->
+</body>
+
+</html>

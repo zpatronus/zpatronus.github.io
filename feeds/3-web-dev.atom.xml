@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Zijun(Mark) Yang's Blog - 3. Web Dev</title><link href="https://blog.zijuny.dev/" rel="alternate"></link><link href="https://blog.zijuny.dev/feeds/3-web-dev.atom.xml" rel="self"></link><id>https://blog.zijuny.dev/</id><updated>2022-05-14T17:27:06+08:00</updated><entry><title>How You Reach a Website</title><link href="https://blog.zijuny.dev/how-you-reach-a-website.html" rel="alternate"></link><published>2022-05-14T17:27:06+08:00</published><updated>2022-05-14T17:27:06+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2022-05-14:/how-you-reach-a-website.html</id><content type="html">&lt;p&gt;Client &amp;lt;----&amp;gt; CloudFlare &amp;lt;----&amp;gt; VPS&lt;/p&gt;</content><category term="3. Web Dev"></category><category term="Notes"></category><category term="Maintenance"></category><category term="Web Dev"></category></entry><entry><title>Frontend Learning Notes</title><link href="https://blog.zijuny.dev/frontend-learning-notes.html" rel="alternate"></link><published>2022-05-03T18:22:03+08:00</published><updated>2022-05-03T18:22:03+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2022-05-03:/frontend-learning-notes.html</id><content type="html">&lt;h2&gt;SHA1, SHA256 and SHA512 Implementation in JavaScript&lt;/h2&gt;
+&lt;p&gt;Docs: &lt;a href="https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest#converting_a_digest_to_a_hex_string"&gt;MDN SubtleCrypto.digest()&lt;/a&gt;&lt;/p&gt;</content><category term="3. Web Dev"></category><category term="Frontend"></category><category term="Web Dev"></category><category term="Notes"></category></entry><entry><title>Vue Learning Notes</title><link href="https://blog.zijuny.dev/vue-learning-notes.html" rel="alternate"></link><published>2022-04-27T13:33:31+08:00</published><updated>2022-04-27T13:33:31+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2022-04-27:/vue-learning-notes.html</id><summary type="html">&lt;h2&gt;Style Related&lt;/h2&gt;
+&lt;h3&gt;Add Style to the Chosen Router Link&lt;/h3&gt;
+&lt;p&gt;The chosen router link has a class &lt;code&gt;.router-link-exact-active&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;Vue Router Related&lt;/h2&gt;
+&lt;h3&gt;Navigation Guard&lt;/h3&gt;
+&lt;p&gt;Docs: &lt;a href="https://router.vuejs.org/guide/advanced/navigation-guards.html"&gt;Navigation Guards&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;As the name suggests, the navigation guards provided by Vue router are primarily used to guard navigations either by redirecting it or canceling it.&lt;/p&gt;
+&lt;p&gt;To …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Style Related&lt;/h2&gt;
+&lt;h3&gt;Add Style to the Chosen Router Link&lt;/h3&gt;
+&lt;p&gt;The chosen router link has a class &lt;code&gt;.router-link-exact-active&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;Vue Router Related&lt;/h2&gt;
+&lt;h3&gt;Navigation Guard&lt;/h3&gt;
+&lt;p&gt;Docs: &lt;a href="https://router.vuejs.org/guide/advanced/navigation-guards.html"&gt;Navigation Guards&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;As the name suggests, the navigation guards provided by Vue router are primarily used to guard navigations either by redirecting it or canceling it.&lt;/p&gt;
+&lt;p&gt;To put it in other words, navigation guards allows you to know the urls of the jump-out page and the jump-in page.&lt;/p&gt;
+&lt;p&gt;To get url of the jump-out page, in &lt;code&gt;whateverName.vue&lt;/code&gt;, add:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;export&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="nx"&gt;lastURL&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;beforeRouteEnter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;to&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kr"&gt;from&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;next&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;next&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nx"&gt;vw&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kr"&gt;from&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="nx"&gt;vw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;lastUrl&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kr"&gt;from&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;fullPath&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Back to previous route&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;$router&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;back&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Vuex Related&lt;/h2&gt;
+&lt;h3&gt;Get Variables&lt;/h3&gt;
+&lt;p&gt;In &lt;code&gt;/store/index.js&lt;/code&gt;, add:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;Vuex&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kr"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;vuex&amp;#39;&lt;/span&gt;
+&lt;span class="nx"&gt;Vue&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;use&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;Vuex&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;export&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;new&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;Vuex&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Store&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;state&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nx"&gt;variableName&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;this is a global variable&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In &lt;code&gt;view&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;export&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;computed&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nx"&gt;anyNameYourLike&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;$store&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;state&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;variableName&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="3. Web Dev"></category><category term="Vue"></category><category term="Frontend"></category><category term="Web Dev"></category><category term="Notes"></category></entry><entry><title>How to Deploy Django</title><link href="https://blog.zijuny.dev/how-to-deploy-django.html" rel="alternate"></link><published>2022-04-27T12:20:43+08:00</published><updated>2022-04-27T12:20:43+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2022-04-27:/how-to-deploy-django.html</id><summary type="html">&lt;p&gt;Just follow the &lt;a href="https://uwsgi-docs.readthedocs.io/en/latest/tutorials/Django_and_nginx.html"&gt;docs&lt;/a&gt;. That's it. However, I do find a few things wrong in the docs when I followed it. I rewrite those parts and add some comments.&lt;/p&gt;
+&lt;h2&gt;Some notes about this tutorial&lt;/h2&gt;
+&lt;p&gt;Note&lt;/p&gt;
+&lt;p&gt;This is a tutorial. It is not intended to provide a reference guide, never mind …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Just follow the &lt;a href="https://uwsgi-docs.readthedocs.io/en/latest/tutorials/Django_and_nginx.html"&gt;docs&lt;/a&gt;. That's it. However, I do find a few things wrong in the docs when I followed it. I rewrite those parts and add some comments.&lt;/p&gt;
+&lt;h2&gt;Some notes about this tutorial&lt;/h2&gt;
+&lt;p&gt;Note&lt;/p&gt;
+&lt;p&gt;This is a tutorial. It is not intended to provide a reference guide, never mind an exhaustive reference, to the subject of deployment.&lt;/p&gt;
+&lt;p&gt;nginx and uWSGI are good choices for Django deployment, but they are not the only ones, or the 'official' ones. There are excellent alternatives to both, and you are encouraged to investigate them.&lt;/p&gt;
+&lt;p&gt;The way we deploy Django here is a good way, but it is not the only way; for some purposes it is probably not even the best way.&lt;/p&gt;
+&lt;p&gt;It is however a reliable and easy way, and the material covered here will introduce you to concepts and procedures you will need to be familiar with whatever software you use for deploying Django. By providing you with a working setup, and rehearsing the steps you must take to get there, it will offer you a basis for exploring other ways to achieve this.&lt;/p&gt;
+&lt;p&gt;Note&lt;/p&gt;
+&lt;p&gt;This tutorial makes some assumptions about the system you are using.&lt;/p&gt;
+&lt;p&gt;It is assumed that you are using a Unix-like system, and that it features an aptitude-like package manager. However if you need to ask questions like "What's the equivalent of aptitude on Mac OS X?", you'll be able to find that kind of help fairly easily.&lt;/p&gt;
+&lt;p&gt;While this tutorial assumes Django 1.4 or later, which will automatically create a wsgi module in your new project, the instructions will work with earlier versions. You will though need to obtain that Django wsgi module yourself, and you may find that the Django project directory structure is slightly different.&lt;/p&gt;
+&lt;h2&gt;Concept&lt;/h2&gt;
+&lt;p&gt;A web server faces the outside world. It can serve files (HTML, images, CSS, etc) directly from the file system. However, it can't talk directly to Django applications; it needs something that will run the application, feed it requests from web clients (such as browsers) and return responses.&lt;/p&gt;
+&lt;p&gt;A Web Server Gateway Interface - WSGI - does this job. WSGI is a Python standard.&lt;/p&gt;
+&lt;p&gt;uWSGI is a WSGI implementation. In this tutorial we will set up uWSGI so that it creates a Unix socket, and serves responses to the web server via the uwsgi protocol. At the end, our complete stack of components will look like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;the web client &amp;lt;-&amp;gt; the web server &amp;lt;-&amp;gt; the socket &amp;lt;-&amp;gt; uwsgi &amp;lt;-&amp;gt; Django
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Before you start setting up uWSGI&lt;/h2&gt;
+&lt;h3&gt;virtual env&lt;/h3&gt;
+&lt;p&gt;Make sure you are in a virtualenv for the software we need to install (we will describe how to install a system-wide uwsgi later):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;virtualenv&lt;span class="w"&gt; &lt;/span&gt;uwsgi-tutorial
+&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;uwsgi-tutorial
+&lt;span class="nb"&gt;source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;bin/activate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Django&lt;/h3&gt;
+&lt;p&gt;Install Django into your virtualenv, create a new project, and &lt;code&gt;cd&lt;/code&gt; into the project:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;Django
+django-admin.py&lt;span class="w"&gt; &lt;/span&gt;startproject&lt;span class="w"&gt; &lt;/span&gt;mysite
+&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;mysite
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;About the domain and port&lt;/h3&gt;
+&lt;p&gt;In this tutorial we will call your domain &lt;code&gt;example.com&lt;/code&gt;. Substitute your own FQDN or IP address.&lt;/p&gt;
+&lt;p&gt;Throughout, we'll be using port 8000 for the web server to publish on, just like the Django runserver does by default. You can use whatever port you want of course, but I have chosen this one so it doesn't conflict with anything a web server might be doing already.&lt;/p&gt;
+&lt;h2&gt;Basic uWSGI installation and configuration&lt;/h2&gt;
+&lt;h3&gt;Install uWSGI into your virtualenv&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;uwsgi
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Of course there are other ways to install uWSGI, but this one is as good as any. Remember that you will need to have Python development packages installed. In the case of Debian, or Debian-derived systems such as Ubuntu, what you need to have installed is &lt;code&gt;pythonX.Y-dev&lt;/code&gt;, where X.Y is your version of Python.&lt;/p&gt;
+&lt;h3&gt;Basic test&lt;/h3&gt;
+&lt;p&gt;Create a file called &lt;code&gt;test.py&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# test.py&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;application&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;start_response&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;start_response&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;200 OK&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Content-Type&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;text/html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)])&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Hello World&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# python3&lt;/span&gt;
+    &lt;span class="c1"&gt;#return [&amp;quot;Hello World&amp;quot;] # python2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note&lt;/p&gt;
+&lt;p&gt;Take into account that Python 3 requires &lt;code&gt;bytes()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Run uWSGI:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;uwsgi&lt;span class="w"&gt; &lt;/span&gt;--http&lt;span class="w"&gt; &lt;/span&gt;:8000&lt;span class="w"&gt; &lt;/span&gt;--wsgi-file&lt;span class="w"&gt; &lt;/span&gt;test.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The options mean:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;http :8000&lt;/code&gt;: use protocol http, port 8000&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;wsgi-file test.py&lt;/code&gt;: load the specified file, test.py&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This should serve a 'hello world' message directly to the browser on port 8000. Visit: &lt;code&gt;http://example.com:8000&lt;/code&gt; to check. If so, it means the following stack of components works:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;the web client &amp;lt;-&amp;gt; uWSGI &amp;lt;-&amp;gt; Python
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Test your Django project&lt;/h3&gt;
+&lt;p&gt;Now we want uWSGI to do the same thing, but to run a Django site instead of the &lt;code&gt;test.py&lt;/code&gt; module.&lt;/p&gt;
+&lt;p&gt;If you haven't already done so, make sure that your &lt;code&gt;mysite&lt;/code&gt; project actually works:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;python&lt;span class="w"&gt; &lt;/span&gt;manage.py&lt;span class="w"&gt; &lt;/span&gt;runserver&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.0.0.0:8000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And if that works, run it using uWSGI:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;uwsgi&lt;span class="w"&gt; &lt;/span&gt;--http&lt;span class="w"&gt; &lt;/span&gt;:8000&lt;span class="w"&gt; &lt;/span&gt;--module&lt;span class="w"&gt; &lt;/span&gt;mysite.wsgi
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;module mysite.wsgi&lt;/code&gt;: load the specificied wsgi module&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Point your browser at the server; if the site appears, it means uWSGI is able to serve your Django application from your virtualenv, and this stack operates correctly:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;the web client &amp;lt;-&amp;gt; uWSGI &amp;lt;-&amp;gt; Django
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now normally we won't have the browser speaking directly to uWSGI. That's a job for the webserver, which will act as a go-between.&lt;/p&gt;
+&lt;h2&gt;Basic nginx&lt;/h2&gt;
+&lt;h3&gt;Install nginx&lt;/h3&gt;
+&lt;p&gt;To simple, I'll skip this part.&lt;/p&gt;
+&lt;p&gt;Use &lt;code&gt;sudo /etc/init.d/nginx start&lt;/code&gt; to start nginx and use &lt;code&gt;sudo nginx -s reload&lt;/code&gt; to reload configurations.&lt;/p&gt;
+&lt;h3&gt;Configure nginx for your site&lt;/h3&gt;
+&lt;p&gt;You will need the &lt;code&gt;uwsgi_params&lt;/code&gt; file, which is available in the &lt;code&gt;nginx&lt;/code&gt; directory of the uWSGI distribution, or from &lt;a href="https://github.com/nginx/nginx/blob/master/conf/uwsgi_params"&gt;https://github.com/nginx/nginx/blob/master/conf/uwsgi_params&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Copy it into your project directory. In a moment we will tell nginx to refer to it.&lt;/p&gt;
+&lt;p&gt;Now create a file called mysite_nginx.conf in the /etc/nginx/sites-available/ directory, and put this in it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# mysite_nginx.conf&lt;/span&gt;
+
+&lt;span class="c1"&gt;# the upstream component nginx needs to connect to&lt;/span&gt;
+&lt;span class="n"&gt;upstream&lt;/span&gt; &lt;span class="n"&gt;django&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;# server unix:///path/to/your/mysite/mysite.sock; # for a file socket&lt;/span&gt;
+    &lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="mf"&gt;127.0.0.1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;8001&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;# for a web port socket (we&amp;#39;ll use this first)&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;# configuration of the server&lt;/span&gt;
+&lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;# the port your site will be served on&lt;/span&gt;
+    &lt;span class="n"&gt;listen&lt;/span&gt;      &lt;span class="mi"&gt;8000&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;# the domain name it will serve for&lt;/span&gt;
+    &lt;span class="n"&gt;server_name&lt;/span&gt; &lt;span class="n"&gt;example&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;# substitute your machine&amp;#39;s IP address or FQDN&lt;/span&gt;
+    &lt;span class="n"&gt;charset&lt;/span&gt;     &lt;span class="n"&gt;utf&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# max upload size&lt;/span&gt;
+    &lt;span class="n"&gt;client_max_body_size&lt;/span&gt; &lt;span class="mi"&gt;75&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;   &lt;span class="c1"&gt;# adjust to taste&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Django media&lt;/span&gt;
+    &lt;span class="n"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;media&lt;/span&gt;  &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;alias&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mysite&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;media&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  &lt;span class="c1"&gt;# your Django project&amp;#39;s media files - amend as required&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="n"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;static&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;alias&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mysite&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;static&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;# your Django project&amp;#39;s static files - amend as required&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Finally, send all non-media requests to the Django server.&lt;/span&gt;
+    &lt;span class="n"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;uwsgi_pass&lt;/span&gt;  &lt;span class="n"&gt;django&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;include&lt;/span&gt;     &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mysite&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;uwsgi_params&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;# the uwsgi_params file you installed&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This conf file tells nginx to serve up media and static files from the filesystem, as well as handle requests that require Django's intervention. For a large deployment it is considered good practice to let one server handle static/media files, and another handle Django applications, but for now, this will do just fine.&lt;/p&gt;
+&lt;p&gt;Symlink to this file from /etc/nginx/sites-enabled so nginx can see it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;ln&lt;span class="w"&gt; &lt;/span&gt;-s&lt;span class="w"&gt; &lt;/span&gt;/etc/nginx/sites-available/mysite_nginx.conf&lt;span class="w"&gt; &lt;/span&gt;/etc/nginx/sites-enabled/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Deploying static files&lt;/h3&gt;
+&lt;p&gt;Before running nginx, you have to collect all Django static files in the static folder. First of all you have to edit mysite/settings.py adding:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;STATIC_ROOT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;BASE_DIR&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;static/&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;and then run&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;python&lt;span class="w"&gt; &lt;/span&gt;manage.py&lt;span class="w"&gt; &lt;/span&gt;collectstatic
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Basic nginx test&lt;/h3&gt;
+&lt;p&gt;Restart nginx:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;/etc/init.d/nginx&lt;span class="w"&gt; &lt;/span&gt;restart
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;To check that media files are being served correctly, add an image called &lt;code&gt;media.png&lt;/code&gt; to the &lt;code&gt;/path/to/your/project/project/media&lt;/code&gt; directory, then visit &lt;a href="http://example.com:8000/media/media.png"&gt;http://example.com:8000/media/media.png&lt;/a&gt; - if this works, you'll know at least that nginx is serving files correctly.&lt;/p&gt;
+&lt;p&gt;It is worth not just restarting nginx, but actually stopping and then starting it again, which will inform you if there is a problem, and where it is.&lt;/p&gt;
+&lt;h2&gt;nginx and uWSGI and test.py&lt;/h2&gt;
+&lt;p&gt;Let's get nginx to speak to the "hello world" &lt;code&gt;test.py&lt;/code&gt; application.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;uwsgi&lt;span class="w"&gt; &lt;/span&gt;--socket&lt;span class="w"&gt; &lt;/span&gt;:8001&lt;span class="w"&gt; &lt;/span&gt;--wsgi-file&lt;span class="w"&gt; &lt;/span&gt;test.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This is nearly the same as before, except this time one of the options is different:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;socket :8001&lt;/code&gt;: use protocol uwsgi, port 8001&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;nginx meanwhile has been configured to communicate with uWSGI on that port, and with the outside world on port 8000. Visit:&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://example.com:8000/"&gt;http://example.com:8000/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;to check. And this is our stack:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;the web client &amp;lt;-&amp;gt; the web server &amp;lt;-&amp;gt; the socket &amp;lt;-&amp;gt; uWSGI &amp;lt;-&amp;gt; Python
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Meanwhile, you can try to have a look at the uwsgi output at &lt;a href="http://example.com:8001"&gt;http://example.com:8001&lt;/a&gt; - but quite probably, it won't work because your browser speaks http, not uWSGI, though you should see output from uWSGI in your terminal.&lt;/p&gt;
+&lt;h2&gt;Using Unix sockets instead of ports&lt;/h2&gt;
+&lt;p&gt;So far we have used a TCP port socket, because it's simpler, but in fact it's better to use Unix sockets than ports - there's less overhead.&lt;/p&gt;
+&lt;p&gt;Edit &lt;code&gt;mysite_nginx.conf&lt;/code&gt;, changing it to match:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="n"&gt;unix&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;///&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mysite&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mysite&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sock&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;# for a file socket&lt;/span&gt;
+&lt;span class="c1"&gt;# server 127.0.0.1:8001; # for a web port socket (we&amp;#39;ll use this first)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;and restart nginx.&lt;/p&gt;
+&lt;p&gt;Run uWSGI again:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;uwsgi&lt;span class="w"&gt; &lt;/span&gt;--socket&lt;span class="w"&gt; &lt;/span&gt;mysite.sock&lt;span class="w"&gt; &lt;/span&gt;--wsgi-file&lt;span class="w"&gt; &lt;/span&gt;test.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This time the &lt;code&gt;socket&lt;/code&gt; option tells uWSGI which file to use.&lt;/p&gt;
+&lt;p&gt;Try &lt;a href="http://example.com:8000/"&gt;http://example.com:8000/&lt;/a&gt; in the browser.&lt;/p&gt;
+&lt;h3&gt;If that doesn't work&lt;/h3&gt;
+&lt;p&gt;Check your nginx error log(/var/log/nginx/error.log). If you see something like:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;connect() to unix:///path/to/your/mysite/mysite.sock failed (13: Permission
+denied)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;then probably you need to manage the permissions on the socket so that nginx is allowed to use it.&lt;/p&gt;
+&lt;p&gt;Try:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;uwsgi&lt;span class="w"&gt; &lt;/span&gt;--socket&lt;span class="w"&gt; &lt;/span&gt;mysite.sock&lt;span class="w"&gt; &lt;/span&gt;--wsgi-file&lt;span class="w"&gt; &lt;/span&gt;test.py&lt;span class="w"&gt; &lt;/span&gt;--chmod-socket&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;666&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;# (very permissive)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;↑This works for me and ↓this does not&lt;/p&gt;
+&lt;p&gt;or:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;uwsgi&lt;span class="w"&gt; &lt;/span&gt;--socket&lt;span class="w"&gt; &lt;/span&gt;mysite.sock&lt;span class="w"&gt; &lt;/span&gt;--wsgi-file&lt;span class="w"&gt; &lt;/span&gt;test.py&lt;span class="w"&gt; &lt;/span&gt;--chmod-socket&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;664&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;# (more sensible)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You may also have to add your user to nginx's group (which is probably www-data), or vice-versa, so that nginx can read and write to your socket properly.&lt;/p&gt;
+&lt;p&gt;It's worth keeping the output of the nginx log running in a terminal window so you can easily refer to it while troubleshooting.&lt;/p&gt;
+&lt;h2&gt;Running the Django application with uwsgi and nginx&lt;/h2&gt;
+&lt;p&gt;Let's run our Django application:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;uwsgi&lt;span class="w"&gt; &lt;/span&gt;--socket&lt;span class="w"&gt; &lt;/span&gt;mysite.sock&lt;span class="w"&gt; &lt;/span&gt;--module&lt;span class="w"&gt; &lt;/span&gt;mysite.wsgi&lt;span class="w"&gt; &lt;/span&gt;--chmod-socket&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;666&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note that in the original docs, this command is&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;uwsgi&lt;span class="w"&gt; &lt;/span&gt;--socket&lt;span class="w"&gt; &lt;/span&gt;mysite.sock&lt;span class="w"&gt; &lt;/span&gt;--module&lt;span class="w"&gt; &lt;/span&gt;mysite.wsgi&lt;span class="w"&gt; &lt;/span&gt;--chmod-socket&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;664&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;but it does not work for me.&lt;/p&gt;
+&lt;p&gt;Now uWSGI and nginx should be serving up not just a "Hello World" module, but your Django project.&lt;/p&gt;
+&lt;h2&gt;Now uWSGI and nginx should be serving up not just a "Hello World" module, but your Django project&lt;/h2&gt;
+&lt;p&gt;We can put the same options that we used with uWSGI into a file, and then ask uWSGI to run with that file. It makes it easier to manage configurations.&lt;/p&gt;
+&lt;p&gt;Create a file called &lt;code&gt;mysite_uwsgi.ini&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# mysite_uwsgi.ini file&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;uwsgi&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Django-related settings&lt;/span&gt;
+&lt;span class="c1"&gt;# the base directory (full path)&lt;/span&gt;
+&lt;span class="n"&gt;chdir&lt;/span&gt;           &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;project&lt;/span&gt;
+&lt;span class="c1"&gt;# Django&amp;#39;s wsgi file&lt;/span&gt;
+&lt;span class="n"&gt;module&lt;/span&gt;          &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wsgi&lt;/span&gt;
+&lt;span class="c1"&gt;# the virtualenv (full path)&lt;/span&gt;
+&lt;span class="n"&gt;home&lt;/span&gt;            &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;virtualenv&lt;/span&gt;
+
+&lt;span class="c1"&gt;# process-related settings&lt;/span&gt;
+&lt;span class="c1"&gt;# master&lt;/span&gt;
+&lt;span class="n"&gt;master&lt;/span&gt;          &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;true&lt;/span&gt;
+&lt;span class="c1"&gt;# maximum number of worker processes&lt;/span&gt;
+&lt;span class="n"&gt;processes&lt;/span&gt;       &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;
+&lt;span class="c1"&gt;# the socket (use the full path to be safe&lt;/span&gt;
+&lt;span class="n"&gt;socket&lt;/span&gt;          &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mysite&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sock&lt;/span&gt;
+&lt;span class="c1"&gt;# ... with appropriate permissions - may be needed&lt;/span&gt;
+&lt;span class="c1"&gt;# chmod-socket    = 664&lt;/span&gt;
+&lt;span class="c1"&gt;# clear environment on exit&lt;/span&gt;
+&lt;span class="n"&gt;vacuum&lt;/span&gt;          &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And run uwsgi using this file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;uwsgi&lt;span class="w"&gt; &lt;/span&gt;--ini&lt;span class="w"&gt; &lt;/span&gt;mysite_uwsgi.ini&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;# the --ini option is used to specify a file&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Once again, test that the Django site works as expected.&lt;/p&gt;
+&lt;h2&gt;Install uWSGI system-wide&lt;/h2&gt;
+&lt;p&gt;So far, uWSGI is only installed in our virtualenv; we'll need it installed system-wide for deployment purposes.&lt;/p&gt;
+&lt;p&gt;Deactivate your virtualenv using command: &lt;code&gt;deactivate&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;and install uWSGI system-wide:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;uwsgi
+
+&lt;span class="c1"&gt;# Or install LTS (long term support).&lt;/span&gt;
+pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;https://projects.unbit.it/downloads/uwsgi-lts.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The uWSGI wiki describes several installation procedures. Before installing uWSGI system-wide, it's worth considering which version to choose and the most appropriate way of installing it.&lt;/p&gt;
+&lt;p&gt;Check again that you can still run uWSGI just like you did before:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;uwsgi&lt;span class="w"&gt; &lt;/span&gt;--ini&lt;span class="w"&gt; &lt;/span&gt;mysite_uwsgi.ini&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;# the --ini option is used to specify a file&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Emperor mode&lt;/h2&gt;
+&lt;p&gt;uWSGI can run in 'emperor' mode. In this mode it keeps an eye on a directory of uWSGI config files, and will spawn instances ('vassals') for each one it finds.&lt;/p&gt;
+&lt;p&gt;Whenever a config file is amended, the emperor will automatically restart the vassal.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# create a directory for the vassals&lt;/span&gt;
+sudo&lt;span class="w"&gt; &lt;/span&gt;mkdir&lt;span class="w"&gt; &lt;/span&gt;-p&lt;span class="w"&gt; &lt;/span&gt;/etc/uwsgi/vassals
+&lt;span class="c1"&gt;# symlink from the default config directory to your config file&lt;/span&gt;
+sudo&lt;span class="w"&gt; &lt;/span&gt;ln&lt;span class="w"&gt; &lt;/span&gt;-s&lt;span class="w"&gt; &lt;/span&gt;/path/to/your/mysite/mysite_uwsgi.ini&lt;span class="w"&gt; &lt;/span&gt;/etc/uwsgi/vassals/
+&lt;span class="c1"&gt;# run the emperor&lt;/span&gt;
+uwsgi&lt;span class="w"&gt; &lt;/span&gt;--emperor&lt;span class="w"&gt; &lt;/span&gt;/etc/uwsgi/vassals&lt;span class="w"&gt; &lt;/span&gt;--uid&lt;span class="w"&gt; &lt;/span&gt;www-data&lt;span class="w"&gt; &lt;/span&gt;--gid&lt;span class="w"&gt; &lt;/span&gt;www-data
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You may need to run uWSGI with sudo (I need not)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;uwsgi&lt;span class="w"&gt; &lt;/span&gt;--emperor&lt;span class="w"&gt; &lt;/span&gt;/etc/uwsgi/vassals&lt;span class="w"&gt; &lt;/span&gt;--uid&lt;span class="w"&gt; &lt;/span&gt;www-data&lt;span class="w"&gt; &lt;/span&gt;--gid&lt;span class="w"&gt; &lt;/span&gt;www-data
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The options mean:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;emperor&lt;/code&gt;: where to look for vassals (config files)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;uid&lt;/code&gt;: the user id of the process once it's started&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;gid&lt;/code&gt;: the group id of the process once it's started&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Check the site; it should be running.&lt;/p&gt;
+&lt;h2&gt;Check the site; it should be running&lt;/h2&gt;
+&lt;p&gt;The last step is to make it all happen automatically at system startup time.&lt;/p&gt;
+&lt;p&gt;For many systems, the easiest (if not the best) way to do this is to use the &lt;code&gt;rc.local&lt;/code&gt; file.&lt;/p&gt;
+&lt;p&gt;Edit &lt;code&gt;/etc/rc.local&lt;/code&gt; and add:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;/usr/local/bin/uwsgi&lt;span class="w"&gt; &lt;/span&gt;--emperor&lt;span class="w"&gt; &lt;/span&gt;/etc/uwsgi/vassals&lt;span class="w"&gt; &lt;/span&gt;--uid&lt;span class="w"&gt; &lt;/span&gt;www-data&lt;span class="w"&gt; &lt;/span&gt;--gid&lt;span class="w"&gt; &lt;/span&gt;www-data&lt;span class="w"&gt; &lt;/span&gt;--daemonize&lt;span class="w"&gt; &lt;/span&gt;/var/log/uwsgi-emperor.log
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;before the line &lt;code&gt;exit 0&lt;/code&gt;. &lt;strong&gt;(Important)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;And that should be it!&lt;/p&gt;
+&lt;h2&gt;Further configuration&lt;/h2&gt;
+&lt;p&gt;It is important to understand that this has been a tutorial, to get you started. You do need to read the nginx and uWSGI documentation, and study the options available before deployment in a production environment.&lt;/p&gt;
+&lt;p&gt;Both nginx and uWSGI benefit from friendly communities, who are able to offer invaluable advice about configuration and usage.&lt;/p&gt;
+&lt;h3&gt;nginx&lt;/h3&gt;
+&lt;p&gt;It is important to understand that this has been a tutorial, to get you started. You do need to read the nginx and uWSGI documentation, and study the options available before deployment in a production environment.&lt;/p&gt;
+&lt;p&gt;Both nginx and uWSGI benefit from friendly communities, who are able to offer invaluable advice about configuration and usage.&lt;/p&gt;
+&lt;h3&gt;uWSGI&lt;/h3&gt;
+&lt;p&gt;It is important to understand that this has been a tutorial, to get you started. You do need to read the nginx and uWSGI documentation, and study the options available before deployment in a production environment.&lt;/p&gt;
+&lt;p&gt;Both nginx and uWSGI benefit from friendly communities, who are able to offer invaluable advice about configuration and usage.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;env&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;DJANGO_SETTINGS_MODULE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;mysite&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;settings&lt;/span&gt; &lt;span class="c1"&gt;# set an environment variable&lt;/span&gt;
+&lt;span class="n"&gt;safe&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pidfile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;tmp&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;master&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pid&lt;/span&gt; &lt;span class="c1"&gt;# create a pidfile&lt;/span&gt;
+&lt;span class="n"&gt;harakiri&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt; &lt;span class="c1"&gt;# respawn processes taking more than 20 seconds&lt;/span&gt;
+&lt;span class="n"&gt;limit&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;128&lt;/span&gt; &lt;span class="c1"&gt;# limit the project to 128 MB&lt;/span&gt;
+&lt;span class="nb"&gt;max&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;requests&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;5000&lt;/span&gt; &lt;span class="c1"&gt;# respawn processes after serving 5000 requests&lt;/span&gt;
+&lt;span class="n"&gt;daemonize&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;uwsgi&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;yourproject&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt; &lt;span class="c1"&gt;# background the process &amp;amp; log&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="3. Web Dev"></category><category term="Web Dev"></category><category term="Backend"></category><category term="Django"></category><category term="Tutorial"></category><category term="Nginx"></category></entry><entry><title>Vue+Django CORS and CSRF</title><link href="https://blog.zijuny.dev/vuedjango-cors-and-csrf.html" rel="alternate"></link><published>2022-04-27T12:15:38+08:00</published><updated>2022-04-27T12:15:38+08:00</updated><author><name>Zijun(Mark) Yang</name></author><id>tag:blog.zijuny.dev,2022-04-27:/vuedjango-cors-and-csrf.html</id><summary type="html">&lt;h2&gt;Backend (Django) Part&lt;/h2&gt;
+&lt;p&gt;Docs: &lt;a href="https://pypi.org/project/django-cors-headers/"&gt;django-cors-headers&lt;/a&gt;, &lt;a href="https://docs.djangoproject.com/en/4.0/ref/settings/#csrf-cookie-secure"&gt;django core settings&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;According to &lt;a href="https://pypi.org/project/django-cors-headers/"&gt;django-cors-headers&lt;/a&gt;, use:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;python&lt;span class="w"&gt; &lt;/span&gt;-m&lt;span class="w"&gt; &lt;/span&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;django-cors-headers
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;to install &lt;code&gt;django-cors-headers&lt;/code&gt; and add it to installed apps in &lt;code&gt;settings.py&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;INSTALLED_APPS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;corsheaders&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Add a middleware class to listen in on responses. The order of middlewares is &lt;strong&gt;important&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;CorsMiddleware&lt;/code&gt; should be placed …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Backend (Django) Part&lt;/h2&gt;
+&lt;p&gt;Docs: &lt;a href="https://pypi.org/project/django-cors-headers/"&gt;django-cors-headers&lt;/a&gt;, &lt;a href="https://docs.djangoproject.com/en/4.0/ref/settings/#csrf-cookie-secure"&gt;django core settings&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;According to &lt;a href="https://pypi.org/project/django-cors-headers/"&gt;django-cors-headers&lt;/a&gt;, use:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;python&lt;span class="w"&gt; &lt;/span&gt;-m&lt;span class="w"&gt; &lt;/span&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;django-cors-headers
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;to install &lt;code&gt;django-cors-headers&lt;/code&gt; and add it to installed apps in &lt;code&gt;settings.py&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;INSTALLED_APPS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;corsheaders&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Add a middleware class to listen in on responses. The order of middlewares is &lt;strong&gt;important&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;CorsMiddleware&lt;/code&gt; should be placed as high as possible, especially before any middleware that can generate responses such as Django’s &lt;code&gt;CommonMiddleware&lt;/code&gt; or Whitenoise’s &lt;code&gt;WhiteNoiseMiddleware&lt;/code&gt;. If it is not before, it will not be able to add the CORS headers to these responses.&lt;/p&gt;
+&lt;p&gt;Also if you are using &lt;code&gt;CORS_REPLACE_HTTPS_REFERER&lt;/code&gt; it should be placed before Django’s &lt;code&gt;CsrfViewMiddleware&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;MIDDLEWARE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;corsheaders.middleware.CorsMiddleware&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;django.middleware.common.CommonMiddleware&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Assume frontend is functioning on &lt;code&gt;frontend.com&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Add:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;CORS_ALLOWED_ORIGINS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;frontend.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="n"&gt;CORS_ALLOW_METHODS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;DELETE&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;GET&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;OPTIONS&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;PATCH&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;POST&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;PUT&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="c1"&gt;#enable whatever method needed&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="n"&gt;CSRF_TRUSTED_ORIGINS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;frontend.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="n"&gt;CORS_ALLOW_CREDENTIALS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;
+
+&lt;span class="n"&gt;CSRF_COOKIE_SECURE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;
+
+&lt;span class="n"&gt;CSRF_COOKIE_SAMESITE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;None&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Frontend (Vue) Part&lt;/h2&gt;
+&lt;p&gt;Docs: &lt;a href="https://axios-http.com/docs/req_config"&gt;Axios Request Config&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;We need to get CSRF token contained in cookie from backend.&lt;/p&gt;
+&lt;p&gt;In &lt;code&gt;urls.py&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_csrf_token&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;csrf_token&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_token&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;JsonResponse&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;token&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;csrf_token&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+
+&lt;span class="n"&gt;urlpatterns&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="o"&gt;...&lt;/span&gt;
+    &lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;get_csrf_token/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;get_csrf_token&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="o"&gt;...&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Assume the backend is functioning on &lt;code&gt;backend.com&lt;/code&gt;. In &lt;code&gt;whateverName.vue&lt;/code&gt;, add:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;//django use cookies to varify csrf&lt;/span&gt;
+&lt;span class="k"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;VueCookies&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kr"&gt;from&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;vue-cookies&amp;#39;&lt;/span&gt;
+&lt;span class="nx"&gt;Vue&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;use&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;VueCookies&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;//`withCredentials` indicates whether or not cross-site Access-Control requests should be made using credentials&lt;/span&gt;
+&lt;span class="nx"&gt;axios&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;defaults&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;withCredentials&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;
+
+&lt;span class="k"&gt;export&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="nx"&gt;token&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;methods&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="c1"&gt;//get token function&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nx"&gt;gettoken&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="nx"&gt;axios&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="nx"&gt;method&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;get&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="nx"&gt;url&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="sb"&gt;`http://backend.com/get_csrf_token/`&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="nx"&gt;withCredentials&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;then&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;token&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;token&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="c1"&gt;//POST&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nx"&gt;tryPOST&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="nx"&gt;axios&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="nx"&gt;headers&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;X-CSRFToken&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;token&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Content-Type&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;application/json&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="nx"&gt;withCredentials&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="nx"&gt;url&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="sb"&gt;`http://backend.com/whateverURL`&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="nx"&gt;method&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;post&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;data1&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;data2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;then&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;=&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;                    &lt;/span&gt;&lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nx"&gt;mounted&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;()=&amp;gt;{&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="c1"&gt;//get token when page loads&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;gettoken&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="3. Web Dev"></category><category term="Django"></category><category term="Vue"></category><category term="Web Dev"></category><category term="Frontend"></category><category term="Backend"></category><category term="Tutorial"></category></entry></feed>
